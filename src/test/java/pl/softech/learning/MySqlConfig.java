@@ -47,6 +47,7 @@ public class MySqlConfig {
 		lemfb.setDataSource(dataSource());
 		lemfb.setJpaVendorAdapter(jpaVendorAdapter());
 		lemfb.setPackagesToScan("pl.softech.learning.eav.domain");
+		lemfb.setMappingResources("named-queries.xml");
 		return lemfb;
 	}
 
