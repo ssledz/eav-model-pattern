@@ -1,4 +1,4 @@
-package pl.softech.learning.eav.domain;
+package pl.softech.learning.domain.eav;
 
 import java.util.List;
 
