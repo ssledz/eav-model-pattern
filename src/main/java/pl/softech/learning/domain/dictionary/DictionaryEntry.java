@@ -3,7 +3,6 @@ package pl.softech.learning.domain.dictionary;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -13,13 +12,10 @@ import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import pl.softech.learning.domain.AbstractEntity;
 
 @Entity
-@Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class DictionaryEntry extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)

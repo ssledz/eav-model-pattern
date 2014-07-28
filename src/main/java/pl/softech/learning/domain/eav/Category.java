@@ -1,5 +1,7 @@
 package pl.softech.learning.domain.eav;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -15,5 +17,10 @@ public class Category extends AbstractEntity {
 	private CategoryIdentifier identifier;
 
 	private String name;
+
+	public Category(CategoryIdentifier identifier, String name) {
+		this.identifier = checkNotNull(identifier);
+		this.name = checkNotNull(name);
+	}
 
 }

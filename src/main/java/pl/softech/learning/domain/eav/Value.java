@@ -1,8 +1,10 @@
 package pl.softech.learning.domain.eav;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import pl.softech.learning.domain.AbstractEntity;
@@ -29,8 +31,8 @@ public class Value extends AbstractEntity {
 	@Column(name = "double_value")
 	private Double doubleValue;
 
-	@Column(name = "dict_value")
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dictionary_entry_id")
 	private DictionaryEntry dictionaryValue;
 
 }
