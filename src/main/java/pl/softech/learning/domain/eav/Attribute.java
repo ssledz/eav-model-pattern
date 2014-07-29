@@ -10,12 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 import pl.softech.learning.domain.AbstractEntity;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Entity
 public class Attribute extends AbstractEntity {
 
 	public enum DataType {
-		STRING, DOUBLE, INTEGER, DICTIONARY, BOOLEAN
+		TEXT, DOUBLE, INTEGER, DICTIONARY, BOOLEAN, DATE
 	}
 
 	@Embedded
@@ -29,4 +30,14 @@ public class Attribute extends AbstractEntity {
 
 	@Enumerated(EnumType.STRING)
 	private DataType dataType;
+
+	public Attribute(AttributeIdentifier identifier, String name, Category category, DataType dataType) {
+		super();
+		this.identifier = checkNotNull(identifier);
+		this.name = checkNotNull(name);
+		this.category = checkNotNull(category);
+		this.dataType = checkNotNull(dataType);
+	}
+	
+	
 }

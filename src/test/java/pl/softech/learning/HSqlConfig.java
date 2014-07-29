@@ -15,7 +15,7 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
-@EnableJpaRepositories("pl.softech.learning.eav.domain")
+@EnableJpaRepositories("pl.softech.learning.domain")
 public class HSqlConfig {
 
 	@Bean
