@@ -7,6 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import pl.softech.learning.domain.AbstractEntity;
 
 @Entity
@@ -17,10 +20,22 @@ public class Category extends AbstractEntity {
 	private CategoryIdentifier identifier;
 
 	private String name;
+	
+	protected Category() {
+	}
 
 	public Category(CategoryIdentifier identifier, String name) {
 		this.identifier = checkNotNull(identifier);
 		this.name = checkNotNull(name);
+	}
+	
+	@Override
+	public String toString() {
+		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+		sb.appendSuper(super.toString());
+		sb.append("identifier", identifier);
+		sb.append("name", name);
+		return sb.toString();
 	}
 
 }

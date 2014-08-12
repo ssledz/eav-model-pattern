@@ -5,7 +5,10 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
     version="2.0"
 >
-    <!-- Named Queries Naming Convention -->
-    <!-- Entity.find[What]By[Field(s)Expression] -->
-    <!-- Role -->
+    <!-- Attribute -->
+    <named-query name="Attribute.findByIdentifier">
+        <query>
+            <![CDATA[select a from Attribute a where a.identifier = :identifier]]>
+        </query>
+    </named-query>
 </entity-mappings>
