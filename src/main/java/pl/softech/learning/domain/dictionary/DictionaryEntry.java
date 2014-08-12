@@ -26,14 +26,17 @@ public class DictionaryEntry extends AbstractEntity {
 	@AttributeOverride(name = DictionaryEntryIdentifier.IDENTIFIER_PROPERTY, column = @Column(nullable = false, unique = true))
 	private DictionaryEntryIdentifier identifier;
 
+	private String name;
+
 	private boolean disabled = false;
 
 	protected DictionaryEntry() {
 	}
 
-	public DictionaryEntry(Dictionary dictionary, DictionaryEntryIdentifier identifier) {
+	public DictionaryEntry(Dictionary dictionary, DictionaryEntryIdentifier identifier, String name) {
 		this.dictionary = checkNotNull(dictionary);
 		this.identifier = checkNotNull(identifier);
+		this.name = checkNotNull(name);
 	}
 
 	public Dictionary getDictionary() {
@@ -48,6 +51,10 @@ public class DictionaryEntry extends AbstractEntity {
 		return disabled;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public boolean isEnabled() {
 		return !disabled;
 	}
@@ -57,6 +64,7 @@ public class DictionaryEntry extends AbstractEntity {
 		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
 		sb.appendSuper(super.toString());
 		sb.append(identifier);
+		sb.append("name", name);
 		return sb.toString();
 	}
 }

@@ -33,6 +33,9 @@ public class DictionaryEntryValue extends AbstractValue<DictionaryEntry>{
 		visitor.visit(this);
 	}
 	
-	
+	@Override
+	public String asString() {
+		return getValue() != null ? getValue().getName() : "null";
+	}
 	
 }

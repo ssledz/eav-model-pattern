@@ -36,10 +36,6 @@ public class Attribute extends AbstractEntity {
 
 	protected Attribute() {
 	}
-	
-	public DataType getDataType() {
-		return dataType;
-	}
 
 	public Attribute(AttributeIdentifier identifier, String name, Category category, DataType dataType) {
 		super();
@@ -49,6 +45,14 @@ public class Attribute extends AbstractEntity {
 		this.dataType = checkNotNull(dataType);
 	}
 	
+	public AttributeIdentifier getIdentifier() {
+		return identifier;
+	}
+
+	public DataType getDataType() {
+		return dataType;
+	}
+
 	@Override
 	public String toString() {
 		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
@@ -59,6 +63,5 @@ public class Attribute extends AbstractEntity {
 		sb.append("dataType", dataType);
 		return sb.toString();
 	}
-	
-	
+
 }

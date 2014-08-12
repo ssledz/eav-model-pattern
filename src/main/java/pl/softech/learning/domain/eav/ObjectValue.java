@@ -76,6 +76,10 @@ public class ObjectValue extends AbstractEntity {
 		return new AbstractValue<?>[] { stringValue, integerValue, doubleValue, dateValue, booleanValue, dictionaryEntryValue };
 	}
 
+	public Attribute getAttribute() {
+		return attribute;
+	}
+
 	public void accept(ValueVisitor visitor) {
 
 		for (AbstractValue<?> value : getAllFields()) {

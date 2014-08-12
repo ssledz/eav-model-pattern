@@ -17,7 +17,9 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import pl.softech.learning.domain.AbstractEntity;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 @Entity
@@ -45,6 +47,24 @@ public class MyObject extends AbstractEntity {
 
 	public ImmutableSet<ObjectValue> getValues() {
 		return new ImmutableSet.Builder<ObjectValue>().addAll(values).build();
+	}
+
+	public ImmutableSet<ObjectValue> getValuesByAttribute(final AttributeIdentifier attributeIdentifier) {
+		return new ImmutableSet.Builder<ObjectValue>().addAll(Iterables.filter(values, new Predicate<ObjectValue>() {
+
+			@Override
+			public boolean apply(ObjectValue input) {
+				return input.getAttribute().getIdentifier().equals(attributeIdentifier);
+			}
+		})).build();
+	}
+
+	public ObjectValue getValueByAttribute(AttributeIdentifier attributeIdentifier) {
+		return Iterables.getOnlyElement(getValuesByAttribute(attributeIdentifier));
+	}
+
+	public boolean hasValues(AttributeIdentifier attributeIdentifier) {
+		return !getValuesByAttribute(attributeIdentifier).isEmpty();
 	}
 
 	public <T extends AbstractValue<?>> ObjectValue addValue(final Attribute attribute, T value) {

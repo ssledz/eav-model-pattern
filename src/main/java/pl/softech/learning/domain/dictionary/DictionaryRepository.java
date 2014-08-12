@@ -1,11 +1,9 @@
 package pl.softech.learning.domain.dictionary;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface DictionaryRepository extends Repository<Dictionary, Long> {
+public interface DictionaryRepository extends CrudRepository<Dictionary, Long> {
 
-	Dictionary findOne(Long entityId);
-
-	Dictionary findByIdentifier(@Param("identifier") String identifier);
+	Dictionary findByIdentifier(@Param("identifier") DictionaryIdentifier identifier);
 }

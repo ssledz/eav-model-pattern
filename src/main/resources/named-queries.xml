@@ -11,4 +11,26 @@
             <![CDATA[select a from Attribute a where a.identifier = :identifier]]>
         </query>
     </named-query>
+    
+    <!-- Dictionary -->
+    <named-query name="Dictionary.findByIdentifier">
+        <query>
+            <![CDATA[select d from Dictionary d where d.identifier = :identifier]]>
+        </query>
+    </named-query>
+    
+    <!-- DictionaryEntry -->
+    <named-query name="DictionaryEntry.findByIdentifier">
+        <query>
+            <![CDATA[select e from DictionaryEntry e where e.dictionary.identifier = :identifier and e.identifier = :entryIdentifier]]>
+        </query>
+    </named-query>
+    
+    <!-- Attribute -->
+    <named-query name="Category.findByIdentifier">
+        <query>
+            <![CDATA[select c from Category c where c.identifier = :identifier]]>
+        </query>
+    </named-query>
+    
 </entity-mappings>
