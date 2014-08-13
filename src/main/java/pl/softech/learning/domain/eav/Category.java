@@ -29,6 +29,10 @@ public class Category extends AbstractEntity {
 		this.name = checkNotNull(name);
 	}
 	
+	public CategoryIdentifier getIdentifier() {
+		return identifier;
+	}
+
 	@Override
 	public String toString() {
 		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);

@@ -45,6 +45,10 @@ public class Attribute extends AbstractEntity {
 		this.dataType = checkNotNull(dataType);
 	}
 	
+	public Category getCategory() {
+		return category;
+	}
+
 	public AttributeIdentifier getIdentifier() {
 		return identifier;
 	}

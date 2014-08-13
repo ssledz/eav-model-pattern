@@ -3,7 +3,6 @@ package pl.softech.learning.domain.eav;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -54,7 +53,7 @@ public class ComputerModelExampleTest {
 	private DictionaryEntryIdentifier lenovo;
 	private DictionaryEntryIdentifier apple;
 
-	CategoryIdentifier computerCategory;
+	CategoryIdentifier computerCategory, personCategory;
 
 	@Before
 	public void init() {
@@ -107,6 +106,15 @@ public class ComputerModelExampleTest {
 		attributeRepository.save(new Attribute(new AttributeIdentifier("screen"), "Screen", computer, DataType.TEXT));
 		attributeRepository.save(new Attribute(new AttributeIdentifier("os"), "OS", computer, DataType.DICTIONARY));
 		attributeRepository.save(new Attribute(new AttributeIdentifier("purshase_date"), "Purschase Date", computer, DataType.DATE));
+
+		personCategory = new CategoryIdentifier("person");
+		Category person = new Category(personCategory, "Person");
+		categoryRepository.save(person);
+
+		attributeRepository.save(new Attribute(new AttributeIdentifier("firstname"), "First Name", person, DataType.TEXT));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("lastname"), "Last Name", person, DataType.TEXT));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("age"), "Age", person, DataType.INTEGER));
+
 	}
 
 	@Test
@@ -150,7 +158,7 @@ public class ComputerModelExampleTest {
 			obj.getValueByAttribute((new AttributeIdentifier("ramm")));
 			Assert.fail();
 		} catch (Exception e) {
-			
+
 		}
 
 		Set<ObjectValue> opticals = obj.getValuesByAttribute(new AttributeIdentifier("optical"));
@@ -170,6 +178,32 @@ public class ComputerModelExampleTest {
 		});
 		Assert.assertEquals("Linux", arr[0].getValueAsString());
 		Assert.assertEquals("Windows 7", arr[1].getValueAsString());
+
+	}
+
+	@Test
+	@Transactional
+	public void testCategoryContraint() {
+		MyObject computer = new MyObject(categoryRepository.findByIdentifier(computerCategory), "PING");
+
+		try {
+			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("firstname")), new StringValue("Slawek"));
+			Assert.fail();
+		} catch (Exception e) {
+		}
+
+	}
+
+	@Test
+	@Transactional
+	public void testValueMatchAttributeContraint() {
+		MyObject computer = new MyObject(categoryRepository.findByIdentifier(computerCategory), "PONG");
+
+		try {
+			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new StringValue("Dell"));
+			Assert.fail();
+		} catch (Exception e) {
+		}
 
 	}
 

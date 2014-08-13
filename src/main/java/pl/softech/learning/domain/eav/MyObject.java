@@ -72,9 +72,15 @@ public class MyObject extends AbstractEntity {
 		checkNotNull(attribute);
 		checkNotNull(value);
 
-		ValueMatchAttributeSpecification spec = new ValueMatchAttributeSpecification();
+		ObjectCategoryMatchAttributeConstraint catConstraint = new ObjectCategoryMatchAttributeConstraint();
 
-		checkArgument(spec.isSafisfiedBy(Pair.of(value, attribute)),
+		checkArgument(catConstraint.isSafisfiedBy(Pair.of(this, attribute)), String.format(
+				"Object category %s doesn't match the Attribute category %s", category.getIdentifier().getIdentifier(), attribute
+						.getCategory().getIdentifier().getIdentifier()));
+
+		ValueMatchAttributeConstraint dataTypeConstraint = new ValueMatchAttributeConstraint();
+
+		checkArgument(dataTypeConstraint.isSafisfiedBy(Pair.of(value, attribute)),
 				String.format("Attribute %s doesn't match the value %s", attribute.toString(), value.toString()));
 
 		final ObjectValue[] bag = new ObjectValue[1];
