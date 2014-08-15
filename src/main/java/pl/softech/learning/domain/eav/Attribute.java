@@ -1,11 +1,11 @@
 package pl.softech.learning.domain.eav;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
@@ -13,14 +13,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.softech.learning.domain.AbstractEntity;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 @Entity
 public class Attribute extends AbstractEntity {
-
-	public enum DataType {
-		TEXT, DOUBLE, INTEGER, DICTIONARY, BOOLEAN, DATE
-	}
 
 	@Embedded
 	@AttributeOverride(name = AttributeIdentifier.IDENTIFIER_PROPERTY, column = @Column(nullable = false, unique = true))
@@ -31,7 +26,7 @@ public class Attribute extends AbstractEntity {
 
 	private String name;
 
-	@Enumerated(EnumType.STRING)
+	@Embedded
 	private DataType dataType;
 
 	protected Attribute() {

@@ -44,9 +44,13 @@ public class Dictionary extends AbstractEntity {
 	public List<DictionaryEntry> getEntries() {
 		return Collections.unmodifiableList(entries);
 	}
-	
+
 	public String getName() {
 		return name;
+	}
+
+	public DictionaryIdentifier getIdentifier() {
+		return identifier;
 	}
 
 	public List<DictionaryEntry> getEnabledEntries() {

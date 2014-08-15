@@ -21,7 +21,7 @@ import pl.softech.learning.domain.dictionary.DictionaryEntryIdentifier;
 import pl.softech.learning.domain.dictionary.DictionaryEntryRepository;
 import pl.softech.learning.domain.dictionary.DictionaryIdentifier;
 import pl.softech.learning.domain.dictionary.DictionaryRepository;
-import pl.softech.learning.domain.eav.Attribute.DataType;
+import pl.softech.learning.domain.eav.DataType.Type;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = HSqlConfig.class)
@@ -52,7 +52,7 @@ public class ComputerModelExampleTest {
 	private DictionaryEntryIdentifier dell;
 	private DictionaryEntryIdentifier lenovo;
 	private DictionaryEntryIdentifier apple;
-
+	
 	CategoryIdentifier computerCategory, personCategory;
 
 	@Before
@@ -94,26 +94,29 @@ public class ComputerModelExampleTest {
 		Category computer = new Category(computerCategory, "Computer");
 		categoryRepository.save(computer);
 
-		attributeRepository.save(new Attribute(new AttributeIdentifier("make"), "Make", computer, DataType.DICTIONARY));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("model"), "Model", computer, DataType.TEXT));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("type"), "Type", computer, DataType.DICTIONARY));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("cpu"), "CPU", computer, DataType.TEXT));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("drive"), "Drive", computer, DataType.TEXT));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("video"), "Video", computer, DataType.TEXT));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("ram"), "RAM (GB)", computer, DataType.INTEGER));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("optical"), "Optical", computer, DataType.TEXT));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("battery"), "Battery", computer, DataType.TEXT));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("screen"), "Screen", computer, DataType.TEXT));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("os"), "OS", computer, DataType.DICTIONARY));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("purshase_date"), "Purschase Date", computer, DataType.DATE));
+		Dictionary computerMakeDict = dictionaryRepository.findByIdentifier(computerMake);
+		Dictionary computerTypeDict = dictionaryRepository.findByIdentifier(computerType);
+		Dictionary osDict = dictionaryRepository.findByIdentifier(os);
+		attributeRepository.save(new Attribute(new AttributeIdentifier("make"), "Make", computer, new DataType(computerMakeDict)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("model"), "Model", computer, new DataType(Type.TEXT)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("type"), "Type", computer, new DataType(computerTypeDict)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("cpu"), "CPU", computer, new DataType(Type.TEXT)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("drive"), "Drive", computer, new DataType(Type.TEXT)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("video"), "Video", computer, new DataType(Type.TEXT)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("ram"), "RAM (GB)", computer, new DataType(Type.INTEGER)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("optical"), "Optical", computer, new DataType(Type.TEXT)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("battery"), "Battery", computer, new DataType(Type.TEXT)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("screen"), "Screen", computer, new DataType(Type.TEXT)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("os"), "OS", computer, new DataType(osDict)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("purshase_date"), "Purschase Date", computer, new DataType(Type.DATE)));
 
 		personCategory = new CategoryIdentifier("person");
 		Category person = new Category(personCategory, "Person");
 		categoryRepository.save(person);
 
-		attributeRepository.save(new Attribute(new AttributeIdentifier("firstname"), "First Name", person, DataType.TEXT));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("lastname"), "Last Name", person, DataType.TEXT));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("age"), "Age", person, DataType.INTEGER));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("firstname"), "First Name", person, new DataType(Type.TEXT)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("lastname"), "Last Name", person, new DataType(Type.TEXT)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("age"), "Age", person, new DataType(Type.INTEGER)));
 
 	}
 
@@ -183,7 +186,7 @@ public class ComputerModelExampleTest {
 
 	@Test
 	@Transactional
-	public void testCategoryContraint() {
+	public void testCategoryConstraint() {
 		MyObject computer = new MyObject(categoryRepository.findByIdentifier(computerCategory), "PING");
 
 		try {
@@ -196,7 +199,7 @@ public class ComputerModelExampleTest {
 
 	@Test
 	@Transactional
-	public void testValueMatchAttributeContraint() {
+	public void testValueMatchAttributeConstraint() {
 		MyObject computer = new MyObject(categoryRepository.findByIdentifier(computerCategory), "PONG");
 
 		try {
@@ -204,7 +207,16 @@ public class ComputerModelExampleTest {
 			Assert.fail();
 		} catch (Exception e) {
 		}
+		
+		try {
+			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new DictionaryEntryValue(
+					dictionaryEntryRepository.findByIdentifier(computerType, notebook)));
+			Assert.fail();
+		} catch (Exception e) {
+		}
+		
+		
 
 	}
-
+	
 }
