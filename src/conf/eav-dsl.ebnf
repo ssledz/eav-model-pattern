@@ -1,0 +1,38 @@
+conf = { def, { ws } }, eof ;
+
+def = cat-def | att-def | obj-def ;
+
+cat-def = "category", { ws }, identifier, { ws }, name-property, { ws }, "end" ;
+
+att-def = "attribute", { ws }, identifier, { ws }, { att-body, { ws } }, "end" ; 
+
+att-body = name-property | category-property | data-type-property ;
+
+obj-def = "object", { ws }, identifier, { ws }, "of", { ws }, identifier, { ws }, "category", { ws }, { obj-body, { ws } }, "end" ;
+
+obj-body = identifier, [ { ws } ] ":", [ { ws } ], string ;
+
+name-property = "name", [ { ws } ], ":", [ { ws } ], string ;
+
+category-property = "category", [ { ws } ], ":", [ { ws } ], string ;
+
+data-type-property = "data_type", [ { ws } ], ":", [ { ws } ], string | ( string,  { ws }, "of", { ws }, string ) ;
+
+letter = "A" | "a" | "B" | "b" | "C" | "c" | "D" | "d" | "E" | "e" | "F" | "f" | "G" | "g"
+       | "H" | "h" | "I" | "i" | "J" | "j" | "K" | "k" | "L" | "l" | "M" | "m" | "N" | "n"
+       | "O" | "o" | "P" | "p" | "Q" | "q" | "R" | "r" | "S" | "s" | "T" | "t" | "U" | "u"
+       | "V" | "v" | "W" | "w" | "X" | "x" | "Y" | "Y" | "Z" | "z" ;
+
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+
+character = letter | digit | "_" ;
+
+identifier = letter, { character } ;
+
+string = '"' , { all characters - '"' }, '"' ;
+
+ws = ? white space characters ? ;
+
+all_characters = ? all visible characters ? ;
+
+eof = ? end of file ?
