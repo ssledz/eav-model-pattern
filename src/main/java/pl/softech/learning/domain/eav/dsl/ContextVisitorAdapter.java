@@ -52,12 +52,22 @@ public class ContextVisitorAdapter implements ContextVisitor {
 		visitAny(ctx);
 	}
 
+	protected void visitAny(Context ctx) {
+	}
+
 	@Override
-	public void visit(ObjectBodyContext ctx) {
+	public void visit(AttributeValueContext ctx) {
 		visitAny(ctx);
 	}
 
-	protected void visitAny(Context ctx) {
+	@Override
+	public void visitOnEnter(ObjectBodyContext ctx) {
+		visitAny(ctx);
+	}
+
+	@Override
+	public void visitOnLeave(ObjectBodyContext ctx) {
+		visitAny(ctx);
 	}
 
 }

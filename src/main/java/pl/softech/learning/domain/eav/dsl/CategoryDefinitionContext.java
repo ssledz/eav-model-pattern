@@ -3,8 +3,6 @@ package pl.softech.learning.domain.eav.dsl;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import pl.softech.learning.domain.eav.dsl.AttributeDefinitionContext.Builder;
-
 /**
  * @author ssledz 
  */

@@ -154,27 +154,47 @@ public class Parser {
 		consume(Type.IDENTIFIER);
 		consume(Type.CATEGORY);
 
-		while (!match(Type.END)) {
-
-			ObjectBodyContext.Builder innerBuilder = new ObjectBodyContext.Builder();
-			innerBuilder.withAttributeIdentifier(currentToken.getValue());
-
-			if (match(Type.IDENTIFIER)) {
-				consume(Type.IDENTIFIER);
-			} else {
-				consume(Type.NAME);
-			}
-			consume(Type.COLON);
-			innerBuilder.withValue(currentToken.getValue());
-			consume(Type.STRING);
-
-			builder.add(new ObjectBodyContext(innerBuilder));
-
-		}
+		objBody(builder);
 
 		consume(Type.END);
 
 		new ObjectDefinitionContext(builder).accept(contextVisitor);
+	}
+	
+	private void objBody(ObjectDefinitionContext.Builder builder) {
+		ObjectBodyContext.Builder innerBuilder = new ObjectBodyContext.Builder();
+		
+		while (!match(Type.NAME)) {
+			attValue(innerBuilder);
+		}
+		
+		objBodyNameProperty(innerBuilder);
+		
+		builder.add(new ObjectBodyContext(innerBuilder));
+		
+	}
+	
+	private void objBodyNameProperty(ObjectBodyContext.Builder builder) {
+		
+		nameProperty(builder);
+		
+		while (!match(Type.END)) {
+			attValue(builder);
+		}
+		
+	}
+	
+	private void attValue(ObjectBodyContext.Builder builder) {
+		
+		AttributeValueContext.Builder innerBuilder = new AttributeValueContext.Builder();
+		
+		innerBuilder.withAttributeIdentifier(currentToken.getValue());
+		consume(Type.IDENTIFIER);
+		consume(Type.COLON);
+		innerBuilder.withValue(currentToken.getValue());
+		consume(Type.STRING);
+		
+		builder.add(new AttributeValueContext(innerBuilder));
 	}
 
 }

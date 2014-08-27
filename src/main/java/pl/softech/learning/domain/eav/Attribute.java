@@ -32,6 +32,10 @@ public class Attribute extends AbstractEntity {
 	protected Attribute() {
 	}
 
+	public Attribute(Builder builder) {
+		this(new AttributeIdentifier(builder.identifier), builder.name, builder.category, new DataType(builder.dataType));
+	}
+
 	public Attribute(AttributeIdentifier identifier, String name, Category category, DataType dataType) {
 		super();
 		this.identifier = checkNotNull(identifier);
@@ -39,7 +43,7 @@ public class Attribute extends AbstractEntity {
 		this.category = checkNotNull(category);
 		this.dataType = checkNotNull(dataType);
 	}
-	
+
 	public Category getCategory() {
 		return category;
 	}
@@ -61,6 +65,38 @@ public class Attribute extends AbstractEntity {
 		sb.append("category", category);
 		sb.append("dataType", dataType);
 		return sb.toString();
+	}
+
+	public static class Builder {
+
+		private String identifier;
+
+		private Category category;
+
+		private String name;
+
+		private DataType.Builder dataType;
+
+		public Builder withIdentifier(String identifier) {
+			this.identifier = identifier;
+			return this;
+		}
+
+		public Builder withCategory(Category category) {
+			this.category = category;
+			return this;
+		}
+
+		public Builder withName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder withDataType(DataType.Builder dataType) {
+			this.dataType = dataType;
+			return this;
+		}
+
 	}
 
 }

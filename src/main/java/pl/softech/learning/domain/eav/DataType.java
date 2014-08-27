@@ -30,6 +30,13 @@ public class DataType extends AbstractValueObject {
 	protected DataType() {
 	}
 
+	public DataType(Builder builder) {
+		this.type = checkNotNull(builder.type);
+		this.dictionary = builder.dictionary;
+		checkArgument(type != Type.DICTIONARY && dictionary == null);
+		checkArgument(type == Type.DICTIONARY && dictionary != null);
+	}
+
 	public DataType(Type type) {
 		this.type = checkNotNull(type);
 		checkArgument(type != Type.DICTIONARY);
@@ -46,6 +53,27 @@ public class DataType extends AbstractValueObject {
 
 	public Dictionary getDictionary() {
 		return dictionary;
+	}
+
+	public static class Builder {
+
+		private Type type;
+		private Dictionary dictionary;
+
+		public Builder withType(Type type) {
+			this.type = type;
+			return this;
+		}
+
+		public Builder withType(String type) {
+			return withType(Type.valueOf(type.toUpperCase()));
+		}
+
+		public Builder withDictionary(Dictionary dictionary) {
+			this.dictionary = dictionary;
+			return this;
+		}
+
 	}
 
 }

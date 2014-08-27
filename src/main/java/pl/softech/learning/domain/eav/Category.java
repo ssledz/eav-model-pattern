@@ -23,6 +23,10 @@ public class Category extends AbstractEntity {
 	
 	protected Category() {
 	}
+	
+	public Category(Builder builder) {
+		this(new CategoryIdentifier(builder.identifier), builder.name);
+	}
 
 	public Category(CategoryIdentifier identifier, String name) {
 		this.identifier = checkNotNull(identifier);
@@ -40,6 +44,22 @@ public class Category extends AbstractEntity {
 		sb.append("identifier", identifier);
 		sb.append("name", name);
 		return sb.toString();
+	}
+	
+	public static class Builder {
+		
+		private String identifier;
+		private String name;
+		
+		public Builder withIdentifier(String identifier) {
+			this.identifier = identifier;
+			return this;
+		}
+		public Builder withName(String name) {
+			this.name = name;
+			return this;
+		}
+		
 	}
 
 }

@@ -8,9 +8,13 @@ att-def = "attribute", { ws }, identifier, { ws }, { att-body, { ws } }, "end" ;
 
 att-body = name-property | category-property | data-type-property ;
 
-obj-def = "object", { ws }, identifier, { ws }, "of", { ws }, identifier, { ws }, "category", { ws }, { obj-body, { ws } }, "end" ;
+obj-def = "object", { ws }, identifier, { ws }, "of", { ws }, identifier, { ws }, "category", { ws }, obj-body, { ws }, "end" ;
 
-obj-body = identifier, [ { ws } ] ":", [ { ws } ], string ;
+obj-body = { att-value } | obj-body-name-property
+
+obj-body-name-property = name-property, { ws }, { att-value }   
+
+att-value = identifier, [ { ws } ] ":", [ { ws } ], string ;
 
 name-property = "name", [ { ws } ], ":", [ { ws } ], string ;
 

@@ -1,55 +1,65 @@
 package pl.softech.learning.domain.eav.dsl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import pl.softech.learning.domain.eav.dsl.AttributeDefinitionContext.Builder;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 /**
  * @author ssledz
  */
 public class ObjectBodyContext implements Context {
 
-	private final String attributeIdentifier;
-	private final String value;
+	private final Context[] childrens;
 
 	public ObjectBodyContext(Builder builder) {
-		this.attributeIdentifier = builder.attributeIdentifier;
-		this.value = builder.value;
-	}
-
-	public String getAttributeIdentifier() {
-		return attributeIdentifier;
-	}
-
-	public String getValue() {
-		return value;
+		this.childrens = builder.getContexts();
 	}
 
 	@Override
 	public void accept(ContextVisitor visitor) {
-		visitor.visit(this);
+		visitor.visitOnEnter(this);
+
+		for (Context ctx : childrens) {
+			ctx.accept(visitor);
+		}
+
+		visitor.visitOnLeave(this);
 	}
-	
+
 	@Override
 	public String toString() {
 		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-		sb.append("attributeIdentifier", attributeIdentifier);
-		sb.append("value", value);
+		sb.append("childrens", childrens);
 		return sb.toString();
 	}
 
-	static class Builder {
+	static class Builder implements NamePropertyContextAware<Builder> {
 
-		private String attributeIdentifier;
-		private String value;
+		private NamePropertyContext namePropertyContext;;
 
-		public Builder withAttributeIdentifier(String attributeIdentifier) {
-			this.attributeIdentifier = attributeIdentifier;
+		private List<AttributeValueContext> list = Lists.newLinkedList();
+
+		public Builder withNamePropertyContext(NamePropertyContext namePropertyContext) {
+			this.namePropertyContext = namePropertyContext;
 			return this;
 		}
 
-		public Builder withValue(String value) {
-			this.value = value;
-			return this;
+		public void add(AttributeValueContext ctx) {
+			list.add(ctx);
+		}
+
+		private Context[] getContexts() {
+			return new ImmutableList.Builder<Context>()//
+					.addAll(list)//
+					.add(namePropertyContext)//
+					.build()//
+					.toArray(new Context[0]);
 		}
 
 	}

@@ -5,7 +5,7 @@ public interface ContextVisitor {
 	void visit(NamePropertyContext ctx);
 
 	void visit(DataTypePropertyContext ctx);
-	
+
 	void visit(DictionaryDataTypePropertyContext ctx);
 
 	void visit(CategoryPropertyContext ctx);
@@ -22,6 +22,10 @@ public interface ContextVisitor {
 
 	void visitOnLeave(ObjectDefinitionContext ctx);
 
-	void visit(ObjectBodyContext ctx);
+	void visit(AttributeValueContext ctx);
+
+	void visitOnEnter(ObjectBodyContext ctx);
+
+	void visitOnLeave(ObjectBodyContext ctx);
 
 }

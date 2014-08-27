@@ -3,6 +3,7 @@ package pl.softech.learning.domain.eav;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,7 @@ import pl.softech.learning.domain.AbstractEntity;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 @Entity
@@ -36,6 +38,15 @@ public class MyObject extends AbstractEntity {
 	protected MyObject() {
 	}
 
+	public MyObject(Builder builder) {
+		this(builder.category, builder.name);
+		
+		for(Pair<Attribute, ? extends AbstractValue<?>> p : builder.values) {
+			addValue(p.getLeft(), p.getRight());
+		}
+		
+	}
+	
 	public MyObject(Category category, String name) {
 		this.category = checkNotNull(category);
 		this.name = checkNotNull(name);
@@ -139,4 +150,31 @@ public class MyObject extends AbstractEntity {
 		sb.append("category", category);
 		return sb.toString();
 	}
+
+	public static class Builder {
+
+		private Category category;
+
+		private String name;
+
+		private Collection<Pair<Attribute, ? extends AbstractValue<?>>> values = Lists.newLinkedList();
+
+		public Builder withCategory(Category category) {
+			this.category = category;
+			return this;
+		}
+
+		public Builder withName(String name) {
+			this.name = name;
+			return this;
+		}
+		
+		public  <T extends AbstractValue<?>> Builder add(Attribute attribute, T value) {
+			values.add(Pair.of(attribute, value));
+			return this;
+		}
+		
+
+	}
+
 }
