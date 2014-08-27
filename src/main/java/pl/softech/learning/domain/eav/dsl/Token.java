@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class Token {
 
 	enum Type {
-		CATEGORY, ATTRIBUTE, OBJECT, OF, STRING, IDENTIFIER, COLON, END, EOF, NAME, DATA_TYPE;
+		CATEGORY, ATTRIBUTE, OBJECT, OF, STRING, IDENTIFIER, COLON, END, EOF, NAME, DATA_TYPE, DICTIONARY;
 	}
 
 	private final Type type;

@@ -16,7 +16,9 @@ name-property = "name", [ { ws } ], ":", [ { ws } ], string ;
 
 category-property = "category", [ { ws } ], ":", [ { ws } ], string ;
 
-data-type-property = "data_type", [ { ws } ], ":", [ { ws } ], string | ( string,  { ws }, "of", { ws }, string ) ;
+data-type-property = "data_type", [ { ws } ], ":", [ { ws } ], identifier | dictionary-data-type ;
+
+dictionary-data-type = "dictionary",  { ws }, "of", { ws }, string ;
 
 letter = "A" | "a" | "B" | "b" | "C" | "c" | "D" | "d" | "E" | "e" | "F" | "f" | "G" | "g"
        | "H" | "h" | "I" | "i" | "J" | "j" | "K" | "k" | "L" | "l" | "M" | "m" | "N" | "n"

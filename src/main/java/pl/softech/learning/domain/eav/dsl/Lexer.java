@@ -75,7 +75,8 @@ public class Lexer {
 			return new Token(Type.OF);
 		case "end":
 			return new Token(Type.END);
-
+		case "dictionary":
+			return new Token(Type.DICTIONARY);
 		}
 
 		return token;
