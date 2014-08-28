@@ -33,8 +33,11 @@ public class DataType extends AbstractValueObject {
 	public DataType(Builder builder) {
 		this.type = checkNotNull(builder.type);
 		this.dictionary = builder.dictionary;
-		checkArgument(type != Type.DICTIONARY && dictionary == null);
-		checkArgument(type == Type.DICTIONARY && dictionary != null);
+		if (type != Type.DICTIONARY) {
+			checkArgument(dictionary == null);
+		} else {
+			checkArgument(dictionary != null);
+		}
 	}
 
 	public DataType(Type type) {

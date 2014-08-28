@@ -148,6 +148,7 @@ public class MyObject extends AbstractEntity {
 		sb.appendSuper(super.toString());
 		sb.append("name", name);
 		sb.append("category", category);
+		sb.append("values", values);
 		return sb.toString();
 	}
 

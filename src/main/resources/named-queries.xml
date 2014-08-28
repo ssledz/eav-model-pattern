@@ -22,7 +22,7 @@
     <!-- DictionaryEntry -->
     <named-query name="DictionaryEntry.findByIdentifier">
         <query>
-            <![CDATA[select e from DictionaryEntry e where e.dictionary.identifier = :identifier and e.identifier = :entryIdentifier]]>
+            <![CDATA[select e from DictionaryEntry e where e.identifier = :identifier]]>
         </query>
     </named-query>
     

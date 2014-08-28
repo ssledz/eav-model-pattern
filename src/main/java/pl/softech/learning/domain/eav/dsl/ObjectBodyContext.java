@@ -5,8 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import pl.softech.learning.domain.eav.dsl.AttributeDefinitionContext.Builder;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 

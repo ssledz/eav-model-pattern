@@ -127,10 +127,10 @@ public class ComputerModelExampleTest {
 		MyObject computer = new MyObject(categoryRepository.findByIdentifier(computerCategory), "MAUI");
 
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new DictionaryEntryValue(
-				dictionaryEntryRepository.findByIdentifier(computerMake, dell)));
+				dictionaryEntryRepository.findByIdentifier(dell)));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("model")), new StringValue("Studio15"));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("type")), new DictionaryEntryValue(
-				dictionaryEntryRepository.findByIdentifier(computerType, notebook)));
+				dictionaryEntryRepository.findByIdentifier(notebook)));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("cpu")), new StringValue("Core 2 Duo 2.4GHz"));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("drive")), new StringValue("320Gb 5400rpm"));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("video")), new StringValue("Intel Acc"));
@@ -139,9 +139,9 @@ public class ComputerModelExampleTest {
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("battery")), new StringValue("6 cell"));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("screen")), new StringValue("15\""));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("os")), new DictionaryEntryValue(
-				dictionaryEntryRepository.findByIdentifier(os, win7)));
+				dictionaryEntryRepository.findByIdentifier(win7)));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("os")), new DictionaryEntryValue(
-				dictionaryEntryRepository.findByIdentifier(os, linux)));
+				dictionaryEntryRepository.findByIdentifier(linux)));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("purshase_date")), new DateValue(new Date()));
 
 		myObjectRepository.save(computer);
@@ -210,7 +210,7 @@ public class ComputerModelExampleTest {
 		
 		try {
 			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new DictionaryEntryValue(
-					dictionaryEntryRepository.findByIdentifier(computerType, notebook)));
+					dictionaryEntryRepository.findByIdentifier(notebook)));
 			Assert.fail();
 		} catch (Exception e) {
 		}

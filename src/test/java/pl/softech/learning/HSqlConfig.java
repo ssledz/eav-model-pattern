@@ -14,10 +14,18 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
+import pl.softech.learning.domain.dictionary.DictionaryEntryRepository;
+import pl.softech.learning.domain.eav.DataTypeSerialisationService;
+
 @Configuration
 @EnableJpaRepositories("pl.softech.learning.domain")
 public class HSqlConfig {
 
+	@Bean
+	public DataTypeSerialisationService dataTypeSerialisationService(DictionaryEntryRepository dictionaryEntryRepository) {
+		return new DataTypeSerialisationService(dictionaryEntryRepository);
+	}
+	
 	@Bean
 	public DataSource dataSource() {
 		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).build();

@@ -13,6 +13,7 @@ import pl.softech.learning.domain.eav.AbstractValue;
 import pl.softech.learning.domain.eav.Attribute;
 import pl.softech.learning.domain.eav.Category;
 import pl.softech.learning.domain.eav.DataType;
+import pl.softech.learning.domain.eav.DataTypeSerialisationService;
 import pl.softech.learning.domain.eav.MyObject;
 
 import com.google.common.collect.Maps;
@@ -63,10 +64,13 @@ public class CreateModelVisitor implements ContextVisitor {
 
 	private MyObject.Builder currentObjectBuilder;
 
-	private DictionaryRepository dictionaryRepository;
+	private final DictionaryRepository dictionaryRepository;
+	
+	private final DataTypeSerialisationService dataTypeSerialisationService;
 
-	public CreateModelVisitor(DictionaryRepository dictionaryRepository) {
+	public CreateModelVisitor(DictionaryRepository dictionaryRepository, DataTypeSerialisationService dataTypeSerialisationService) {
 		this.dictionaryRepository = dictionaryRepository;
+		this.dataTypeSerialisationService = dataTypeSerialisationService;
 	}
 
 	public Collection<Category> getCategories() {
@@ -169,7 +173,7 @@ public class CreateModelVisitor implements ContextVisitor {
 	public void visit(AttributeValueContext ctx) {
 
 		Attribute attribute = checkNotNull(symbolTable.getAttribute(ctx.getAttributeIdentifier()), "No attribute with identifier %s", ctx.getAttributeIdentifier());
-		AbstractValue<?> value = null;
+		AbstractValue<?> value = dataTypeSerialisationService.readValue(attribute.getDataType().getType(), ctx.getValue());
 
 		currentObjectBuilder.add(attribute, value);
 

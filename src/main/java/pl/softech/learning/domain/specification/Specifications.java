@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 
 public class Specifications {
 
+	@SuppressWarnings("unchecked")
 	public static <T> Specification<T> and(final Specification<T>... specifications) {
 		checkNotNull(specifications);
 		checkArgument(specifications.length > 1, "There must be at least 2 specifications");
@@ -28,6 +29,7 @@ public class Specifications {
 		};
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <T> Specification<T> or(final Specification<T>... specifications) {
 		checkNotNull(specifications);
 		checkArgument(specifications.length > 1, "There must be at least 2 specifications");
