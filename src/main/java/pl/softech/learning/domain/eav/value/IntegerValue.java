@@ -1,4 +1,4 @@
-package pl.softech.learning.domain.eav;
+package pl.softech.learning.domain.eav.value;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -6,20 +6,20 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class BooleanValue extends AbstractValue<Boolean> {
+public class IntegerValue extends AbstractValue<Integer> {
 
-	@Column(name = "boolean_value")
-	private Boolean value;
+	@Column(name = "integer_value")
+	private Integer value;
 
-	protected BooleanValue() {
+	protected IntegerValue() {
 	}
 
-	public BooleanValue(Boolean value) {
+	public IntegerValue(Integer value) {
 		this.value = checkNotNull(value);
 	}
 
 	@Override
-	public Boolean getValue() {
+	public Integer getValue() {
 		return value;
 	}
 

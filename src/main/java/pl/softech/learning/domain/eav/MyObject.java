@@ -17,6 +17,20 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.tuple.Pair;
 
 import pl.softech.learning.domain.AbstractEntity;
+import pl.softech.learning.domain.eav.category.Category;
+import pl.softech.learning.domain.eav.relation.Relation;
+import pl.softech.learning.domain.eav.relation.RelationConfiguration;
+import pl.softech.learning.domain.eav.specification.ObjectMatchAttributeSpecification;
+import pl.softech.learning.domain.eav.specification.ValueMatchAttributeSpecification;
+import pl.softech.learning.domain.eav.value.AbstractValue;
+import pl.softech.learning.domain.eav.value.BooleanValue;
+import pl.softech.learning.domain.eav.value.DateValue;
+import pl.softech.learning.domain.eav.value.DictionaryEntryValue;
+import pl.softech.learning.domain.eav.value.DoubleValue;
+import pl.softech.learning.domain.eav.value.IntegerValue;
+import pl.softech.learning.domain.eav.value.ObjectValue;
+import pl.softech.learning.domain.eav.value.StringValue;
+import pl.softech.learning.domain.eav.value.ValueVisitor;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
@@ -24,6 +38,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+/**
+ * @author ssledz 
+ */
 @Entity
 public class MyObject extends AbstractEntity {
 
@@ -35,18 +52,21 @@ public class MyObject extends AbstractEntity {
 
 	private String name;
 
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "owner")
+	private Set<Relation> relations = Sets.newHashSet();
+
 	protected MyObject() {
 	}
 
 	public MyObject(Builder builder) {
 		this(builder.category, builder.name);
-		
-		for(Pair<Attribute, ? extends AbstractValue<?>> p : builder.values) {
+
+		for (Pair<Attribute, ? extends AbstractValue<?>> p : builder.values) {
 			addValue(p.getLeft(), p.getRight());
 		}
-		
+
 	}
-	
+
 	public MyObject(Category category, String name) {
 		this.category = checkNotNull(category);
 		this.name = checkNotNull(name);
@@ -78,18 +98,28 @@ public class MyObject extends AbstractEntity {
 		return !getValuesByAttribute(attributeIdentifier).isEmpty();
 	}
 
+	public ImmutableSet<Relation> getRelations() {
+		return new ImmutableSet.Builder<Relation>().addAll(relations).build();
+	}
+
+	public Relation addRelation(RelationConfiguration configurarion, MyObject target) {
+		Relation r = new Relation(configurarion, this, target);
+		relations.add(r);
+		return r;
+	}
+
 	public <T extends AbstractValue<?>> ObjectValue addValue(final Attribute attribute, T value) {
 
 		checkNotNull(attribute);
 		checkNotNull(value);
 
-		ObjectCategoryMatchAttributeConstraint catConstraint = new ObjectCategoryMatchAttributeConstraint();
+		ObjectMatchAttributeSpecification catConstraint = new ObjectMatchAttributeSpecification();
 
 		checkArgument(catConstraint.isSafisfiedBy(Pair.of(this, attribute)), String.format(
 				"Object category %s doesn't match the Attribute category %s", category.getIdentifier().getIdentifier(), attribute
 						.getCategory().getIdentifier().getIdentifier()));
 
-		ValueMatchAttributeConstraint dataTypeConstraint = new ValueMatchAttributeConstraint();
+		ValueMatchAttributeSpecification dataTypeConstraint = new ValueMatchAttributeSpecification();
 
 		checkArgument(dataTypeConstraint.isSafisfiedBy(Pair.of(value, attribute)),
 				String.format("Attribute %s doesn't match the value %s", attribute.toString(), value.toString()));
@@ -169,12 +199,11 @@ public class MyObject extends AbstractEntity {
 			this.name = name;
 			return this;
 		}
-		
-		public  <T extends AbstractValue<?>> Builder add(Attribute attribute, T value) {
+
+		public <T extends AbstractValue<?>> Builder add(Attribute attribute, T value) {
 			values.add(Pair.of(attribute, value));
 			return this;
 		}
-		
 
 	}
 

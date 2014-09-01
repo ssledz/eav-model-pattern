@@ -33,4 +33,11 @@
         </query>
     </named-query>
     
+    <!-- RelationConfiguration -->
+    <named-query name="RelationConfiguration.findByIdentifier">
+        <query>
+            <![CDATA[select rc from RelationConfiguration rc where rc.identifier = :identifier]]>
+        </query>
+    </named-query>
+    
 </entity-mappings>

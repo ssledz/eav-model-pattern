@@ -8,6 +8,9 @@ import javax.persistence.MappedSuperclass;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * @author ssledz 
+ */
 @MappedSuperclass
 public class AbstractEntity implements Entity {
 

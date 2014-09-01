@@ -9,12 +9,12 @@ import java.util.Map;
 import pl.softech.learning.domain.dictionary.Dictionary;
 import pl.softech.learning.domain.dictionary.DictionaryIdentifier;
 import pl.softech.learning.domain.dictionary.DictionaryRepository;
-import pl.softech.learning.domain.eav.AbstractValue;
 import pl.softech.learning.domain.eav.Attribute;
-import pl.softech.learning.domain.eav.Category;
 import pl.softech.learning.domain.eav.DataType;
 import pl.softech.learning.domain.eav.DataTypeSerialisationService;
 import pl.softech.learning.domain.eav.MyObject;
+import pl.softech.learning.domain.eav.category.Category;
+import pl.softech.learning.domain.eav.value.AbstractValue;
 
 import com.google.common.collect.Maps;
 

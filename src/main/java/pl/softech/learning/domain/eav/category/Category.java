@@ -1,4 +1,4 @@
-package pl.softech.learning.domain.eav;
+package pl.softech.learning.domain.eav.category;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

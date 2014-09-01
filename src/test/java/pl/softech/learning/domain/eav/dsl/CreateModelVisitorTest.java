@@ -2,7 +2,6 @@ package pl.softech.learning.domain.eav.dsl;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,22 +13,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.softech.learning.HSqlConfig;
-import pl.softech.learning.domain.dictionary.Dictionary;
-import pl.softech.learning.domain.dictionary.DictionaryEntry;
-import pl.softech.learning.domain.dictionary.DictionaryEntryIdentifier;
 import pl.softech.learning.domain.dictionary.DictionaryEntryRepository;
-import pl.softech.learning.domain.dictionary.DictionaryIdentifier;
 import pl.softech.learning.domain.dictionary.DictionaryRepository;
 import pl.softech.learning.domain.eav.AttributeIdentifier;
 import pl.softech.learning.domain.eav.AttributeRepository;
-import pl.softech.learning.domain.eav.CategoryRepository;
+import pl.softech.learning.domain.eav.ComputerModelInitializationService;
 import pl.softech.learning.domain.eav.DataTypeSerialisationService;
 import pl.softech.learning.domain.eav.MyObject;
 import pl.softech.learning.domain.eav.MyObjectRepository;
-import pl.softech.learning.domain.eav.ObjectValue;
+import pl.softech.learning.domain.eav.category.CategoryRepository;
+import pl.softech.learning.domain.eav.value.ObjectValue;
 
 /**
- * @author ssledz 
+ * @author ssledz
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = HSqlConfig.class)
@@ -43,63 +39,23 @@ public class CreateModelVisitorTest {
 
 	@Autowired
 	private DataTypeSerialisationService dataTypeSerialisationService;
-	
+
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	@Autowired
 	private AttributeRepository attributeRepository;
-	
+
 	@Autowired
 	private MyObjectRepository myObjectRepository;
 
-	private DictionaryIdentifier computerType;
-	private DictionaryIdentifier os;
-	private DictionaryIdentifier computerMake;
-	private DictionaryEntryIdentifier notebook;
-	private DictionaryEntryIdentifier desktop;
-	private DictionaryEntryIdentifier win7;
-	private DictionaryEntryIdentifier win8;
-	private DictionaryEntryIdentifier linux;
-	private DictionaryEntryIdentifier solaris;
-	private DictionaryEntryIdentifier dell;
-	private DictionaryEntryIdentifier lenovo;
-	private DictionaryEntryIdentifier apple;
+	@Autowired
+	private ComputerModelInitializationService cmis;
 
 	@Before
 	public void init() {
 
-		computerType = new DictionaryIdentifier("computer_type");
-		os = new DictionaryIdentifier("os");
-		computerMake = new DictionaryIdentifier("computer_make");
-
-		dictionaryRepository.save(Arrays.asList(//
-				new Dictionary(computerType, "Computer Type"),//
-				new Dictionary(os, "Operating System"),//
-				new Dictionary(computerMake, "Computer Make")//
-				));
-
-		notebook = new DictionaryEntryIdentifier("notebook");
-		desktop = new DictionaryEntryIdentifier("desktop");
-		win7 = new DictionaryEntryIdentifier("win7");
-		win8 = new DictionaryEntryIdentifier("win8");
-		linux = new DictionaryEntryIdentifier("linux");
-		solaris = new DictionaryEntryIdentifier("solaris");
-		dell = new DictionaryEntryIdentifier("dell");
-		lenovo = new DictionaryEntryIdentifier("lenovo");
-		apple = new DictionaryEntryIdentifier("apple");
-
-		dictionaryEntryRepository.save(Arrays.asList(//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerType), notebook, "Notebook"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerType), desktop, "Desktop"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(os), win7, "Windows 7"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(os), win8, "Window 8"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(os), linux, "Linux"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(os), solaris, "Solaris"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerMake), dell, "Dell"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerMake), lenovo, "Lenovo"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerMake), apple, "Apple")//
-				));
+		cmis.initializeDict();
 	}
 
 	@Test
@@ -122,11 +78,11 @@ public class CreateModelVisitorTest {
 		CreateModelVisitor visitor = new CreateModelVisitor(dictionaryRepository, dataTypeSerialisationService);
 		Parser p = new Parser(visitor);
 		p.parse(buffer.toString());
-		
+
 		categoryRepository.save(visitor.getCategories());
 		attributeRepository.save(visitor.getAttributes());
 		myObjectRepository.save(visitor.getObjects());
-		
+
 		MyObject obj = myObjectRepository.findByName("MAUI");
 		System.out.println(obj);
 
@@ -138,10 +94,7 @@ public class CreateModelVisitorTest {
 
 		Assert.assertFalse(obj.hasValues(new AttributeIdentifier("ramm")));
 		Assert.assertTrue(obj.getValuesByAttribute((new AttributeIdentifier("ramm"))).isEmpty());
-		
-		
-		
-		
+
 	}
 
 }

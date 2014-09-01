@@ -15,7 +15,9 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import pl.softech.learning.domain.dictionary.DictionaryEntryRepository;
+import pl.softech.learning.domain.eav.ComputerModelInitializationService;
 import pl.softech.learning.domain.eav.DataTypeSerialisationService;
+import pl.softech.learning.domain.eav.PersonModelInitializationService;
 
 @Configuration
 @EnableJpaRepositories("pl.softech.learning.domain")
@@ -24,6 +26,16 @@ public class HSqlConfig {
 	@Bean
 	public DataTypeSerialisationService dataTypeSerialisationService(DictionaryEntryRepository dictionaryEntryRepository) {
 		return new DataTypeSerialisationService(dictionaryEntryRepository);
+	}
+	
+	@Bean
+	public ComputerModelInitializationService computerModelInitializationService() {
+		return new ComputerModelInitializationService();
+	}
+	
+	@Bean
+	public PersonModelInitializationService personModelInitializationService() {
+		return new PersonModelInitializationService();
 	}
 	
 	@Bean

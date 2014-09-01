@@ -15,13 +15,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.softech.learning.HSqlConfig;
-import pl.softech.learning.domain.dictionary.Dictionary;
-import pl.softech.learning.domain.dictionary.DictionaryEntry;
-import pl.softech.learning.domain.dictionary.DictionaryEntryIdentifier;
 import pl.softech.learning.domain.dictionary.DictionaryEntryRepository;
-import pl.softech.learning.domain.dictionary.DictionaryIdentifier;
 import pl.softech.learning.domain.dictionary.DictionaryRepository;
-import pl.softech.learning.domain.eav.DataType.Type;
+import pl.softech.learning.domain.eav.category.CategoryRepository;
+import pl.softech.learning.domain.eav.value.DateValue;
+import pl.softech.learning.domain.eav.value.DictionaryEntryValue;
+import pl.softech.learning.domain.eav.value.IntegerValue;
+import pl.softech.learning.domain.eav.value.ObjectValue;
+import pl.softech.learning.domain.eav.value.ObjectValueRepository;
+import pl.softech.learning.domain.eav.value.StringValue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = HSqlConfig.class)
@@ -39,84 +41,17 @@ public class ComputerModelExampleTest {
 	private DictionaryRepository dictionaryRepository;
 	@Autowired
 	private DictionaryEntryRepository dictionaryEntryRepository;
-
-	private DictionaryIdentifier computerType;
-	private DictionaryIdentifier os;
-	private DictionaryIdentifier computerMake;
-	private DictionaryEntryIdentifier notebook;
-	private DictionaryEntryIdentifier desktop;
-	private DictionaryEntryIdentifier win7;
-	private DictionaryEntryIdentifier win8;
-	private DictionaryEntryIdentifier linux;
-	private DictionaryEntryIdentifier solaris;
-	private DictionaryEntryIdentifier dell;
-	private DictionaryEntryIdentifier lenovo;
-	private DictionaryEntryIdentifier apple;
-	
-	CategoryIdentifier computerCategory, personCategory;
+	@Autowired
+	private ComputerModelInitializationService cmis;
+	@Autowired
+	private PersonModelInitializationService pmis;
 
 	@Before
 	public void init() {
 
-		computerType = new DictionaryIdentifier("computer_type");
-		os = new DictionaryIdentifier("os");
-		computerMake = new DictionaryIdentifier("computer_make");
+		cmis.initialize();
 
-		dictionaryRepository.save(Arrays.asList(//
-				new Dictionary(computerType, "Computer Type"),//
-				new Dictionary(os, "Operating System"),//
-				new Dictionary(computerMake, "Computer Make")//
-				));
-
-		notebook = new DictionaryEntryIdentifier("notebook");
-		desktop = new DictionaryEntryIdentifier("desktop");
-		win7 = new DictionaryEntryIdentifier("win7");
-		win8 = new DictionaryEntryIdentifier("win8");
-		linux = new DictionaryEntryIdentifier("linux");
-		solaris = new DictionaryEntryIdentifier("solaris");
-		dell = new DictionaryEntryIdentifier("dell");
-		lenovo = new DictionaryEntryIdentifier("lenovo");
-		apple = new DictionaryEntryIdentifier("apple");
-
-		dictionaryEntryRepository.save(Arrays.asList(//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerType), notebook, "Notebook"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerType), desktop, "Desktop"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(os), win7, "Windows 7"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(os), win8, "Window 8"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(os), linux, "Linux"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(os), solaris, "Solaris"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerMake), dell, "Dell"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerMake), lenovo, "Lenovo"),//
-				new DictionaryEntry(dictionaryRepository.findByIdentifier(computerMake), apple, "Apple")//
-				));
-
-		computerCategory = new CategoryIdentifier("computer");
-		Category computer = new Category(computerCategory, "Computer");
-		categoryRepository.save(computer);
-
-		Dictionary computerMakeDict = dictionaryRepository.findByIdentifier(computerMake);
-		Dictionary computerTypeDict = dictionaryRepository.findByIdentifier(computerType);
-		Dictionary osDict = dictionaryRepository.findByIdentifier(os);
-		attributeRepository.save(new Attribute(new AttributeIdentifier("make"), "Make", computer, new DataType(computerMakeDict)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("model"), "Model", computer, new DataType(Type.TEXT)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("type"), "Type", computer, new DataType(computerTypeDict)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("cpu"), "CPU", computer, new DataType(Type.TEXT)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("drive"), "Drive", computer, new DataType(Type.TEXT)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("video"), "Video", computer, new DataType(Type.TEXT)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("ram"), "RAM (GB)", computer, new DataType(Type.INTEGER)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("optical"), "Optical", computer, new DataType(Type.TEXT)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("battery"), "Battery", computer, new DataType(Type.TEXT)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("screen"), "Screen", computer, new DataType(Type.TEXT)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("os"), "OS", computer, new DataType(osDict)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("purshase_date"), "Purschase Date", computer, new DataType(Type.DATE)));
-
-		personCategory = new CategoryIdentifier("person");
-		Category person = new Category(personCategory, "Person");
-		categoryRepository.save(person);
-
-		attributeRepository.save(new Attribute(new AttributeIdentifier("firstname"), "First Name", person, new DataType(Type.TEXT)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("lastname"), "Last Name", person, new DataType(Type.TEXT)));
-		attributeRepository.save(new Attribute(new AttributeIdentifier("age"), "Age", person, new DataType(Type.INTEGER)));
+		pmis.initialize();
 
 	}
 
@@ -124,13 +59,13 @@ public class ComputerModelExampleTest {
 	@Transactional
 	public void testExample() {
 
-		MyObject computer = new MyObject(categoryRepository.findByIdentifier(computerCategory), "MAUI");
+		MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "MAUI");
 
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new DictionaryEntryValue(
-				dictionaryEntryRepository.findByIdentifier(dell)));
+				dictionaryEntryRepository.findByIdentifier(cmis.getDell())));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("model")), new StringValue("Studio15"));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("type")), new DictionaryEntryValue(
-				dictionaryEntryRepository.findByIdentifier(notebook)));
+				dictionaryEntryRepository.findByIdentifier(cmis.getNotebook())));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("cpu")), new StringValue("Core 2 Duo 2.4GHz"));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("drive")), new StringValue("320Gb 5400rpm"));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("video")), new StringValue("Intel Acc"));
@@ -139,9 +74,9 @@ public class ComputerModelExampleTest {
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("battery")), new StringValue("6 cell"));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("screen")), new StringValue("15\""));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("os")), new DictionaryEntryValue(
-				dictionaryEntryRepository.findByIdentifier(win7)));
+				dictionaryEntryRepository.findByIdentifier(cmis.getWin7())));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("os")), new DictionaryEntryValue(
-				dictionaryEntryRepository.findByIdentifier(linux)));
+				dictionaryEntryRepository.findByIdentifier(cmis.getLinux())));
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("purshase_date")), new DateValue(new Date()));
 
 		myObjectRepository.save(computer);
@@ -187,7 +122,7 @@ public class ComputerModelExampleTest {
 	@Test
 	@Transactional
 	public void testCategoryConstraint() {
-		MyObject computer = new MyObject(categoryRepository.findByIdentifier(computerCategory), "PING");
+		MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "PING");
 
 		try {
 			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("firstname")), new StringValue("Slawek"));
@@ -200,23 +135,21 @@ public class ComputerModelExampleTest {
 	@Test
 	@Transactional
 	public void testValueMatchAttributeConstraint() {
-		MyObject computer = new MyObject(categoryRepository.findByIdentifier(computerCategory), "PONG");
+		MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "PONG");
 
 		try {
 			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new StringValue("Dell"));
 			Assert.fail();
 		} catch (Exception e) {
 		}
-		
+
 		try {
 			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new DictionaryEntryValue(
-					dictionaryEntryRepository.findByIdentifier(notebook)));
+					dictionaryEntryRepository.findByIdentifier(cmis.getNotebook())));
 			Assert.fail();
 		} catch (Exception e) {
 		}
-		
-		
 
 	}
-	
+
 }

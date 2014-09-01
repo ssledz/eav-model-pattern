@@ -1,4 +1,4 @@
-package pl.softech.learning.domain.eav;
+package pl.softech.learning.domain.eav.value;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -11,6 +11,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.softech.learning.domain.AbstractEntity;
+import pl.softech.learning.domain.eav.Attribute;
+import pl.softech.learning.domain.eav.MyObject;
 
 @Entity
 public class ObjectValue extends AbstractEntity {

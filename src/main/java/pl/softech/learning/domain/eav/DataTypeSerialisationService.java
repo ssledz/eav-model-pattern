@@ -9,6 +9,14 @@ import org.springframework.stereotype.Service;
 import pl.softech.learning.domain.dictionary.DictionaryEntryIdentifier;
 import pl.softech.learning.domain.dictionary.DictionaryEntryRepository;
 import pl.softech.learning.domain.eav.DataType.Type;
+import pl.softech.learning.domain.eav.value.AbstractValue;
+import pl.softech.learning.domain.eav.value.BooleanValue;
+import pl.softech.learning.domain.eav.value.DateValue;
+import pl.softech.learning.domain.eav.value.DictionaryEntryValue;
+import pl.softech.learning.domain.eav.value.DoubleValue;
+import pl.softech.learning.domain.eav.value.IntegerValue;
+import pl.softech.learning.domain.eav.value.StringValue;
+import pl.softech.learning.domain.eav.value.ValueReader;
 
 import com.google.common.collect.ImmutableMap;
 

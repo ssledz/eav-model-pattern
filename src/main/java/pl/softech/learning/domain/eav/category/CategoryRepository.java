@@ -1,4 +1,4 @@
-package pl.softech.learning.domain.eav;
+package pl.softech.learning.domain.eav.category;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

@@ -13,6 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.softech.learning.domain.AbstractEntity;
+import pl.softech.learning.domain.eav.category.Category;
 
 @Entity
 public class Attribute extends AbstractEntity {
