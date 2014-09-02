@@ -25,6 +25,9 @@ import pl.softech.learning.domain.eav.value.ObjectValue;
 import pl.softech.learning.domain.eav.value.ObjectValueRepository;
 import pl.softech.learning.domain.eav.value.StringValue;
 
+/**
+ * @author ssledz 
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = HSqlConfig.class)
 public class ComputerModelExampleTest {

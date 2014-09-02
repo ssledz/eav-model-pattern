@@ -91,7 +91,7 @@ public class MyObject extends AbstractEntity {
 	}
 
 	public ObjectValue getValueByAttribute(AttributeIdentifier attributeIdentifier) {
-		return Iterables.getOnlyElement(getValuesByAttribute(attributeIdentifier));
+		return Iterables.getOnlyElement(getValuesByAttribute(attributeIdentifier), null);
 	}
 
 	public boolean hasValues(AttributeIdentifier attributeIdentifier) {
