@@ -164,6 +164,7 @@ public class ComputerModelInitializationService {
 		attributeRepository.save(new Attribute(new AttributeIdentifier("os"), "OS", computer, new DataType(osDict)));
 		attributeRepository.save(new Attribute(new AttributeIdentifier("purshase_date"), "Purschase Date", computer,
 				new DataType(Type.DATE)));
+		attributeRepository.save(new Attribute(new AttributeIdentifier("for_sale"), "Is for sale ?", computer, new DataType(Type.BOOLEAN)));
 
 	}
 

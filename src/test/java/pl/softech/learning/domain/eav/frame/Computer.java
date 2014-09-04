@@ -3,15 +3,15 @@ package pl.softech.learning.domain.eav.frame;
 import java.util.Collection;
 import java.util.Date;
 
-import pl.softech.learning.domain.eav.value.DictionaryEntryValue;
+import pl.softech.learning.domain.dictionary.DictionaryEntry;
 
 public interface Computer {
 
-	DictionaryEntryValue getMake();
+	DictionaryEntry getMake();
 	
 	String getModel();
 	
-	DictionaryEntryValue getType();
+	DictionaryEntry getType();
 	
 	String getCpu();
 	
@@ -27,9 +27,12 @@ public interface Computer {
 	
 	String getScreen();
 	
-	Collection<DictionaryEntryValue> getOs();
+	Collection<DictionaryEntry> getOs();
 	
 	@Attribute(name="purshase_date")
-	Date getOurshaseDate();
+	Date getPurshaseDate();
+	
+	@Attribute(name="for_sale")
+	Boolean isForSale();
 	
 }
