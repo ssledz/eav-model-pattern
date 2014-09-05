@@ -2,13 +2,16 @@ package pl.softech.learning.domain.eav.frame;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static pl.softech.learning.domain.eav.frame.ReflectionUtils.isAdd;
 import static pl.softech.learning.domain.eav.frame.ReflectionUtils.isCollection;
 import static pl.softech.learning.domain.eav.frame.ReflectionUtils.isGetter;
+import static pl.softech.learning.domain.eav.frame.ReflectionUtils.isSetter;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -17,6 +20,7 @@ import pl.softech.learning.domain.eav.AttributeRepository;
 import pl.softech.learning.domain.eav.MyObject;
 import pl.softech.learning.domain.eav.value.AbstractValue;
 import pl.softech.learning.domain.eav.value.ObjectValue;
+import pl.softech.learning.domain.eav.value.ValueFactory;
 import pl.softech.learning.domain.eav.value.ValueVisitorAdapter;
 
 import com.google.common.collect.ImmutableSet;
@@ -28,11 +32,13 @@ public class FrameFactory {
 
 	private AttributeRepository attributeRepository;
 
+	private ValueFactory valueFactory = new ValueFactory();
+
 	public FrameFactory(AttributeRepository attributeRepository) {
 		this.attributeRepository = attributeRepository;
 	}
 
-	private static class MyInvocationHandler implements InvocationHandler {
+	private class MyInvocationHandler implements InvocationHandler {
 
 		private final MyObject object;
 
@@ -41,15 +47,26 @@ public class FrameFactory {
 		}
 
 		private String getAttributeIdentifier(Method method) {
+			
 			Attribute ann = method.getAnnotation(Attribute.class);
 			if (ann != null && ann.name().length() > 0) {
 				return ann.name();
 			}
-			return method.getName().substring(3).toLowerCase();
+
+			String name = method.getName();
+
+			for (String prefix : Arrays.asList("get", "is", "set", "add")) {
+				if (name.startsWith(prefix)) {
+					name = name.substring(prefix.length());
+					break;
+				}
+			}
+
+			return name.toLowerCase();
 		}
 
 		@SuppressWarnings("unchecked")
-		private Object getCollectionValue(String attIdentifier, Method method) throws Exception {
+		private Object getValues(String attIdentifier, Method method) throws Exception {
 
 			ImmutableSet<ObjectValue> values = object.getValuesByAttribute(new AttributeIdentifier(attIdentifier));
 
@@ -89,7 +106,7 @@ public class FrameFactory {
 			return bag[0];
 		}
 
-		private Object getSingleValue(String attIdentifier, Method method) {
+		private Object getValue(String attIdentifier, Method method) {
 
 			ObjectValue value = object.getValueByAttribute(new AttributeIdentifier(attIdentifier));
 
@@ -111,6 +128,31 @@ public class FrameFactory {
 			return bag[0];
 		}
 
+		private void setValue(String attIdentifier, Method method, Object arg) {
+
+			pl.softech.learning.domain.eav.Attribute attribute = attributeRepository
+					.findByIdentifier(new AttributeIdentifier(attIdentifier));
+
+			if (arg == null) {
+				object.updateValue(attribute, null);
+				return;
+			}
+
+			AbstractValue<?> value = valueFactory.create(arg);
+
+			object.updateValue(attribute, value);
+		}
+
+		private void addValue(String attIdentifier, Method method, Object arg) {
+
+			pl.softech.learning.domain.eav.Attribute attribute = attributeRepository
+					.findByIdentifier(new AttributeIdentifier(attIdentifier));
+			checkNotNull(arg);
+			AbstractValue<?> value = valueFactory.create(arg);
+			object.addValue(attribute, value);
+
+		}
+
 		@Override
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
@@ -121,9 +163,9 @@ public class FrameFactory {
 				Class<?> returnType = method.getReturnType();
 				Object value = null;
 				if (isCollection(returnType)) {
-					value = getCollectionValue(attIdentifier, method);
+					value = getValues(attIdentifier, method);
 				} else {
-					value = getSingleValue(attIdentifier, method);
+					value = getValue(attIdentifier, method);
 				}
 
 				if (value == null) {
@@ -138,7 +180,25 @@ public class FrameFactory {
 
 			}
 
-			return null;
+			boolean isSetter = isSetter(method);
+			boolean isAdd = isAdd(method);
+
+			if (isSetter || isAdd) {
+
+				if (isSetter) {
+
+					setValue(attIdentifier, method, args[0]);
+
+				} else {
+
+					addValue(attIdentifier, method, args[0]);
+				}
+
+				return null;
+			}
+
+			throw new UnsupportedOperationException(String.format("Method %s is unsupported", method.getName()));
+
 		}
 
 	}

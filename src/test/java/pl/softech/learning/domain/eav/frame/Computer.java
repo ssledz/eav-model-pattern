@@ -11,6 +11,8 @@ public interface Computer {
 	
 	String getModel();
 	
+	void setModel(String model);
+	
 	DictionaryEntry getType();
 	
 	String getCpu();
@@ -18,6 +20,8 @@ public interface Computer {
 	String getDrive();
 	
 	String getVideo();
+	
+	void setVideo(String video);
 	
 	Integer getRam();
 	
@@ -29,10 +33,15 @@ public interface Computer {
 	
 	Collection<DictionaryEntry> getOs();
 	
+	void addOs(DictionaryEntry od);
+	
 	@Attribute(name="purshase_date")
 	Date getPurshaseDate();
 	
 	@Attribute(name="for_sale")
 	Boolean isForSale();
+	
+	@Attribute(name="for_sale")
+	void setForSale(Boolean forSale);
 	
 }

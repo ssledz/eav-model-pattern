@@ -108,6 +108,23 @@ public class MyObject extends AbstractEntity {
 		return r;
 	}
 
+	public <T extends AbstractValue<?>> ObjectValue updateValue(final Attribute attribute, T value) {
+		
+		checkNotNull(attribute);
+		
+		ObjectValue objValue = getValueByAttribute(attribute.getIdentifier());
+		
+		if(objValue != null) {
+			values.remove(objValue);
+		}
+		
+		if(value == null) {
+			return null;
+		}
+		
+		return addValue(attribute, value);
+	}
+	
 	public <T extends AbstractValue<?>> ObjectValue addValue(final Attribute attribute, T value) {
 
 		checkNotNull(attribute);

@@ -68,17 +68,23 @@ public class FrameFactoryTest {
 	public void test() {
 
 		MyObject object = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "MAUI");
+		
 		object.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("model")), new StringValue("Studio15"));
+		
 		object.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("os")), new DictionaryEntryValue(
 				dictionaryEntryRepository.findByIdentifier(cmis.getWin7())));
+		
 		object.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("os")), new DictionaryEntryValue(
 				dictionaryEntryRepository.findByIdentifier(cmis.getLinux())));
+		
 		object.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("for_sale")), new BooleanValue(false));
 
 		Computer computer = frameFactory.frame(Computer.class, object);
 
 		Assert.assertEquals("Studio15", computer.getModel());
+		
 		Assert.assertEquals(new Boolean(false), computer.isForSale());
+		
 		Assert.assertNull(computer.getDrive());
 
 		List<String> oses = new LinkedList<>(Collections2.transform(computer.getOs(), new Function<DictionaryEntry, String>() {
@@ -96,6 +102,33 @@ public class FrameFactoryTest {
 		Assert.assertEquals("Linux", it.next());
 		Assert.assertEquals("Windows 7", it.next());
 		
+		computer.setModel("Studio17");
+		Assert.assertEquals("Studio17", computer.getModel());
+		
+		Assert.assertNull(computer.getVideo());
+		computer.setVideo("Intel Acc");
+		Assert.assertEquals("Intel Acc", computer.getVideo());
+		computer.setVideo(null);
+		Assert.assertNull(computer.getVideo());
+		
+		computer.setForSale(true);
+		Assert.assertEquals(new Boolean(true), computer.isForSale());
+		
+		computer.addOs(dictionaryEntryRepository.findByIdentifier(cmis.getSolaris()));
+		
+		oses = new LinkedList<>(Collections2.transform(computer.getOs(), new Function<DictionaryEntry, String>() {
+			@Override
+			public String apply(DictionaryEntry input) {
+				return input.getName();
+			}
+		}));
+		
+		Assert.assertEquals(3, oses.size());
+		Collections.sort(oses);
+		it = oses.iterator();
+		Assert.assertEquals("Linux", it.next());
+		Assert.assertEquals("Solaris", it.next());
+		Assert.assertEquals("Windows 7", it.next());
 	}
 
 }
