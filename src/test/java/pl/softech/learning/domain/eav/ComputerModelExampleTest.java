@@ -95,12 +95,7 @@ public class ComputerModelExampleTest {
 		Assert.assertFalse(obj.hasValues(new AttributeIdentifier("ramm")));
 		Assert.assertTrue(obj.getValuesByAttribute((new AttributeIdentifier("ramm"))).isEmpty());
 
-		try {
-			obj.getValueByAttribute((new AttributeIdentifier("ramm")));
-			Assert.fail();
-		} catch (Exception e) {
-
-		}
+		Assert.assertNull(obj.getValueByAttribute((new AttributeIdentifier("ramm"))));
 
 		Set<ObjectValue> opticals = obj.getValuesByAttribute(new AttributeIdentifier("optical"));
 		Assert.assertEquals(1, opticals.size());

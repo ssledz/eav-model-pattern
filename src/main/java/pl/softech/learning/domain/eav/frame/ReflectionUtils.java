@@ -2,11 +2,61 @@ package pl.softech.learning.domain.eav.frame;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 
 public class ReflectionUtils {
+
+	private static String capitalize(String word) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(Character.toUpperCase(word.charAt(0)));
+		buffer.append(word.substring(1));
+		return buffer.toString();
+
+	}
+	
+	public static Method getSetter(String propertyName, Class<?> clazz, Class<?> arg) throws Exception {
+		return clazz.getMethod(String.format("set", capitalize(propertyName)), arg);
+	}
+
+	public static Method getAdd(String propertyName, Class<?> clazz, Class<?> arg) throws Exception {
+		return clazz.getMethod(String.format("add", capitalize(propertyName)), arg);
+	}
+
+	public static String getPropertyName(Method method) {
+		String name = method.getName();
+
+		for (String prefix : Arrays.asList("get", "is", "set", "add")) {
+			if (name.startsWith(prefix)) {
+				name = name.substring(prefix.length());
+				break;
+			}
+		}
+		
+		return name;
+	}
+
+	public static Method getGetter(String propertyName, Class<?> clazz) throws Exception {
+
+		String[] names = { String.format("get%s", capitalize(propertyName)),//
+				String.format("is%s", capitalize(propertyName)) //
+		};
+
+		for (Method m : clazz.getMethods()) {
+
+			for (String name : names) {
+				if (m.getName().equals(name)) {
+					return m;
+				}
+			}
+
+		}
+
+		return null;
+
+	}
 
 	public static boolean isGetter(Method method) {
 

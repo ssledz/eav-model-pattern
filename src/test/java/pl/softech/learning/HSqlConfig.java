@@ -20,14 +20,15 @@ import pl.softech.learning.domain.eav.ComputerModelInitializationService;
 import pl.softech.learning.domain.eav.DataTypeSerialisationService;
 import pl.softech.learning.domain.eav.PersonModelInitializationService;
 import pl.softech.learning.domain.eav.frame.FrameFactory;
+import pl.softech.learning.domain.eav.relation.RelationConfigurationRepository;
 
 @Configuration
 @EnableJpaRepositories("pl.softech.learning.domain")
 public class HSqlConfig {
 
 	@Bean
-	public FrameFactory frameFactory(AttributeRepository attributeRepository) {
-		return new FrameFactory(attributeRepository);
+	public FrameFactory frameFactory(AttributeRepository attributeRepository, RelationConfigurationRepository relationConfigurationRepository) {
+		return new FrameFactory(attributeRepository, relationConfigurationRepository);
 	}
 	
 	@Bean

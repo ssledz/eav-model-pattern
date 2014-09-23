@@ -5,6 +5,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface RelationConfigurationRepository extends CrudRepository<RelationConfiguration, Long> {
 
-	RelationConfiguration findByIdentifier(@Param("identifier") RelationConfiguration identifier);
-	
+	RelationConfiguration findByIdentifier(@Param("identifier") RelationIdentifier identifier);
+
 }
