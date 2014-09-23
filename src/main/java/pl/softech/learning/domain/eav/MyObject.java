@@ -20,6 +20,7 @@ import pl.softech.learning.domain.AbstractEntity;
 import pl.softech.learning.domain.eav.category.Category;
 import pl.softech.learning.domain.eav.relation.Relation;
 import pl.softech.learning.domain.eav.relation.RelationConfiguration;
+import pl.softech.learning.domain.eav.relation.RelationIdentifier;
 import pl.softech.learning.domain.eav.specification.ObjectMatchAttributeSpecification;
 import pl.softech.learning.domain.eav.specification.ValueMatchAttributeSpecification;
 import pl.softech.learning.domain.eav.value.AbstractValue;
@@ -39,7 +40,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
- * @author ssledz 
+ * @author ssledz
  */
 @Entity
 public class MyObject extends AbstractEntity {
@@ -102,6 +103,22 @@ public class MyObject extends AbstractEntity {
 		return new ImmutableSet.Builder<Relation>().addAll(relations).build();
 	}
 
+	public ImmutableSet<Relation> getRelationsByIdentifier(final RelationIdentifier identifier) {
+
+		return new ImmutableSet.Builder<Relation>().addAll(Iterables.filter(relations, new Predicate<Relation>() {
+
+			@Override
+			public boolean apply(Relation input) {
+				return input.getConfigurarion().getIdentifier().equals(identifier);
+			}
+		})).build();
+
+	}
+
+	public Relation getRelationByIdentifier(RelationIdentifier identifier) {
+		return Iterables.getOnlyElement(getRelationsByIdentifier(identifier), null);
+	}
+
 	public Relation addRelation(RelationConfiguration configurarion, MyObject target) {
 		Relation r = new Relation(configurarion, this, target);
 		relations.add(r);
@@ -109,22 +126,22 @@ public class MyObject extends AbstractEntity {
 	}
 
 	public <T extends AbstractValue<?>> ObjectValue updateValue(final Attribute attribute, T value) {
-		
+
 		checkNotNull(attribute);
-		
+
 		ObjectValue objValue = getValueByAttribute(attribute.getIdentifier());
-		
-		if(objValue != null) {
+
+		if (objValue != null) {
 			values.remove(objValue);
 		}
-		
-		if(value == null) {
+
+		if (value == null) {
 			return null;
 		}
-		
+
 		return addValue(attribute, value);
 	}
-	
+
 	public <T extends AbstractValue<?>> ObjectValue addValue(final Attribute attribute, T value) {
 
 		checkNotNull(attribute);

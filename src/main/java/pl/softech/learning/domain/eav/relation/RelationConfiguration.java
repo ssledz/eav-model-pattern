@@ -55,7 +55,11 @@ public class RelationConfiguration extends AbstractEntity {
 	public String getName() {
 		return name;
 	}
-	
+
+	public RelationIdentifier getIdentifier() {
+		return identifier;
+	}
+
 	@Override
 	public String toString() {
 		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);

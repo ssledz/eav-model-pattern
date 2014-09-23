@@ -1,6 +1,7 @@
 package pl.softech.learning.domain.eav.relation;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +16,7 @@ import pl.softech.learning.domain.eav.specification.OwnerRelationSpecification;
 import pl.softech.learning.domain.eav.specification.TargetRelationSpecification;
 
 /**
- * @author ssledz 
+ * @author ssledz
  */
 @Entity
 public class Relation extends AbstractEntity {
@@ -37,12 +38,20 @@ public class Relation extends AbstractEntity {
 		this.configurarion = checkNotNull(configurarion);
 		this.owner = checkNotNull(owner);
 		this.target = checkNotNull(target);
-		
+
 		checkArgument(new TargetRelationSpecification(configurarion).isSafisfiedBy(target));
 		checkArgument(new OwnerRelationSpecification(configurarion).isSafisfiedBy(owner));
 
 	}
-	
+
+	public RelationConfiguration getConfigurarion() {
+		return configurarion;
+	}
+
+	public MyObject getTarget() {
+		return target;
+	}
+
 	@Override
 	public String toString() {
 		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
