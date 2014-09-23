@@ -13,9 +13,12 @@ public class RelationProperty implements Property {
 	private final MyObject object;
 
 	private final RelationConfigurationRepository relationConfigurationRepository;
+	
+	private final String relationIdentifier;
 
-	RelationProperty(MyObject object, RelationConfigurationRepository relationConfigurationRepository) {
+	RelationProperty(MyObject object, String relationIdentifier, RelationConfigurationRepository relationConfigurationRepository) {
 		this.object = object;
+		this.relationIdentifier = relationIdentifier;
 		this.relationConfigurationRepository = relationConfigurationRepository;
 	}
 

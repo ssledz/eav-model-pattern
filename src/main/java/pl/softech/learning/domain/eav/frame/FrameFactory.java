@@ -43,7 +43,7 @@ public class FrameFactory {
 		private Property createProperty(MethodContext ctx) {
 
 			if (ctx.getRel() != null) {
-				return new RelationProperty(object, relationConfigurationRepository);
+				return new RelationProperty(object, ctx.getIdentifier(), relationConfigurationRepository);
 			}
 
 			return new AttributeProperty(object, ctx.getIdentifier(), attributeRepository, valueFactory);
