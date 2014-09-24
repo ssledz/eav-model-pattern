@@ -16,7 +16,7 @@ public interface Person {
 	
 	Integer getAge();
 	
-	void setAge(int age);
+	void setAge(Integer age);
 	
 	@Relation(name="has_computer")
 	Computer getComputer();
