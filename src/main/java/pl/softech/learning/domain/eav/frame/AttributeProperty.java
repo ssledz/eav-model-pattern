@@ -3,9 +3,7 @@ package pl.softech.learning.domain.eav.frame;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 import pl.softech.learning.domain.eav.AttributeIdentifier;
 import pl.softech.learning.domain.eav.AttributeRepository;
@@ -78,8 +76,10 @@ public class AttributeProperty implements Property {
 
 	private void addValue(String attIdentifier, Method method, Object arg) {
 
-		pl.softech.learning.domain.eav.Attribute attribute = attributeRepository.findByIdentifier(new AttributeIdentifier(attIdentifier));
 		checkNotNull(arg);
+		
+		pl.softech.learning.domain.eav.Attribute attribute = attributeRepository.findByIdentifier(new AttributeIdentifier(attIdentifier));
+		
 		AbstractValue<?> value = valueFactory.create(arg);
 		object.addValue(attribute, value);
 
@@ -95,25 +95,11 @@ public class AttributeProperty implements Property {
 		}
 
 		Class<?> collType = method.getReturnType();
+		
 		final Collection<Object>[] bag = new Collection[1];
-		if (collType.isInterface()) {
 
-			if (collType.isAssignableFrom(ArrayList.class)) {
-
-				bag[0] = new ArrayList<>();
-
-			} else if (collType.isAssignableFrom(HashSet.class)) {
-
-				bag[0] = new HashSet<>();
-
-			}
-
-		} else {
-
-			bag[0] = (Collection<Object>) collType.getConstructor(new Class<?>[] {}).newInstance();
-
-		}
-
+		bag[0] = ReflectionUtils.newCollection(collType);
+		
 		for (ObjectValue value : values) {
 			value.accept(new ValueVisitorAdapter() {
 				@Override

@@ -16,7 +16,7 @@ public class ReflectionUtils {
 		return buffer.toString();
 
 	}
-	
+
 	public static Method getSetter(String propertyName, Class<?> clazz, Class<?> arg) throws Exception {
 		return clazz.getMethod(String.format("set", capitalize(propertyName)), arg);
 	}
@@ -34,7 +34,7 @@ public class ReflectionUtils {
 				break;
 			}
 		}
-		
+
 		return name;
 	}
 
@@ -95,6 +95,27 @@ public class ReflectionUtils {
 
 	public static boolean isCollection(Class<?> type) {
 		return Collection.class.isAssignableFrom(type);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Collection<Object> newCollection(Class<?> collType) throws Exception {
+		
+		if (collType.isInterface()) {
+
+			if (collType.isAssignableFrom(ArrayList.class)) {
+
+				return new ArrayList<>();
+
+			} else if (collType.isAssignableFrom(HashSet.class)) {
+
+				return new HashSet<>();
+
+			}
+
+		}
+
+		return (Collection<Object>) collType.getConstructor(new Class<?>[] {}).newInstance();
+
 	}
 
 	public static void main(String[] args) throws Exception {

@@ -52,6 +52,10 @@ public class FrameFactory {
 		@Override
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
+			if(method.getDeclaringClass().isAssignableFrom(MyObjectProxy.class)) {
+				return object;
+			}
+			
 			MethodContext ctx = methodContextRepository.findOne(method);
 
 			checkState(ctx != null, "Method %s is unsupported", method.getName());
@@ -104,7 +108,7 @@ public class FrameFactory {
 	@SuppressWarnings("unchecked")
 	public <T> T frame(Class<T> clazz, MyObject object) {
 		ClassLoader parentLoader = FrameFactory.class.getClassLoader();
-		return (T) Proxy.newProxyInstance(parentLoader, new Class[] { clazz }, new MyInvocationHandler(object, new MethodContextRepository(
+		return (T) Proxy.newProxyInstance(parentLoader, new Class[] { clazz, MyObjectProxy.class }, new MyInvocationHandler(object, new MethodContextRepository(
 				clazz)));
 	}
 

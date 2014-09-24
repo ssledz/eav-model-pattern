@@ -14,7 +14,7 @@ public interface Person {
 	
 	void setLastname(String lastname);
 	
-	int getAge();
+	Integer getAge();
 	
 	void setAge(int age);
 	

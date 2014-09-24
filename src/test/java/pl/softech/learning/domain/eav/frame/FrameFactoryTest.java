@@ -204,9 +204,9 @@ public class FrameFactoryTest {
 		Assert.assertEquals(friendTom.getFirstname(), it.next().getFirstname());
 
 		Assert.assertNotNull(person.getParent());
-		Assert.assertEquals(parent.getFirstname(), person.getParent().getValueByAttribute(new AttributeIdentifier("firstname")));
-		Assert.assertEquals(parent.getLastname(), person.getParent().getValueByAttribute(new AttributeIdentifier("lastname")));
-		Assert.assertEquals(parent.getAge(), person.getParent().getValueByAttribute(new AttributeIdentifier("age")));
+		Assert.assertEquals(parent.getFirstname(), person.getParent().getValueByAttribute(new AttributeIdentifier("firstname")).getValueAsString());
+		Assert.assertEquals(parent.getLastname(), person.getParent().getValueByAttribute(new AttributeIdentifier("lastname")).getValueAsString());
+		Assert.assertEquals(""+parent.getAge(), person.getParent().getValueByAttribute(new AttributeIdentifier("age")).getValueAsString());
 	}
 
 }

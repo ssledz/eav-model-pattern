@@ -141,6 +141,23 @@ public class MyObject extends AbstractEntity {
 
 		return addValue(attribute, value);
 	}
+	
+	public Relation updateRelation(RelationConfiguration configurarion, MyObject target) {
+		checkNotNull(configurarion);
+		
+		Relation relation = getRelationByIdentifier(configurarion.getIdentifier());
+		
+		if(relation != null) {
+			relations.remove(relation);
+		}
+		
+		if(target == null) {
+			return null;
+		}
+		
+		return addRelation(configurarion, target);
+		
+	}
 
 	public <T extends AbstractValue<?>> ObjectValue addValue(final Attribute attribute, T value) {
 
