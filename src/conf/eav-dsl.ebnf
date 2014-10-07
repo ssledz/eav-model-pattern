@@ -1,6 +1,6 @@
 conf = { def, { ws } }, eof ;
 
-def = cat-def | att-def | obj-def ;
+def = cat-def | att-def | rel-def | obj-def ;
 
 cat-def = "category", { ws }, identifier, { ws }, name-property, { ws }, "end" ;
 
@@ -8,11 +8,9 @@ att-def = "attribute", { ws }, identifier, { ws }, { att-body, { ws } }, "end" ;
 
 att-body = name-property | category-property | data-type-property ;
 
-obj-def = "object", { ws }, identifier, { ws }, "of", { ws }, identifier, { ws }, "category", { ws }, obj-body, { ws }, "end" ;
+obj-def = "object", { ws }, identifier, { ws }, "of", { ws }, identifier, { ws }, "category", { ws }, { obj-body, { ws } }, "end" ;
 
-obj-body = { att-value } | obj-body-name-property | relations-section
-
-obj-body-name-property = name-property, { ws }, { att-value }   
+obj-body = att-value | name-property | rel-section
 
 att-value = identifier, [ { ws } ] ":", [ { ws } ], string ;
 
@@ -24,13 +22,13 @@ data-type-property = "data_type", [ { ws } ], ":", [ { ws } ], identifier | dict
 
 dictionary-data-type = "dictionary",  { ws }, "of", { ws }, string ;
 
-relations-section = "relations", { ws }, relation-value, { ws }, [ { relation-value, { ws } } ], "end" 
+rel-section = "relations", { ws }, rel-value, { ws }, [ { rel-value, { ws } } ], "end" 
 
-relation-value = identifier, [ { ws } ] ":", [ { ws } ], string ;
+rel-value = identifier, [ { ws } ] ":", [ { ws } ], string ;
 
-relation-def = "relation", { ws }, identifier, { ws }, { relation-def-body, { ws } }, "end" ;
+rel-def = "relation", { ws }, identifier, { ws }, { rel-def-body, { ws } }, "end" ;
 
-relation-def-body = name-property | owner-property | target-property ;
+rel-def-body = name-property | owner-property | target-property ;
 
 owner-property = "owner", [ { ws } ], ":", [ { ws } ], string ;
 

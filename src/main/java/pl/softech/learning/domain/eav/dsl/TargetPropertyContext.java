@@ -6,11 +6,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * @author ssledz 
  */
-public class NamePropertyContext implements Context {
+public class TargetPropertyContext implements Context {
 
 	private final String name;
 
-	public NamePropertyContext(String name) {
+	public TargetPropertyContext(String name) {
 		this.name = name;
 	}
 

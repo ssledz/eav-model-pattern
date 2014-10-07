@@ -5,17 +5,16 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 /**
  * @author ssledz
  */
-public class ObjectBodyContext implements Context {
+public class RelationSectionContext implements Context {
 
 	private final Context[] childrens;
 
-	public ObjectBodyContext(Builder builder) {
+	public RelationSectionContext(Builder builder) {
 		this.childrens = builder.getContexts();
 	}
 
@@ -37,31 +36,16 @@ public class ObjectBodyContext implements Context {
 		return sb.toString();
 	}
 
-	static class Builder implements NamePropertyContextAware<Builder> {
+	static class Builder {
 
-		private NamePropertyContext namePropertyContext;;
+		private List<RelationValueContext> list = Lists.newLinkedList();
 
-		private List<Context> list = Lists.newLinkedList();
-
-		public Builder withNamePropertyContext(NamePropertyContext namePropertyContext) {
-			this.namePropertyContext = namePropertyContext;
-			return this;
-		}
-
-		public void add(AttributeValueContext ctx) {
-			list.add(ctx);
-		}
-		
-		public void add(RelationSectionContext ctx) {
+		public void addRelation(RelationValueContext ctx) {
 			list.add(ctx);
 		}
 
 		private Context[] getContexts() {
-			return new ImmutableList.Builder<Context>()//
-					.addAll(list)//
-					.add(namePropertyContext)//
-					.build()//
-					.toArray(new Context[0]);
+			return list.toArray(new Context[list.size()]);
 		}
 
 	}

@@ -1,5 +1,8 @@
 package pl.softech.learning.domain.eav.dsl;
 
+/**
+ * @author ssledz 
+ */
 public class ContextVisitorAdapter implements ContextVisitor {
 
 	@Override
@@ -67,6 +70,41 @@ public class ContextVisitorAdapter implements ContextVisitor {
 
 	@Override
 	public void visitOnLeave(ObjectBodyContext ctx) {
+		visitAny(ctx);
+	}
+
+	@Override
+	public void visitOnEnter(RelationDefinitionContext ctx) {
+		visitAny(ctx);
+	}
+
+	@Override
+	public void visitOnLeave(RelationDefinitionContext ctx) {
+		visitAny(ctx);
+	}
+
+	@Override
+	public void visit(OwnerPropertyContext ctx) {
+		visitAny(ctx);
+	}
+
+	@Override
+	public void visit(TargetPropertyContext ctx) {
+		visitAny(ctx);
+	}
+
+	@Override
+	public void visit(RelationValueContext ctx) {
+		visitAny(ctx);
+	}
+
+	@Override
+	public void visitOnEnter(RelationSectionContext ctx) {
+		visitAny(ctx);
+	}
+
+	@Override
+	public void visitOnLeave(RelationSectionContext ctx) {
 		visitAny(ctx);
 	}
 

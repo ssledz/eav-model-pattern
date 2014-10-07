@@ -183,4 +183,46 @@ public class CreateModelVisitor implements ContextVisitor {
 	public void visitOnLeave(ObjectBodyContext ctx) {
 	}
 
+	@Override
+	public void visitOnEnter(RelationDefinitionContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitOnLeave(RelationDefinitionContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(OwnerPropertyContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(TargetPropertyContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(RelationValueContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitOnEnter(RelationSectionContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitOnLeave(RelationSectionContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

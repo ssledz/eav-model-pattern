@@ -28,4 +28,18 @@ public interface ContextVisitor {
 
 	void visitOnLeave(ObjectBodyContext ctx);
 
+	void visitOnEnter(RelationDefinitionContext ctx);
+
+	void visitOnLeave(RelationDefinitionContext ctx);
+
+	void visit(OwnerPropertyContext ctx);
+	
+	void visit(TargetPropertyContext ctx);
+
+	void visit(RelationValueContext ctx);
+
+	void visitOnEnter(RelationSectionContext ctx);
+
+	void visitOnLeave(RelationSectionContext ctx);
+
 }

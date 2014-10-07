@@ -59,6 +59,8 @@ public class Parser {
 				catDef();
 			} else if (match(Type.ATTRIBUTE)) {
 				attDef();
+			} else if (match(Type.RELATION)) {
+				relDef();
 			} else {
 				objDef();
 			}
@@ -67,6 +69,43 @@ public class Parser {
 
 		consume(Type.EOF);
 
+	}
+
+	private void relDef() {
+		consume(Type.RELATION);
+		RelationDefinitionContext.Builder builder = new RelationDefinitionContext.Builder();
+		builder.withRelationIdentifier(currentToken.getValue());
+		consume(Type.IDENTIFIER);
+
+		while (!match(Type.END)) {
+
+			if (match(Type.NAME)) {
+				nameProperty(builder);
+			} else if (match(Type.OWNER)) {
+				ownerProperty(builder);
+			} else {
+				targetProperty(builder);
+			}
+
+		}
+
+		consume(Type.END);
+
+		new RelationDefinitionContext(builder).accept(contextVisitor);
+	}
+
+	private void ownerProperty(RelationDefinitionContext.Builder builder) {
+		consume(Type.OWNER);
+		consume(Type.COLON);
+		builder.addContext(new OwnerPropertyContext(currentToken.getValue()));
+		consume(Type.STRING);
+	}
+
+	private void targetProperty(RelationDefinitionContext.Builder builder) {
+		consume(Type.TARGET);
+		consume(Type.COLON);
+		builder.addContext(new TargetPropertyContext(currentToken.getValue()));
+		consume(Type.STRING);
 	}
 
 	private void catDef() {
@@ -160,41 +199,67 @@ public class Parser {
 
 		new ObjectDefinitionContext(builder).accept(contextVisitor);
 	}
-	
+
 	private void objBody(ObjectDefinitionContext.Builder builder) {
 		ObjectBodyContext.Builder innerBuilder = new ObjectBodyContext.Builder();
-		
-		while (!match(Type.NAME)) {
-			attValue(innerBuilder);
+
+		while (!match(Type.END)) {
+
+			if (match(Type.NAME)) {
+				nameProperty(innerBuilder);
+			} else if (match(Type.RELATIONS)) {
+				relSection(innerBuilder);
+			} else {
+				attValue(innerBuilder);
+			}
+
 		}
-		
-		objBodyNameProperty(innerBuilder);
-		
+
 		builder.add(new ObjectBodyContext(innerBuilder));
-		
+
 	}
-	
-	private void objBodyNameProperty(ObjectBodyContext.Builder builder) {
+
+	private void relSection(ObjectBodyContext.Builder builder) {
+		consume(Type.RELATIONS);
 		
-		nameProperty(builder);
+		RelationSectionContext.Builder innerBuilder = new RelationSectionContext.Builder();
+		
+		//at least one
+		relValue(innerBuilder);
 		
 		while (!match(Type.END)) {
-			attValue(builder);
+			relValue(innerBuilder);
 		}
 		
+		builder.add(new RelationSectionContext(innerBuilder));
+		
+		consume(Type.END);
 	}
-	
+
 	private void attValue(ObjectBodyContext.Builder builder) {
-		
+
 		AttributeValueContext.Builder innerBuilder = new AttributeValueContext.Builder();
-		
+
 		innerBuilder.withAttributeIdentifier(currentToken.getValue());
 		consume(Type.IDENTIFIER);
 		consume(Type.COLON);
 		innerBuilder.withValue(currentToken.getValue());
 		consume(Type.STRING);
-		
+
 		builder.add(new AttributeValueContext(innerBuilder));
+	}
+	
+	private void relValue(RelationSectionContext.Builder builder) {
+
+		RelationValueContext.Builder innerBuilder = new RelationValueContext.Builder();
+
+		innerBuilder.withRelationIdentifier(currentToken.getValue());
+		consume(Type.IDENTIFIER);
+		consume(Type.COLON);
+		innerBuilder.withValue(currentToken.getValue());
+		consume(Type.STRING);
+
+		builder.addRelation(new RelationValueContext(innerBuilder));
 	}
 
 }

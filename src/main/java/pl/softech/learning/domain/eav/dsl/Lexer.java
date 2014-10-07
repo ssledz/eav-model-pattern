@@ -2,6 +2,9 @@ package pl.softech.learning.domain.eav.dsl;
 
 import pl.softech.learning.domain.eav.dsl.Token.Type;
 
+/**
+ * @author ssledz 
+ */
 public class Lexer {
 
 	private int current;
@@ -77,6 +80,14 @@ public class Lexer {
 			return new Token(Type.END);
 		case "dictionary":
 			return new Token(Type.DICTIONARY);
+		case "owner":
+			return new Token(Type.OWNER);
+		case "target":
+			return new Token(Type.TARGET);
+		case "relation":
+			return new Token(Type.RELATION);
+		case "relations":
+			return new Token(Type.RELATIONS);
 		}
 
 		return token;
