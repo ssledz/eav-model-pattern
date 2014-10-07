@@ -10,7 +10,7 @@ att-body = name-property | category-property | data-type-property ;
 
 obj-def = "object", { ws }, identifier, { ws }, "of", { ws }, identifier, { ws }, "category", { ws }, obj-body, { ws }, "end" ;
 
-obj-body = { att-value } | obj-body-name-property
+obj-body = { att-value } | obj-body-name-property | relations-section
 
 obj-body-name-property = name-property, { ws }, { att-value }   
 
@@ -23,6 +23,18 @@ category-property = "category", [ { ws } ], ":", [ { ws } ], string ;
 data-type-property = "data_type", [ { ws } ], ":", [ { ws } ], identifier | dictionary-data-type ;
 
 dictionary-data-type = "dictionary",  { ws }, "of", { ws }, string ;
+
+relations-section = "relations", { ws }, relation-value, { ws }, [ { relation-value, { ws } } ], "end" 
+
+relation-value = identifier, [ { ws } ] ":", [ { ws } ], string ;
+
+relation-def = "relation", { ws }, identifier, { ws }, { relation-def-body, { ws } }, "end" ;
+
+relation-def-body = name-property | owner-property | target-property ;
+
+owner-property = "owner", [ { ws } ], ":", [ { ws } ], string ;
+
+target-property = "target", [ { ws } ], ":", [ { ws } ], string ;
 
 letter = "A" | "a" | "B" | "b" | "C" | "c" | "D" | "d" | "E" | "e" | "F" | "f" | "G" | "g"
        | "H" | "h" | "I" | "i" | "J" | "j" | "K" | "k" | "L" | "l" | "M" | "m" | "N" | "n"
