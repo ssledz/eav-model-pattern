@@ -9,19 +9,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class RelationValueContext implements Context {
 
 	private final String relationIdentifier;
-	private final String value;
+	private final String objectIdentifier;
 
 	public RelationValueContext(Builder builder) {
 		this.relationIdentifier = builder.relationIdentifier;
-		this.value = builder.value;
+		this.objectIdentifier = builder.objectIdentifier;
 	}
 
 	public String getRelationIdentifier() {
 		return relationIdentifier;
 	}
 
-	public String getValue() {
-		return value;
+	public String getObjectIdentifier() {
+		return objectIdentifier;
 	}
 
 	@Override
@@ -33,22 +33,22 @@ public class RelationValueContext implements Context {
 	public String toString() {
 		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
 		sb.append("relationIdentifier", relationIdentifier);
-		sb.append("value", value);
+		sb.append("objectIdentifier", objectIdentifier);
 		return sb.toString();
 	}
 
 	static class Builder {
 
 		private String relationIdentifier;
-		private String value;
+		private String objectIdentifier;
 
 		public Builder withRelationIdentifier(String relationIdentifier) {
 			this.relationIdentifier = relationIdentifier;
 			return this;
 		}
 
-		public Builder withValue(String value) {
-			this.value = value;
+		public Builder withObjectIdentifier(String identifier) {
+			this.objectIdentifier = identifier;
 			return this;
 		}
 

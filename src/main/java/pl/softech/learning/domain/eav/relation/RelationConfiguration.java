@@ -37,6 +37,10 @@ public class RelationConfiguration extends AbstractEntity {
 	protected RelationConfiguration() {
 	}
 
+	public RelationConfiguration(Builder builder) {
+		this(new RelationIdentifier(builder.identifier), builder.name, builder.owner, builder.target);
+	}
+
 	public RelationConfiguration(RelationIdentifier identifier, String name, Category owner, Category target) {
 		this.identifier = checkNotNull(identifier);
 		this.name = checkNotNull(name);
@@ -69,6 +73,38 @@ public class RelationConfiguration extends AbstractEntity {
 		sb.append("owner", owner);
 		sb.append("target", target);
 		return sb.toString();
+	}
+
+	public static class Builder {
+
+		private String identifier;
+
+		private String name;
+
+		private Category owner;
+
+		private Category target;
+
+		public Builder withIdentifier(String identifier) {
+			this.identifier = identifier;
+			return this;
+		}
+
+		public Builder withName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder withOwner(Category owner) {
+			this.owner = owner;
+			return this;
+		}
+
+		public Builder withTarget(Category target) {
+			this.target = target;
+			return this;
+		}
+
 	}
 
 }

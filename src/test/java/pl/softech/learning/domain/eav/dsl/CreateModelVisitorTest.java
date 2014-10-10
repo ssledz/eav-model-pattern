@@ -22,6 +22,9 @@ import pl.softech.learning.domain.eav.DataTypeSerialisationService;
 import pl.softech.learning.domain.eav.MyObject;
 import pl.softech.learning.domain.eav.MyObjectRepository;
 import pl.softech.learning.domain.eav.category.CategoryRepository;
+import pl.softech.learning.domain.eav.frame.FrameFactory;
+import pl.softech.learning.domain.eav.frame.Person;
+import pl.softech.learning.domain.eav.relation.RelationConfigurationRepository;
 import pl.softech.learning.domain.eav.value.ObjectValue;
 
 /**
@@ -48,9 +51,15 @@ public class CreateModelVisitorTest {
 
 	@Autowired
 	private MyObjectRepository myObjectRepository;
+	
+	@Autowired
+	private RelationConfigurationRepository relationConfigurationRepository;
 
 	@Autowired
 	private ComputerModelInitializationService cmis;
+	
+	@Autowired
+	private FrameFactory frameFactory;
 
 	@Before
 	public void init() {
@@ -81,6 +90,7 @@ public class CreateModelVisitorTest {
 
 		categoryRepository.save(visitor.getCategories());
 		attributeRepository.save(visitor.getAttributes());
+		relationConfigurationRepository.save(visitor.getRelations());
 		myObjectRepository.save(visitor.getObjects());
 
 		MyObject obj = myObjectRepository.findByName("MAUI");
@@ -94,6 +104,16 @@ public class CreateModelVisitorTest {
 
 		Assert.assertFalse(obj.hasValues(new AttributeIdentifier("ramm")));
 		Assert.assertTrue(obj.getValuesByAttribute((new AttributeIdentifier("ramm"))).isEmpty());
+		
+		Person gyles = frameFactory.frame(Person.class, myObjectRepository.findByName("gyles"));
+		Assert.assertEquals("Gyles", gyles.getFirstname());
+		Assert.assertEquals("Aitken", gyles.getLastname());
+		Assert.assertEquals(22, gyles.getAge().intValue());
+		Assert.assertNotNull(gyles.getComputer());
+		Assert.assertEquals("320Gb 5400rpm", gyles.getComputer().getDrive());
+		Assert.assertEquals(2, gyles.getFriends().size());
+		Assert.assertEquals("colton", gyles.getParent().getName());
+		
 
 	}
 

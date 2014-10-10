@@ -65,6 +65,10 @@ public class MyObject extends AbstractEntity {
 		for (Pair<Attribute, ? extends AbstractValue<?>> p : builder.values) {
 			addValue(p.getLeft(), p.getRight());
 		}
+		
+		for(Pair<RelationConfiguration, MyObject> r : builder.relations) {
+			addRelation(r.getLeft(), r.getRight());
+		}
 
 	}
 
@@ -240,7 +244,9 @@ public class MyObject extends AbstractEntity {
 		private String name;
 
 		private Collection<Pair<Attribute, ? extends AbstractValue<?>>> values = Lists.newLinkedList();
-
+		
+		private Collection<Pair<RelationConfiguration, MyObject>> relations = Lists.newLinkedList();
+		
 		public Builder withCategory(Category category) {
 			this.category = category;
 			return this;
@@ -253,6 +259,11 @@ public class MyObject extends AbstractEntity {
 
 		public <T extends AbstractValue<?>> Builder add(Attribute attribute, T value) {
 			values.add(Pair.of(attribute, value));
+			return this;
+		}
+		
+		public Builder add(RelationConfiguration relation, MyObject target) {
+			relations.add(Pair.of(relation, target));
 			return this;
 		}
 

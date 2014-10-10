@@ -256,7 +256,7 @@ public class Parser {
 		innerBuilder.withRelationIdentifier(currentToken.getValue());
 		consume(Type.IDENTIFIER);
 		consume(Type.COLON);
-		innerBuilder.withValue(currentToken.getValue());
+		innerBuilder.withObjectIdentifier(currentToken.getValue());
 		consume(Type.STRING);
 
 		builder.addRelation(new RelationValueContext(innerBuilder));

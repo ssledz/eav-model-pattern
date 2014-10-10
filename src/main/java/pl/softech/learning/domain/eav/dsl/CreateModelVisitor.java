@@ -14,6 +14,7 @@ import pl.softech.learning.domain.eav.DataType;
 import pl.softech.learning.domain.eav.DataTypeSerialisationService;
 import pl.softech.learning.domain.eav.MyObject;
 import pl.softech.learning.domain.eav.category.Category;
+import pl.softech.learning.domain.eav.relation.RelationConfiguration;
 import pl.softech.learning.domain.eav.value.AbstractValue;
 
 import com.google.common.collect.Maps;
@@ -28,6 +29,7 @@ public class CreateModelVisitor implements ContextVisitor {
 		private Map<String, Category> id2cat = Maps.newHashMap();
 		private Map<String, Attribute> id2att = Maps.newHashMap();
 		private Map<String, MyObject> id2obj = Maps.newHashMap();
+		private Map<String, RelationConfiguration> id2rel = Maps.newHashMap();
 
 		public void put(String identifier, Category cat) {
 			checkState(id2cat.put(identifier, cat) == null, "Category %s already exists ", cat);
@@ -39,6 +41,10 @@ public class CreateModelVisitor implements ContextVisitor {
 
 		public void put(String identifier, MyObject obj) {
 			checkState(id2obj.put(identifier, obj) == null, "MyObject %s already exists ", obj);
+		}
+
+		public void put(String identifier, RelationConfiguration rel) {
+			checkState(id2rel.put(identifier, rel) == null, "Relation %s already exists ", rel);
 		}
 
 		public Category getCategory(String identifier) {
@@ -54,6 +60,10 @@ public class CreateModelVisitor implements ContextVisitor {
 			return id2obj.get(identifier);
 		}
 
+		public RelationConfiguration getRelation(String identifier) {
+			return id2rel.get(identifier);
+		}
+
 	}
 
 	private final SymbolTable symbolTable = new SymbolTable();
@@ -64,8 +74,10 @@ public class CreateModelVisitor implements ContextVisitor {
 
 	private MyObject.Builder currentObjectBuilder;
 
+	private RelationConfiguration.Builder currentRelationBuilder;
+
 	private final DictionaryRepository dictionaryRepository;
-	
+
 	private final DataTypeSerialisationService dataTypeSerialisationService;
 
 	public CreateModelVisitor(DictionaryRepository dictionaryRepository, DataTypeSerialisationService dataTypeSerialisationService) {
@@ -79,6 +91,10 @@ public class CreateModelVisitor implements ContextVisitor {
 
 	public Collection<Attribute> getAttributes() {
 		return symbolTable.id2att.values();
+	}
+
+	public Collection<RelationConfiguration> getRelations() {
+		return symbolTable.id2rel.values();
 	}
 
 	public Collection<MyObject> getObjects() {
@@ -111,6 +127,10 @@ public class CreateModelVisitor implements ContextVisitor {
 		} else if (currentObjectBuilder != null) {
 
 			currentObjectBuilder.withName(ctx.getName());
+
+		} else if (currentRelationBuilder != null) {
+
+			currentRelationBuilder.withName(ctx.getName());
 
 		}
 
@@ -172,7 +192,8 @@ public class CreateModelVisitor implements ContextVisitor {
 	@Override
 	public void visit(AttributeValueContext ctx) {
 
-		Attribute attribute = checkNotNull(symbolTable.getAttribute(ctx.getAttributeIdentifier()), "No attribute with identifier %s", ctx.getAttributeIdentifier());
+		Attribute attribute = checkNotNull(symbolTable.getAttribute(ctx.getAttributeIdentifier()), "No attribute with identifier %s",
+				ctx.getAttributeIdentifier());
 		AbstractValue<?> value = dataTypeSerialisationService.readValue(attribute.getDataType().getType(), ctx.getValue());
 
 		currentObjectBuilder.add(attribute, value);
@@ -185,44 +206,54 @@ public class CreateModelVisitor implements ContextVisitor {
 
 	@Override
 	public void visitOnEnter(RelationDefinitionContext ctx) {
-		// TODO Auto-generated method stub
-		
+
+		currentRelationBuilder = new RelationConfiguration.Builder();
+		currentRelationBuilder.withIdentifier(ctx.getRelationIdentifier());
+
 	}
 
 	@Override
 	public void visitOnLeave(RelationDefinitionContext ctx) {
-		// TODO Auto-generated method stub
-		
+
+		symbolTable.put(ctx.getRelationIdentifier(), new RelationConfiguration(currentRelationBuilder));
+		currentRelationBuilder = null;
+
 	}
 
 	@Override
 	public void visit(OwnerPropertyContext ctx) {
-		// TODO Auto-generated method stub
-		
+
+		Category owner = checkNotNull(symbolTable.getCategory(ctx.getName()), "No category with identifier %s", ctx.getName());
+		currentRelationBuilder.withOwner(owner);
+
 	}
 
 	@Override
 	public void visit(TargetPropertyContext ctx) {
-		// TODO Auto-generated method stub
-		
+
+		Category target = checkNotNull(symbolTable.getCategory(ctx.getName()), "No category with identifier %s", ctx.getName());
+		currentRelationBuilder.withTarget(target);
+
 	}
 
 	@Override
 	public void visit(RelationValueContext ctx) {
-		// TODO Auto-generated method stub
-		
+		RelationConfiguration relation = checkNotNull(symbolTable.getRelation(ctx.getRelationIdentifier()),
+				"No relation with identifier %s", ctx.getRelationIdentifier());
+		MyObject target = checkNotNull(symbolTable.getObject(ctx.getObjectIdentifier()), "No object with identifier %s",
+				ctx.getObjectIdentifier());
+		currentObjectBuilder.add(relation, target);
+
 	}
 
 	@Override
 	public void visitOnEnter(RelationSectionContext ctx) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void visitOnLeave(RelationSectionContext ctx) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }
