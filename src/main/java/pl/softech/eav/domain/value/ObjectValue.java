@@ -2,6 +2,7 @@ package pl.softech.eav.domain.value;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import javax.persistence.AssociationOverride;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -54,7 +55,7 @@ public class ObjectValue extends AbstractEntity {
 	private BooleanValue booleanValue;
 
 	@Embedded
-	@AttributeOverride(name = "value", column = @Column(name = "dictionary_entry_id"))
+	@AssociationOverride(name="value", joinColumns=@JoinColumn(name="dictionary_entry_id"))
 	private DictionaryEntryValue dictionaryEntryValue;
 
 	protected ObjectValue() {

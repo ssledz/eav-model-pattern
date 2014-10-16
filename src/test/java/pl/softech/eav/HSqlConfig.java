@@ -33,6 +33,11 @@ import pl.softech.eav.infrastructure.jpa.TableNamingStrategy;
 public class HSqlConfig {
 
 	@Bean
+	public DataSource dataSource() {
+		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).build();
+	}
+	
+	@Bean
 	public FrameFactory frameFactory(AttributeRepository attributeRepository,
 			RelationConfigurationRepository relationConfigurationRepository) {
 		return new FrameFactory(attributeRepository, relationConfigurationRepository);
@@ -51,11 +56,6 @@ public class HSqlConfig {
 	@Bean
 	public PersonModelInitializationService personModelInitializationService() {
 		return new PersonModelInitializationService();
-	}
-
-	@Bean
-	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).build();
 	}
 
 	@Bean

@@ -15,18 +15,18 @@ import javax.persistence.TemporalType;
 public class DateValue extends AbstractValue<Date> {
 
 	@Temporal(TemporalType.DATE)
-	private Date date;
+	private Date value;
 
 	protected DateValue() {
 	}
 
-	public DateValue(Date date) {
-		this.date = checkNotNull(date);
+	public DateValue(Date value) {
+		this.value = checkNotNull(value);
 	}
 
 	@Override
 	public Date getValue() {
-		return date;
+		return value;
 	}
 
 	@Override

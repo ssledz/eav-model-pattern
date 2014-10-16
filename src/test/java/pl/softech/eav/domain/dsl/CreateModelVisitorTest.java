@@ -20,8 +20,6 @@ import pl.softech.eav.domain.attribute.DataTypeSerialisationService;
 import pl.softech.eav.domain.category.CategoryRepository;
 import pl.softech.eav.domain.dictionary.DictionaryEntryRepository;
 import pl.softech.eav.domain.dictionary.DictionaryRepository;
-import pl.softech.eav.domain.dsl.CreateModelVisitor;
-import pl.softech.eav.domain.dsl.Parser;
 import pl.softech.eav.domain.frame.FrameFactory;
 import pl.softech.eav.domain.frame.Person;
 import pl.softech.eav.domain.object.MyObject;
@@ -33,6 +31,7 @@ import pl.softech.eav.domain.value.ObjectValue;
  * @author ssledz
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = MySqlConfig.class)
 @ContextConfiguration(classes = HSqlConfig.class)
 public class CreateModelVisitorTest {
 
