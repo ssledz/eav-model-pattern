@@ -3,6 +3,7 @@ package pl.softech.eav.domain.attribute;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import pl.softech.eav.domain.AbstractEntity;
 import pl.softech.eav.domain.TextMedium;
@@ -24,6 +26,8 @@ import pl.softech.eav.domain.category.Category;
  */
 @Entity
 @Table(name = "attribute")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Attribute extends AbstractEntity {
 
 	@Valid
