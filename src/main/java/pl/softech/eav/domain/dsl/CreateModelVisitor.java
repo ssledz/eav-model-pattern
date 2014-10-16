@@ -55,7 +55,6 @@ public class CreateModelVisitor implements ContextVisitor {
 			return id2att.get(identifier);
 		}
 
-		@SuppressWarnings("unused")
 		public MyObject getObject(String identifier) {
 			return id2obj.get(identifier);
 		}
