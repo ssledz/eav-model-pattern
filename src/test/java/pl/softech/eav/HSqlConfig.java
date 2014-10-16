@@ -1,5 +1,7 @@
 package pl.softech.eav;
 
+import java.util.Properties;
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -21,31 +23,36 @@ import pl.softech.eav.domain.attribute.DataTypeSerialisationService;
 import pl.softech.eav.domain.dictionary.DictionaryEntryRepository;
 import pl.softech.eav.domain.frame.FrameFactory;
 import pl.softech.eav.domain.relation.RelationConfigurationRepository;
+import pl.softech.eav.infrastructure.jpa.TableNamingStrategy;
 
+/**
+ * @author ssledz
+ */
 @Configuration
 @EnableJpaRepositories("pl.softech.eav.domain")
 public class HSqlConfig {
 
 	@Bean
-	public FrameFactory frameFactory(AttributeRepository attributeRepository, RelationConfigurationRepository relationConfigurationRepository) {
+	public FrameFactory frameFactory(AttributeRepository attributeRepository,
+			RelationConfigurationRepository relationConfigurationRepository) {
 		return new FrameFactory(attributeRepository, relationConfigurationRepository);
 	}
-	
+
 	@Bean
 	public DataTypeSerialisationService dataTypeSerialisationService(DictionaryEntryRepository dictionaryEntryRepository) {
 		return new DataTypeSerialisationService(dictionaryEntryRepository);
 	}
-	
+
 	@Bean
 	public ComputerModelInitializationService computerModelInitializationService() {
 		return new ComputerModelInitializationService();
 	}
-	
+
 	@Bean
 	public PersonModelInitializationService personModelInitializationService() {
 		return new PersonModelInitializationService();
 	}
-	
+
 	@Bean
 	public DataSource dataSource() {
 		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).build();
@@ -71,6 +78,13 @@ public class HSqlConfig {
 		lemfb.setJpaVendorAdapter(jpaVendorAdapter());
 		lemfb.setPackagesToScan("pl.softech.eav.domain");
 		lemfb.setMappingResources("named-queries.xml");
+		Properties jpaProperties = new Properties();
+		jpaProperties.setProperty("hibernate.ejb.naming_strategy", TableNamingStrategy.class.getName());
+		jpaProperties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
+		jpaProperties.setProperty("hibernate.cache.use_second_level_cache", "true");
+		jpaProperties.setProperty("hibernate.show_sql", "true");
+		jpaProperties.setProperty("hibernate.format_sql", "true");
+		lemfb.setJpaProperties(jpaProperties);
 		return lemfb;
 	}
 

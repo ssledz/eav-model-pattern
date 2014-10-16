@@ -3,7 +3,7 @@ package pl.softech.eav.domain;
 /**
  * @author ssledz 
  */
-public interface Entity {
+public interface Entity extends Messages {
 
 	Long getId();
 

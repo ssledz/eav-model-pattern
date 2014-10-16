@@ -6,6 +6,9 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+/**
+ * @author ssledz
+ */
 @Target({ ElementType.METHOD })
 @Retention(RUNTIME)
 public @interface Attribute {

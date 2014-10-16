@@ -7,16 +7,20 @@ import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.tuple.Pair;
 
 import pl.softech.eav.domain.AbstractEntity;
+import pl.softech.eav.domain.TextMedium;
 import pl.softech.eav.domain.attribute.Attribute;
 import pl.softech.eav.domain.attribute.AttributeIdentifier;
 import pl.softech.eav.domain.category.Category;
@@ -45,14 +49,18 @@ import com.google.common.collect.Sets;
  * @author ssledz
  */
 @Entity
+@Table(name = "my_object")
 public class MyObject extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "object")
 	private Set<ObjectValue> values = Sets.newHashSet();
 
+	@TextMedium
+	@Column(nullable = false)
 	private String name;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "owner")
@@ -75,8 +83,8 @@ public class MyObject extends AbstractEntity {
 	}
 
 	public MyObject(Category category, String name) {
-		this.category = checkNotNull(category);
-		this.name = checkNotNull(name);
+		this.category = checkNotNull(category, ARG_NOT_NULL_CHECK, "category");
+		this.name = checkNotNull(name, ARG_NOT_NULL_CHECK, "name");
 	}
 
 	public Category getCategory() {
@@ -115,7 +123,7 @@ public class MyObject extends AbstractEntity {
 
 			@Override
 			public boolean apply(Relation input) {
-				return input.getConfigurarion().getIdentifier().equals(identifier);
+				return input.getConfiguration().getIdentifier().equals(identifier);
 			}
 		})).build();
 

@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import pl.softech.eav.domain.AbstractValueObject;
 import pl.softech.eav.domain.dictionary.Dictionary;
 
+/**
+ * @author ssledz
+ */
 @Embeddable
 public class DataType extends AbstractValueObject {
 

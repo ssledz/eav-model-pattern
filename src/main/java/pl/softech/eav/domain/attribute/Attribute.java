@@ -7,24 +7,36 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.softech.eav.domain.AbstractEntity;
+import pl.softech.eav.domain.TextMedium;
 import pl.softech.eav.domain.category.Category;
 
+/**
+ * @author ssledz
+ */
 @Entity
+@Table(name = "attribute")
 public class Attribute extends AbstractEntity {
 
+	@Valid
 	@Embedded
 	@AttributeOverride(name = AttributeIdentifier.IDENTIFIER_PROPERTY, column = @Column(nullable = false, unique = true))
 	private AttributeIdentifier identifier;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
+	@TextMedium
+	@Column(nullable = false)
 	private String name;
 
 	@Embedded
@@ -38,11 +50,10 @@ public class Attribute extends AbstractEntity {
 	}
 
 	public Attribute(AttributeIdentifier identifier, String name, Category category, DataType dataType) {
-		super();
-		this.identifier = checkNotNull(identifier);
-		this.name = checkNotNull(name);
-		this.category = checkNotNull(category);
-		this.dataType = checkNotNull(dataType);
+		this.identifier = checkNotNull(identifier, ARG_NOT_NULL_CHECK, "identifier");
+		this.name = checkNotNull(name, ARG_NOT_NULL_CHECK, "name");
+		this.category = checkNotNull(category, ARG_NOT_NULL_CHECK, "category");
+		this.dataType = checkNotNull(dataType, ARG_NOT_NULL_CHECK, "dataType");
 	}
 
 	public Category getCategory() {

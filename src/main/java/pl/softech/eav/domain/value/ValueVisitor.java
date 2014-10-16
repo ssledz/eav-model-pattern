@@ -1,6 +1,8 @@
 package pl.softech.eav.domain.value;
 
-
+/**
+ * @author ssledz
+ */
 public interface ValueVisitor {
 
 	void visit(StringValue value);

@@ -4,15 +4,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * @author ssledz
+ */
 @Embeddable
 public class DateValue extends AbstractValue<Date> {
 
-	@Column(name = "date_value")
 	@Temporal(TemporalType.DATE)
 	private Date date;
 

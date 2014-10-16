@@ -10,6 +10,9 @@ import pl.softech.eav.domain.dsl.ContextVisitor;
 import pl.softech.eav.domain.dsl.ContextVisitorAdapter;
 import pl.softech.eav.domain.dsl.Parser;
 
+/**
+ * @author ssledz
+ */
 public class ParserTest {
 	//TODO implement
 	@Test

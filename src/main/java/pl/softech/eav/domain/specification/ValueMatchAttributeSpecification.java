@@ -3,7 +3,6 @@ package pl.softech.eav.domain.specification;
 import org.apache.commons.lang3.tuple.Pair;
 
 import pl.softech.eav.domain.attribute.Attribute;
-import pl.softech.eav.domain.attribute.DataType;
 import pl.softech.eav.domain.attribute.DataType.Type;
 import pl.softech.eav.domain.dictionary.Dictionary;
 import pl.softech.eav.domain.value.AbstractValue;
@@ -15,6 +14,9 @@ import pl.softech.eav.domain.value.IntegerValue;
 import pl.softech.eav.domain.value.StringValue;
 import pl.softech.eav.domain.value.ValueVisitor;
 
+/**
+ * @author ssledz
+ */
 public class ValueMatchAttributeSpecification implements Specification<Pair<? extends AbstractValue<?>, Attribute>> {
 
 	@Override

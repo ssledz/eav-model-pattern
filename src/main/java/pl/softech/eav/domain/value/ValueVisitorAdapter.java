@@ -1,5 +1,8 @@
 package pl.softech.eav.domain.value;
 
+/**
+ * @author ssledz
+ */
 public class ValueVisitorAdapter implements ValueVisitor {
 
 	protected void visitAny(AbstractValue<?> value) {

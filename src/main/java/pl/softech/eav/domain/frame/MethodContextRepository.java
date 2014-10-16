@@ -7,6 +7,9 @@ import pl.softech.eav.domain.frame.MethodContextRepository.MethodContext.MethodT
 
 import com.google.common.collect.Maps;
 
+/**
+ * @author ssledz
+ */
 public class MethodContextRepository {
 
 	private final Class<?> clazz;

@@ -2,13 +2,14 @@ package pl.softech.eav.domain.value;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+/**
+ * @author ssledz
+ */
 @Embeddable
 public class IntegerValue extends AbstractValue<Integer> {
 
-	@Column(name = "integer_value")
 	private Integer value;
 
 	protected IntegerValue() {

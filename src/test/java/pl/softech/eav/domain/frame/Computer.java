@@ -6,6 +6,9 @@ import java.util.Date;
 import pl.softech.eav.domain.dictionary.DictionaryEntry;
 import pl.softech.eav.domain.frame.Attribute;
 
+/**
+ * @author ssledz
+ */
 public interface Computer {
 
 	DictionaryEntry getMake();

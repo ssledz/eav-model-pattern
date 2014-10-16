@@ -2,13 +2,14 @@ package pl.softech.eav.domain.value;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+/**
+ * @author ssledz
+ */
 @Embeddable
 public class BooleanValue extends AbstractValue<Boolean> {
 
-	@Column(name = "boolean_value")
 	private Boolean value;
 
 	protected BooleanValue() {

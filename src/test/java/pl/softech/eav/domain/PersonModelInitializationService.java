@@ -17,6 +17,9 @@ import pl.softech.eav.domain.dictionary.DictionaryRepository;
 import pl.softech.eav.domain.object.MyObjectRepository;
 import pl.softech.eav.domain.value.ObjectValueRepository;
 
+/**
+ * @author ssledz
+ */
 @Service
 public class PersonModelInitializationService {
 

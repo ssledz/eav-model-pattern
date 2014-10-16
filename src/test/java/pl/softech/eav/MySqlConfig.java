@@ -14,6 +14,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+/**
+ * @author ssledz
+ */
 @Configuration
 @EnableJpaRepositories("pl.softech.learning.eav.domain")
 public class MySqlConfig {

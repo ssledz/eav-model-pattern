@@ -5,6 +5,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import pl.softech.eav.domain.attribute.Attribute;
 import pl.softech.eav.domain.object.MyObject;
 
+/**
+ * @author ssledz
+ */
 public class ObjectMatchAttributeSpecification implements Specification<Pair<MyObject, Attribute>> {
 
 	@Override

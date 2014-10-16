@@ -9,6 +9,9 @@ import pl.softech.eav.domain.dsl.Lexer;
 import pl.softech.eav.domain.dsl.Token;
 import pl.softech.eav.domain.dsl.Token.Type;
 
+/**
+ * @author ssledz
+ */
 public class LexerTest {
 
 	//TODO implement

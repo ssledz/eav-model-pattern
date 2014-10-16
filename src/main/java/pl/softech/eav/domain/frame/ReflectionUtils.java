@@ -7,6 +7,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+/**
+ * @author ssledz
+ */
 public class ReflectionUtils {
 
 	private static String capitalize(String word) {

@@ -5,6 +5,9 @@ import java.util.Collection;
 import pl.softech.eav.domain.frame.Relation;
 import pl.softech.eav.domain.object.MyObject;
 
+/**
+ * @author ssledz
+ */
 public interface Person {
 
 	String getFirstname();

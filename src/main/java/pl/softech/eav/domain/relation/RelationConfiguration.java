@@ -3,16 +3,22 @@ package pl.softech.eav.domain.relation;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import pl.softech.eav.domain.AbstractEntity;
+import pl.softech.eav.domain.TextMedium;
 import pl.softech.eav.domain.category.Category;
 import pl.softech.eav.domain.category.CategoryIdentifier;
 
@@ -20,18 +26,26 @@ import pl.softech.eav.domain.category.CategoryIdentifier;
  * @author ssledz
  */
 @Entity
+@Table(name = "rel_configuration")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RelationConfiguration extends AbstractEntity {
 
+	@Valid
 	@Embedded
 	@AttributeOverride(name = CategoryIdentifier.IDENTIFIER_PROPERTY, column = @Column(nullable = false, unique = true))
 	private RelationIdentifier identifier;
 
+	@TextMedium
+	@Column(nullable = false)
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "owner_cat_id", nullable = false)
 	private Category owner;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "target_cat_id", nullable = false)
 	private Category target;
 
 	protected RelationConfiguration() {
@@ -42,10 +56,10 @@ public class RelationConfiguration extends AbstractEntity {
 	}
 
 	public RelationConfiguration(RelationIdentifier identifier, String name, Category owner, Category target) {
-		this.identifier = checkNotNull(identifier);
-		this.name = checkNotNull(name);
-		this.owner = checkNotNull(owner);
-		this.target = checkNotNull(target);
+		this.identifier = checkNotNull(identifier, ARG_NOT_NULL_CHECK, "identifier");
+		this.name = checkNotNull(name, ARG_NOT_NULL_CHECK, "name");
+		this.owner = checkNotNull(owner, ARG_NOT_NULL_CHECK, "owner");
+		this.target = checkNotNull(target, ARG_NOT_NULL_CHECK, "target");
 	}
 
 	public Category getOwner() {
