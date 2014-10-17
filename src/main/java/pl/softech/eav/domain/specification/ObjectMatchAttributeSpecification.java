@@ -21,7 +21,7 @@ import pl.softech.eav.domain.attribute.Attribute;
 import pl.softech.eav.domain.object.MyObject;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public class ObjectMatchAttributeSpecification implements Specification<Pair<MyObject, Attribute>> {

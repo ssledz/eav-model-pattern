@@ -18,7 +18,7 @@ package pl.softech.eav.domain.object;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public interface MyObjectRepository extends CrudRepository<MyObject, Long> {

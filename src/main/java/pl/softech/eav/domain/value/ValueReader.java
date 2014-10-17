@@ -16,8 +16,8 @@
 package pl.softech.eav.domain.value;
 
 /**
- * @author ssledz
- * @since 1.0 
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
+ * @since 1.0
  */
 public interface ValueReader {
 	AbstractValue<?> readValue(String value);

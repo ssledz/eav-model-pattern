@@ -24,7 +24,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public class AttributeDefinitionContext implements Context {

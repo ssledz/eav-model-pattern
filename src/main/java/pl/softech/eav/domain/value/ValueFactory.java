@@ -22,7 +22,7 @@ import java.util.Date;
 import pl.softech.eav.domain.dictionary.DictionaryEntry;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public class ValueFactory {

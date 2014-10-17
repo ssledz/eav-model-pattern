@@ -43,7 +43,7 @@ import pl.softech.eav.domain.relation.RelationConfigurationRepository;
 import pl.softech.eav.domain.value.ObjectValue;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)

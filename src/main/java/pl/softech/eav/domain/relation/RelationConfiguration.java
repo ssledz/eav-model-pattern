@@ -38,7 +38,7 @@ import pl.softech.eav.domain.category.Category;
 import pl.softech.eav.domain.category.CategoryIdentifier;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @Entity

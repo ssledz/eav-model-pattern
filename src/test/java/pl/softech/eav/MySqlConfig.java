@@ -41,7 +41,7 @@ import pl.softech.eav.infrastructure.jpa.TableNamingStrategy;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @Configuration

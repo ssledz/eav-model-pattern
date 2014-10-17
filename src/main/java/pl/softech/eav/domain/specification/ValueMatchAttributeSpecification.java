@@ -30,7 +30,7 @@ import pl.softech.eav.domain.value.StringValue;
 import pl.softech.eav.domain.value.ValueVisitor;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public class ValueMatchAttributeSpecification implements Specification<Pair<? extends AbstractValue<?>, Attribute>> {

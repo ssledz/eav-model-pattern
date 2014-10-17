@@ -23,7 +23,7 @@ import pl.softech.eav.domain.frame.MethodContextRepository.MethodContext.MethodT
 import com.google.common.collect.Maps;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public class MethodContextRepository {

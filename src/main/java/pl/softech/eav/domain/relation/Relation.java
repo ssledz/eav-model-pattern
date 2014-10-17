@@ -33,7 +33,7 @@ import pl.softech.eav.domain.specification.OwnerRelationSpecification;
 import pl.softech.eav.domain.specification.TargetRelationSpecification;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @Entity

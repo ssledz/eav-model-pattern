@@ -39,7 +39,7 @@ import pl.softech.eav.domain.object.MyObjectRepository;
 import pl.softech.eav.domain.value.ObjectValueRepository;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @Service

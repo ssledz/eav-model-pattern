@@ -55,7 +55,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)

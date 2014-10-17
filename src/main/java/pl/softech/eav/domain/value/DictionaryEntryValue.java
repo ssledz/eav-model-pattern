@@ -24,7 +24,7 @@ import javax.persistence.ManyToOne;
 import pl.softech.eav.domain.dictionary.DictionaryEntry;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @Embeddable

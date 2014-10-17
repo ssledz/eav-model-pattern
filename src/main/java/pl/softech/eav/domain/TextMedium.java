@@ -31,7 +31,7 @@ import javax.validation.Payload;
 import javax.validation.constraints.Size;
 
 /**
- * @author ssledz 
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @Documented

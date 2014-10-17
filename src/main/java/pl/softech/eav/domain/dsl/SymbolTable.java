@@ -23,8 +23,8 @@ import pl.softech.eav.domain.object.MyObject;
 import pl.softech.eav.domain.relation.RelationConfiguration;
 
 /**
- * @author ssledz
- * @since 1.1 
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
+ * @since 1.1
  */
 public interface SymbolTable {
 	

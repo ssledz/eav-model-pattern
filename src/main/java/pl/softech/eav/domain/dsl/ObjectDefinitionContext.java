@@ -23,7 +23,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.google.common.collect.Lists;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public class ObjectDefinitionContext implements Context {

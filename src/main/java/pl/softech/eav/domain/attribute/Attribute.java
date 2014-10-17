@@ -37,7 +37,7 @@ import pl.softech.eav.domain.TextMedium;
 import pl.softech.eav.domain.category.Category;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @Entity

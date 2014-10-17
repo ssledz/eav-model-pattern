@@ -33,8 +33,8 @@ import pl.softech.eav.domain.AbstractEntity;
 import pl.softech.eav.domain.TextMedium;
 
 /**
- * @author ssledz
- * @since 1.0 
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
+ * @since 1.0
  */
 @Entity
 @Table(name = "category")

@@ -22,7 +22,7 @@ import pl.softech.eav.domain.dictionary.DictionaryEntry;
 import pl.softech.eav.domain.frame.Attribute;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public interface Computer {

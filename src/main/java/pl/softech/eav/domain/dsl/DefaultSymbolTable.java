@@ -28,8 +28,8 @@ import pl.softech.eav.domain.relation.RelationConfiguration;
 import com.google.common.collect.Maps;
 
 /**
- * @author ssledz
- * @since 1.1 
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
+ * @since 1.1
  */
 public class DefaultSymbolTable implements SymbolTable {
 

@@ -25,7 +25,7 @@ import pl.softech.eav.domain.AbstractValueObject;
 import pl.softech.eav.domain.TextMedium;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @Embeddable

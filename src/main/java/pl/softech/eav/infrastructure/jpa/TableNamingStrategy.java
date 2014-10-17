@@ -18,8 +18,8 @@ package pl.softech.eav.infrastructure.jpa;
 import org.hibernate.cfg.DefaultNamingStrategy;
 
 /**
- * @author ssledz
- * @since 1.0 
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
+ * @since 1.0
  */
 public class TableNamingStrategy extends DefaultNamingStrategy {
 

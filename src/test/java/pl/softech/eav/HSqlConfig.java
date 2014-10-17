@@ -41,7 +41,7 @@ import pl.softech.eav.domain.relation.RelationConfigurationRepository;
 import pl.softech.eav.infrastructure.jpa.TableNamingStrategy;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @Configuration

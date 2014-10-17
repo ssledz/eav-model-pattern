@@ -42,7 +42,7 @@ import pl.softech.eav.domain.value.ObjectValueRepository;
 import pl.softech.eav.domain.value.StringValue;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)

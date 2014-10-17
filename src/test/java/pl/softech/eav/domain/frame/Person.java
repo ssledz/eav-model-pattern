@@ -21,7 +21,7 @@ import pl.softech.eav.domain.frame.Relation;
 import pl.softech.eav.domain.object.MyObject;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public interface Person {

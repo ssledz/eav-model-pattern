@@ -18,7 +18,7 @@ package pl.softech.eav.domain.value;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public interface ObjectValueRepository extends CrudRepository<ObjectValue, Long> {

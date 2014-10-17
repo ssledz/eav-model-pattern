@@ -36,8 +36,8 @@ import pl.softech.eav.domain.value.ValueReader;
 import com.google.common.collect.ImmutableMap;
 
 /**
- * @author ssledz
- * @since 1.0 
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
+ * @since 1.0
  */
 @Service
 public class DataTypeSerialisationService {

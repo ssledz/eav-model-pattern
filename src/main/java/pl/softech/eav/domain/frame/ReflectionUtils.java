@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
 public class ReflectionUtils {
