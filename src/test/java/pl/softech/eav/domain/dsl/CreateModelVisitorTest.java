@@ -29,6 +29,7 @@ import pl.softech.eav.domain.value.ObjectValue;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(classes = MySqlConfig.class)

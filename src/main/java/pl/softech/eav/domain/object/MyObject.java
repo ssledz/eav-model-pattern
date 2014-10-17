@@ -47,6 +47,7 @@ import com.google.common.collect.Sets;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Entity
 @Table(name = "my_object")

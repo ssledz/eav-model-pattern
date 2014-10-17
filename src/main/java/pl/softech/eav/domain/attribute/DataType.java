@@ -15,6 +15,7 @@ import pl.softech.eav.domain.dictionary.Dictionary;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Embeddable
 public class DataType extends AbstractValueObject {

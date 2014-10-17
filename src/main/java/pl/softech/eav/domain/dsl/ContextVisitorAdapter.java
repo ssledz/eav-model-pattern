@@ -1,7 +1,8 @@
 package pl.softech.eav.domain.dsl;
 
 /**
- * @author ssledz 
+ * @author ssledz
+ * @since 1.0
  */
 public class ContextVisitorAdapter implements ContextVisitor {
 

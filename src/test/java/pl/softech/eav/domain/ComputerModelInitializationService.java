@@ -25,6 +25,7 @@ import pl.softech.eav.domain.value.ObjectValueRepository;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Service
 public class ComputerModelInitializationService {

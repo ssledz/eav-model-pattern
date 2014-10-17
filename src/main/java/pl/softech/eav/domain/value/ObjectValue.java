@@ -21,6 +21,7 @@ import pl.softech.eav.domain.object.MyObject;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Entity
 @Table(name = "object_value")

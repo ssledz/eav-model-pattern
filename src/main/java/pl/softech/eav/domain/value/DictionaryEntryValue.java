@@ -10,6 +10,7 @@ import pl.softech.eav.domain.dictionary.DictionaryEntry;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Embeddable
 public class DictionaryEntryValue extends AbstractValue<DictionaryEntry>{

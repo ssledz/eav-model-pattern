@@ -4,6 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public interface MyObjectRepository extends CrudRepository<MyObject, Long> {
 

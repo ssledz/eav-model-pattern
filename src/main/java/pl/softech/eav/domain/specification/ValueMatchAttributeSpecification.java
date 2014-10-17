@@ -16,6 +16,7 @@ import pl.softech.eav.domain.value.ValueVisitor;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public class ValueMatchAttributeSpecification implements Specification<Pair<? extends AbstractValue<?>, Attribute>> {
 

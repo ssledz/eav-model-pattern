@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public abstract class AbstractValue<T> {
 

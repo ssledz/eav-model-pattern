@@ -10,6 +10,7 @@ import javax.persistence.TemporalType;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Embeddable
 public class DateValue extends AbstractValue<Date> {

@@ -21,7 +21,8 @@ import pl.softech.eav.domain.value.ValueReader;
 import com.google.common.collect.ImmutableMap;
 
 /**
- * @author ssledz 
+ * @author ssledz
+ * @since 1.0 
  */
 @Service
 public class DataTypeSerialisationService {

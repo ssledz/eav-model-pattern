@@ -27,6 +27,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Configuration
 @EnableJpaRepositories("pl.softech.eav.domain")

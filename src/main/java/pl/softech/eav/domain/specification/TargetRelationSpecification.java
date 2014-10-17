@@ -5,7 +5,8 @@ import pl.softech.eav.domain.object.MyObject;
 import pl.softech.eav.domain.relation.RelationConfiguration;
 
 /**
- * @author ssledz 
+ * @author ssledz
+ * @since 1.0
  */
 public class TargetRelationSpecification implements Specification<MyObject> {
 

@@ -9,7 +9,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
 /**
- * @author ssledz 
+ * @author ssledz
+ * @since 1.0
  */
 public class AttributeDefinitionContext implements Context {
 

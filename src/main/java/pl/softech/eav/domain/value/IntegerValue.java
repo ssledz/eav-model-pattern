@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Embeddable
 public class IntegerValue extends AbstractValue<Integer> {

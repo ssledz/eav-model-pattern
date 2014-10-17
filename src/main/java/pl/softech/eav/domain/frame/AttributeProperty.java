@@ -17,6 +17,7 @@ import com.google.common.collect.ImmutableSet;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public class AttributeProperty implements Property {
 

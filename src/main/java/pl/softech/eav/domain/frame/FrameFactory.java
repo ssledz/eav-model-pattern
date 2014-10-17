@@ -16,6 +16,7 @@ import pl.softech.eav.domain.value.ValueFactory;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public class FrameFactory {
 

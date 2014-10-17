@@ -3,7 +3,8 @@ package pl.softech.eav.infrastructure.jpa;
 import org.hibernate.cfg.DefaultNamingStrategy;
 
 /**
- * @author ssledz 
+ * @author ssledz
+ * @since 1.0 
  */
 public class TableNamingStrategy extends DefaultNamingStrategy {
 

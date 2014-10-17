@@ -3,7 +3,8 @@ package pl.softech.eav.domain.dsl;
 import pl.softech.eav.domain.dsl.Token.Type;
 
 /**
- * @author ssledz 
+ * @author ssledz
+ * @since 1.0
  */
 public class Lexer {
 

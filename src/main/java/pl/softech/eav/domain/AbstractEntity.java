@@ -9,7 +9,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @author ssledz 
+ * @author ssledz
+ * @since 1.0 
  */
 @MappedSuperclass
 public class AbstractEntity implements Entity {

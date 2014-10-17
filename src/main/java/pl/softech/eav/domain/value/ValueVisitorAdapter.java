@@ -2,6 +2,7 @@ package pl.softech.eav.domain.value;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public class ValueVisitorAdapter implements ValueVisitor {
 

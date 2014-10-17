@@ -12,6 +12,7 @@ import pl.softech.eav.domain.TextMedium;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Embeddable
 @Access(AccessType.FIELD)

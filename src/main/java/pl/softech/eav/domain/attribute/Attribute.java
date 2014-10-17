@@ -23,6 +23,7 @@ import pl.softech.eav.domain.category.Category;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Entity
 @Table(name = "attribute")

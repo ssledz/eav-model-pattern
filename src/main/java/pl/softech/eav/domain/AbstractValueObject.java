@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public class AbstractValueObject implements Messages {
 

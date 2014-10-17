@@ -10,6 +10,7 @@ import pl.softech.eav.domain.TextMedium;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Embeddable
 public class DictionaryIdentifier extends AbstractValueObject {

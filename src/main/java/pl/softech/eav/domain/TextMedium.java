@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 
 /**
  * @author ssledz 
+ * @since 1.0
  */
 @Documented
 @Constraint(validatedBy = {})

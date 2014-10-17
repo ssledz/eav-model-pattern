@@ -17,6 +17,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import pl.softech.eav.domain.AbstractEntity;
 import pl.softech.eav.domain.TextMedium;
 
+/**
+ * @author ssledz
+ * @since 1.0 
+ */
 @Entity
 @Table(name = "category")
 @Cacheable

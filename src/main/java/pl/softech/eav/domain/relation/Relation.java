@@ -19,6 +19,7 @@ import pl.softech.eav.domain.specification.TargetRelationSpecification;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Entity
 @Table(name = "relation")

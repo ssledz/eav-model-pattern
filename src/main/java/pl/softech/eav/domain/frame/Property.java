@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public interface Property {
 

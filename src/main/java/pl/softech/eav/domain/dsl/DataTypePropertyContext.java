@@ -3,6 +3,10 @@ package pl.softech.eav.domain.dsl;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * @author ssledz
+ * @since 1.0 
+ */
 public class DataTypePropertyContext implements Context {
 
 	private final String dataType;

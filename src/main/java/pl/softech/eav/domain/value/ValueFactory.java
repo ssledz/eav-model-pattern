@@ -7,7 +7,8 @@ import java.util.Date;
 import pl.softech.eav.domain.dictionary.DictionaryEntry;
 
 /**
- * @author ssledz 
+ * @author ssledz
+ * @since 1.0
  */
 public class ValueFactory {
 

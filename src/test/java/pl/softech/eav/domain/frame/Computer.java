@@ -8,6 +8,7 @@ import pl.softech.eav.domain.frame.Attribute;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public interface Computer {
 

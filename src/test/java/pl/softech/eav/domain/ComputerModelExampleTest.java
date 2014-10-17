@@ -30,7 +30,8 @@ import pl.softech.eav.domain.value.ObjectValueRepository;
 import pl.softech.eav.domain.value.StringValue;
 
 /**
- * @author ssledz 
+ * @author ssledz
+ * @since 1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = HSqlConfig.class)

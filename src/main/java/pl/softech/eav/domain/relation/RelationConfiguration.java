@@ -24,6 +24,7 @@ import pl.softech.eav.domain.category.CategoryIdentifier;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Entity
 @Table(name = "rel_configuration")

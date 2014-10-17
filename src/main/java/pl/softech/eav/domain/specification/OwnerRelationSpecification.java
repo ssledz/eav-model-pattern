@@ -6,6 +6,7 @@ import pl.softech.eav.domain.relation.RelationConfiguration;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public class OwnerRelationSpecification implements Specification<MyObject> {
 

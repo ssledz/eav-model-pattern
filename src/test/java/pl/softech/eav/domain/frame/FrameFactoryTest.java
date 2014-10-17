@@ -41,6 +41,7 @@ import com.google.common.collect.Lists;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = HSqlConfig.class)

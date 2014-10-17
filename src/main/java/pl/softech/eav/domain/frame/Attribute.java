@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Target({ ElementType.METHOD })
 @Retention(RUNTIME)

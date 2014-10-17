@@ -27,6 +27,7 @@ import pl.softech.eav.infrastructure.jpa.TableNamingStrategy;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 @Configuration
 @EnableJpaRepositories("pl.softech.eav.domain")

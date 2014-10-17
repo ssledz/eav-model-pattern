@@ -5,6 +5,7 @@ import org.springframework.data.repository.query.Param;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 

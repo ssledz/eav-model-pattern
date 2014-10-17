@@ -11,6 +11,7 @@ import pl.softech.eav.domain.dsl.Token.Type;
 
 /**
  * @author ssledz
+ * @since 1.0
  */
 public class LexerTest {
 
