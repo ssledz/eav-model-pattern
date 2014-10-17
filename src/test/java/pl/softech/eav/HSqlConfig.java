@@ -92,7 +92,6 @@ public class HSqlConfig {
 		lemfb.setDataSource(dataSource());
 		lemfb.setJpaVendorAdapter(jpaVendorAdapter());
 		lemfb.setPackagesToScan("pl.softech.eav.domain");
-		lemfb.setMappingResources("named-queries.xml");
 		Properties jpaProperties = new Properties();
 		jpaProperties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
 		jpaProperties.setProperty("hibernate.cache.use_second_level_cache", "true");
