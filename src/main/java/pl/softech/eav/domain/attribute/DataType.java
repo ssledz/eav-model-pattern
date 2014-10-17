@@ -18,6 +18,7 @@ package pl.softech.eav.domain.attribute;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -40,6 +41,7 @@ public class DataType extends AbstractValueObject {
 	}
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "data_type", nullable = false)
 	private Type type;
 
 	@ManyToOne(fetch = FetchType.LAZY)
