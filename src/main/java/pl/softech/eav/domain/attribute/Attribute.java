@@ -40,7 +40,7 @@ import pl.softech.eav.domain.category.Category;
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
-@Entity
+@Entity(name="pl.softech.eav.domain.attribute.Attribute")
 @Table(name = "eav_attribute")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

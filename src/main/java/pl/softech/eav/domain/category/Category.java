@@ -36,7 +36,7 @@ import pl.softech.eav.domain.TextMedium;
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
-@Entity
+@Entity(name="pl.softech.eav.domain.category.Category")
 @Table(name = "eav_category")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

@@ -38,7 +38,7 @@ import pl.softech.eav.domain.object.MyObject;
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
-@Entity
+@Entity(name="pl.softech.eav.domain.value.ObjectValue")
 @Table(name = "eav_object_value")
 public class ObjectValue extends AbstractEntity {
 

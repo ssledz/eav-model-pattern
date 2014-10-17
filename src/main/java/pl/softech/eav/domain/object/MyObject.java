@@ -64,7 +64,7 @@ import com.google.common.collect.Sets;
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
-@Entity
+@Entity(name="pl.softech.eav.domain.object.MyObject")
 @Table(name = "eav_my_object")
 public class MyObject extends AbstractEntity {
 

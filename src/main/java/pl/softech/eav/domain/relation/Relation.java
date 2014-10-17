@@ -36,7 +36,7 @@ import pl.softech.eav.domain.specification.TargetRelationSpecification;
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
-@Entity
+@Entity(name="pl.softech.eav.domain.relation.Relation")
 @Table(name = "eav_relation")
 public class Relation extends AbstractEntity {
 

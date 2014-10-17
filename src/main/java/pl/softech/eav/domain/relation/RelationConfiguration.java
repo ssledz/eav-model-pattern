@@ -41,7 +41,7 @@ import pl.softech.eav.domain.category.CategoryIdentifier;
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
-@Entity
+@Entity(name="pl.softech.eav.domain.relation.RelationConfiguration")
 @Table(name = "eav_rel_configuration")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

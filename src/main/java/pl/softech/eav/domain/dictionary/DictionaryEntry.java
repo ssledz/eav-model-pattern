@@ -39,7 +39,7 @@ import pl.softech.eav.domain.TextMedium;
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
-@Entity
+@Entity(name="pl.softech.eav.domain.dictionary.DictionaryEntry")
 @Table(name = "eav_dictionary_entry")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
