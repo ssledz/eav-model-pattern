@@ -45,7 +45,7 @@ import pl.softech.eav.domain.TextMedium;
  * @since 1.0
  */
 @Entity
-@Table(name = "dictionary")
+@Table(name = "eav_dictionary")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Dictionary extends AbstractEntity {
@@ -62,7 +62,7 @@ public class Dictionary extends AbstractEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dictionary", cascade = CascadeType.ALL, orphanRemoval = true)
 	@org.hibernate.annotations.Fetch(FetchMode.SUBSELECT)
 	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	private List<DictionaryEntry> entries = new ArrayList<DictionaryEntry>();
+	private final List<DictionaryEntry> entries = new ArrayList<DictionaryEntry>();
 
 	protected Dictionary() {
 	}

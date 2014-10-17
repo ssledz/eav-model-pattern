@@ -39,7 +39,7 @@ import pl.softech.eav.domain.object.MyObject;
  * @since 1.0
  */
 @Entity
-@Table(name = "object_value")
+@Table(name = "eav_object_value")
 public class ObjectValue extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)

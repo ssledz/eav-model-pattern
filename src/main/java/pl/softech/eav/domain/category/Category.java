@@ -37,7 +37,7 @@ import pl.softech.eav.domain.TextMedium;
  * @since 1.0
  */
 @Entity
-@Table(name = "category")
+@Table(name = "eav_category")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Category extends AbstractEntity {

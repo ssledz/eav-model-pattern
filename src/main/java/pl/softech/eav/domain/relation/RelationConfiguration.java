@@ -42,7 +42,7 @@ import pl.softech.eav.domain.category.CategoryIdentifier;
  * @since 1.0
  */
 @Entity
-@Table(name = "rel_configuration")
+@Table(name = "eav_rel_configuration")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RelationConfiguration extends AbstractEntity {

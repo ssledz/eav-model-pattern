@@ -40,7 +40,7 @@ import pl.softech.eav.domain.TextMedium;
  * @since 1.0
  */
 @Entity
-@Table(name = "dictionary_entry")
+@Table(name = "eav_dictionary_entry")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class DictionaryEntry extends AbstractEntity {
@@ -59,7 +59,7 @@ public class DictionaryEntry extends AbstractEntity {
 	private String name;
 
 	@Column(nullable = false)
-	private boolean disabled = false;
+	private final boolean disabled = false;
 
 	protected DictionaryEntry() {
 	}

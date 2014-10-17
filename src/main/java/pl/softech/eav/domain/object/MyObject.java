@@ -65,7 +65,7 @@ import com.google.common.collect.Sets;
  * @since 1.0
  */
 @Entity
-@Table(name = "my_object")
+@Table(name = "eav_my_object")
 public class MyObject extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -73,14 +73,14 @@ public class MyObject extends AbstractEntity {
 	private Category category;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "object")
-	private Set<ObjectValue> values = Sets.newHashSet();
+	private final Set<ObjectValue> values = Sets.newHashSet();
 
 	@TextMedium
 	@Column(nullable = false)
 	private String name;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "owner")
-	private Set<Relation> relations = Sets.newHashSet();
+	private final Set<Relation> relations = Sets.newHashSet();
 
 	protected MyObject() {
 	}
@@ -269,9 +269,9 @@ public class MyObject extends AbstractEntity {
 
 		private String name;
 
-		private Collection<Pair<Attribute, ? extends AbstractValue<?>>> values = Lists.newLinkedList();
+		private final Collection<Pair<Attribute, ? extends AbstractValue<?>>> values = Lists.newLinkedList();
 		
-		private Collection<Pair<RelationConfiguration, MyObject>> relations = Lists.newLinkedList();
+		private final Collection<Pair<RelationConfiguration, MyObject>> relations = Lists.newLinkedList();
 		
 		public Builder withCategory(Category category) {
 			this.category = category;

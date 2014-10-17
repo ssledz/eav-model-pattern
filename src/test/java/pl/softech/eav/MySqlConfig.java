@@ -36,7 +36,6 @@ import pl.softech.eav.domain.attribute.DataTypeSerialisationService;
 import pl.softech.eav.domain.dictionary.DictionaryEntryRepository;
 import pl.softech.eav.domain.frame.FrameFactory;
 import pl.softech.eav.domain.relation.RelationConfigurationRepository;
-import pl.softech.eav.infrastructure.jpa.TableNamingStrategy;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -87,7 +86,6 @@ public class MySqlConfig {
 		lemfb.setPackagesToScan("pl.softech.eav.domain");
 		lemfb.setMappingResources("named-queries.xml");
 		Properties jpaProperties = new Properties();
-		jpaProperties.setProperty("hibernate.ejb.naming_strategy", TableNamingStrategy.class.getName());
 		jpaProperties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
 		jpaProperties.setProperty("hibernate.cache.use_second_level_cache", "true");
 		jpaProperties.setProperty("hibernate.show_sql", "true");

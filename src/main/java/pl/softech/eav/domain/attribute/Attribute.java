@@ -41,7 +41,7 @@ import pl.softech.eav.domain.category.Category;
  * @since 1.0
  */
 @Entity
-@Table(name = "attribute")
+@Table(name = "eav_attribute")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Attribute extends AbstractEntity {

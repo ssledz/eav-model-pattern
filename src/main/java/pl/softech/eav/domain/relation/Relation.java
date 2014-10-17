@@ -37,7 +37,7 @@ import pl.softech.eav.domain.specification.TargetRelationSpecification;
  * @since 1.0
  */
 @Entity
-@Table(name = "relation")
+@Table(name = "eav_relation")
 public class Relation extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
