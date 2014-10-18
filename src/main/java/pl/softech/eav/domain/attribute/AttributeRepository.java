@@ -15,7 +15,10 @@
  */
 package pl.softech.eav.domain.attribute;
 
+import javax.persistence.QueryHint;
+
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -25,7 +28,11 @@ import org.springframework.data.repository.query.Param;
  */
 public interface AttributeRepository extends CrudRepository<Attribute, Long> {
 
+	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
 	@Query("select a from pl.softech.eav.domain.attribute.Attribute a where a.identifier = :identifier")
 	Attribute findByIdentifier(@Param("identifier") AttributeIdentifier identifier);
 	
+	@Override
+	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
+	Iterable<Attribute> findAll();
 }

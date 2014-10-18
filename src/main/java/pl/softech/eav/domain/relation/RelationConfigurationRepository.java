@@ -15,7 +15,10 @@
  */
 package pl.softech.eav.domain.relation;
 
+import javax.persistence.QueryHint;
+
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -25,7 +28,12 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RelationConfigurationRepository extends CrudRepository<RelationConfiguration, Long> {
 
+	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
 	@Query("select rc from pl.softech.eav.domain.relation.RelationConfiguration rc where rc.identifier = :identifier")
 	RelationConfiguration findByIdentifier(@Param("identifier") RelationIdentifier identifier);
+	
+	@Override
+	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
+	Iterable<RelationConfiguration> findAll();
 
 }

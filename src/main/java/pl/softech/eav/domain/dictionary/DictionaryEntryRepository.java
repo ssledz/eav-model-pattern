@@ -15,7 +15,10 @@
  */
 package pl.softech.eav.domain.dictionary;
 
+import javax.persistence.QueryHint;
+
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -25,6 +28,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface DictionaryEntryRepository extends CrudRepository<DictionaryEntry, Long> {
 
+	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
 	@Query("select e from pl.softech.eav.domain.dictionary.DictionaryEntry e where e.identifier = :identifier")
 	DictionaryEntry findByIdentifier(@Param("identifier") DictionaryEntryIdentifier dictionaryEntryIdentifier);
 }

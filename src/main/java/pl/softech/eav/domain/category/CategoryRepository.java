@@ -15,7 +15,10 @@
  */
 package pl.softech.eav.domain.category;
 
+import javax.persistence.QueryHint;
+
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -25,7 +28,11 @@ import org.springframework.data.repository.query.Param;
  */
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
+	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
 	@Query("select c from pl.softech.eav.domain.category.Category c where c.identifier = :identifier")
 	Category findByIdentifier(@Param("identifier") CategoryIdentifier identifier);
 	
+	@Override
+	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
+	Iterable<Category> findAll();
 }
