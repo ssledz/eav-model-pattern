@@ -13,27 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.softech.eav.domain.specification;
+package pl.softech.eav.domain.dsl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.Collection;
+
+import pl.softech.eav.domain.attribute.Attribute;
+import pl.softech.eav.domain.category.Category;
 import pl.softech.eav.domain.object.MyObject;
 import pl.softech.eav.domain.relation.RelationConfiguration;
 
 /**
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
- * @since 1.0
+ * @since 1.1
  */
-public class TargetRelationSpecification implements Specification<MyObject> {
+public interface SymbolTable {
+	
+	void put(String identifier, Category cat);
 
-	private final RelationConfiguration configurarion;
+	void put(String identifier, Attribute att);
 
-	public TargetRelationSpecification(RelationConfiguration configurarion) {
-		this.configurarion = checkNotNull(configurarion);
-	}
+	void put(String identifier, MyObject obj);
 
-	@Override
-	public boolean isSafisfiedBy(MyObject target) {
-		return configurarion.getTarget().getIdentifier().equals(target.getCategory().getIdentifier());
-	}
+	void put(String identifier, RelationConfiguration rel);
 
+	Category getCategory(String identifier);
+
+	Attribute getAttribute(String identifier);
+
+	MyObject getObject(String identifier);
+
+	RelationConfiguration getRelation(String identifier);
+
+	Collection<MyObject> getObjects();
+
+	Collection<RelationConfiguration> getRelations();
+
+	Collection<Attribute> getAttributes();
+
+	Collection<Category> getCategories();
 }

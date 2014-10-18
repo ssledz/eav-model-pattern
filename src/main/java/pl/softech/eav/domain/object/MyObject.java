@@ -1,3 +1,18 @@
+/*
+ * Copyright 2013 Sławomir Śledź <slawomir.sledz@sof-tech.pl>.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package pl.softech.eav.domain.object;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -46,10 +61,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
- * @author ssledz
+ * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
+ * @since 1.0
  */
-@Entity
-@Table(name = "my_object")
+@Entity(name="pl.softech.eav.domain.object.MyObject")
+@Table(name = "eav_my_object")
 public class MyObject extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -57,14 +73,14 @@ public class MyObject extends AbstractEntity {
 	private Category category;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "object")
-	private Set<ObjectValue> values = Sets.newHashSet();
+	private final Set<ObjectValue> values = Sets.newHashSet();
 
 	@TextMedium
 	@Column(nullable = false)
 	private String name;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "owner")
-	private Set<Relation> relations = Sets.newHashSet();
+	private final Set<Relation> relations = Sets.newHashSet();
 
 	protected MyObject() {
 	}
@@ -253,9 +269,9 @@ public class MyObject extends AbstractEntity {
 
 		private String name;
 
-		private Collection<Pair<Attribute, ? extends AbstractValue<?>>> values = Lists.newLinkedList();
+		private final Collection<Pair<Attribute, ? extends AbstractValue<?>>> values = Lists.newLinkedList();
 		
-		private Collection<Pair<RelationConfiguration, MyObject>> relations = Lists.newLinkedList();
+		private final Collection<Pair<RelationConfiguration, MyObject>> relations = Lists.newLinkedList();
 		
 		public Builder withCategory(Category category) {
 			this.category = category;
