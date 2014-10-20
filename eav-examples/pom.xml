@@ -1,32 +1,18 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
->
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>pl.softech.eav</groupId>
-        <artifactId>eav-parent</artifactId>
-        <version>1.2-SNAPSHOT</version>
-        <relativePath>../eav-parent</relativePath>
-    </parent>
+    <groupId>pl.softech.eav.example</groupId>
     <artifactId>eav-examples</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>examples</name>
-    <dependencies>
-        <dependency>
-            <groupId>pl.softech.eav</groupId>
-            <artifactId>eav-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>c3p0</groupId>
-            <artifactId>c3p0</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-    </dependencies>
+    <scm>
+        <connection>scm:git:git@github.com:ssledz/eav-model-pattern.git</connection>
+        <url>scm:git:git@github.com:ssledz/eav-model-pattern.git</url>
+        <developerConnection>scm:git:git@github.com:ssledz/eav-model-pattern.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+  <modules>
+    <module>eav-computer-person-example</module>
+  </modules>
 </project>
