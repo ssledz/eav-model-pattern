@@ -10,7 +10,7 @@
     </parent>
     <artifactId>eav-core</artifactId>
     <packaging>jar</packaging>
-    <name>Core</name>
+    <name>core</name>
     <dependencies>
         <dependency>
             <groupId>org.hibernate</groupId>
