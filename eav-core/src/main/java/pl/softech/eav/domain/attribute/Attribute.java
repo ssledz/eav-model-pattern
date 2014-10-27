@@ -40,7 +40,7 @@ import pl.softech.eav.domain.category.Category;
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.0
  */
-@Entity(name="pl.softech.eav.domain.attribute.Attribute")
+@Entity(name = "pl.softech.eav.domain.attribute.Attribute")
 @Table(name = "eav_attribute")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -74,6 +74,10 @@ public class Attribute extends AbstractEntity {
 		this.name = checkNotNull(name, ARG_NOT_NULL_CHECK, "name");
 		this.category = checkNotNull(category, ARG_NOT_NULL_CHECK, "category");
 		this.dataType = checkNotNull(dataType, ARG_NOT_NULL_CHECK, "dataType");
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public Category getCategory() {

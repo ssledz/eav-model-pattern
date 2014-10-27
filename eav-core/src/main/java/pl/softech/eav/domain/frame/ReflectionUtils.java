@@ -115,7 +115,7 @@ public class ReflectionUtils {
 	public static boolean isCollection(Class<?> type) {
 		return Collection.class.isAssignableFrom(type);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static Collection<Object> newCollection(Class<?> collType) throws Exception {
 		

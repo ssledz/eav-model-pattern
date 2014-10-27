@@ -35,11 +35,11 @@ import pl.softech.eav.domain.value.ValueFactory;
  */
 public class FrameFactory {
 
-	private AttributeRepository attributeRepository;
+	private final AttributeRepository attributeRepository;
 
-	private RelationConfigurationRepository relationConfigurationRepository;
+	private final RelationConfigurationRepository relationConfigurationRepository;
 
-	private ValueFactory valueFactory = new ValueFactory();
+	private final ValueFactory valueFactory = new ValueFactory();
 
 	public FrameFactory(AttributeRepository attributeRepository, RelationConfigurationRepository relationConfigurationRepository) {
 		this.attributeRepository = attributeRepository;
@@ -68,8 +68,12 @@ public class FrameFactory {
 		@Override
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-			if(method.getDeclaringClass().isAssignableFrom(MyObjectProxy.class)) {
+			if(method.getDeclaringClass().equals(MyObjectProxy.class)) {
 				return object;
+			}
+			
+			if(method.getDeclaringClass().equals(Object.class)) {
+				return method.invoke(object, args);
 			}
 			
 			MethodContext ctx = methodContextRepository.findOne(method);

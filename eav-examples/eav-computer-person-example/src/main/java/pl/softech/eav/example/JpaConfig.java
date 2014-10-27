@@ -39,21 +39,21 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  * @since 1.2
  */
 @Configuration
-@PropertySources(value = {@PropertySource("classpath:jpa.properties")})
+@PropertySources(value = { @PropertySource("classpath:jpa.properties") })
 public class JpaConfig {
-	
-	@Bean
-	   public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-	      return new PropertySourcesPlaceholderConfigurer();
-	   }
-	
-	@Bean
-	public DataSource dataSource() {
 
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+
+	@Bean
+	public DataSource dataSource(@Value("${db.username}") String username, @Value("${db.password}") String password,
+			@Value("${db.url}") String url) {
 		ComboPooledDataSource cpds = new ComboPooledDataSource();
-		cpds.setJdbcUrl("jdbc:mysql://localhost:3306/sample?createDatabaseIfNotExist=true&sessionVariables=sql_mode=NO_BACKSLASH_ESCAPES&useUnicode=yes&characterEncoding=UTF-8&characterSetResults=utf8&connectionCollation=utf8_unicode_ci");
-		cpds.setUser("test");
-		cpds.setPassword("test");
+		cpds.setJdbcUrl(url);
+		cpds.setUser(username);
+		cpds.setPassword(password);
 		return cpds;
 	}
 
@@ -66,23 +66,25 @@ public class JpaConfig {
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(JpaVendorAdapter jpaVendorAdapter, DataSource ds) {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(JpaVendorAdapter jpaVendorAdapter, DataSource ds,
+			@Value("${hibernate.show_sql}") String showSql, @Value("${hibernate.format_sql}") String formatSql,
+			@Value("${hibernate.cache.use_second_level_cache}") String useSecondLevelCache) {
 		LocalContainerEntityManagerFactoryBean lemfb = new LocalContainerEntityManagerFactoryBean();
 		lemfb.setDataSource(ds);
 		lemfb.setJpaVendorAdapter(jpaVendorAdapter);
 		lemfb.setPackagesToScan("pl.softech.eav.domain");
 		Properties jpaProperties = new Properties();
 		jpaProperties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
-		jpaProperties.setProperty("hibernate.cache.use_second_level_cache", "true");
-		jpaProperties.setProperty("hibernate.show_sql", "true");
-		jpaProperties.setProperty("hibernate.format_sql", "true");
-		/*See https://hibernate.atlassian.net/browse/HHH-8796*/
+		jpaProperties.setProperty("hibernate.cache.use_second_level_cache", useSecondLevelCache);
+		jpaProperties.setProperty("hibernate.show_sql", showSql);
+		jpaProperties.setProperty("hibernate.format_sql", formatSql);
+		/* See https://hibernate.atlassian.net/browse/HHH-8796 */
 		jpaProperties.setProperty("hibernate.schema_update.unique_constraint_strategy", "RECREATE_QUIETLY");
 		lemfb.setJpaProperties(jpaProperties);
 		return lemfb;
 	}
 
-	@Bean(name="transactionManager")
+	@Bean(name = "transactionManager")
 	public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
 		return new JpaTransactionManager(emf);
 	}

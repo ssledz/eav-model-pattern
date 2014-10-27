@@ -18,6 +18,7 @@ package pl.softech.eav.example;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
@@ -26,6 +27,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import({JpaConfig.class, EavConfig.class})
 @ComponentScan("pl.softech.eav.example")
+@EnableTransactionManagement
 public class AppConfig {
 
 	

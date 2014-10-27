@@ -15,23 +15,17 @@
  */
 package pl.softech.eav.example;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.2
  */
 public class Example {
-
-	private static String toString(Person person) {
-		ToStringBuilder sb = new ToStringBuilder(ToStringStyle.SHORT_PREFIX_STYLE);
-		sb.append("firstname", person.getFirstname());
-		sb.append("lastname", person.getLastname());
-		sb.append("age", person.getAge());
-		return sb.toString();
-	}
 
 	public static void main(String[] args) throws Exception {
 
@@ -41,15 +35,33 @@ public class Example {
 
 			bootstrapper.onApplicationStart();
 
-			DomainService domainService = ctx.getBean(DomainService.class);
+			final DomainService domainService = ctx.getBean(DomainService.class);
 
 			domainService.loadConfigurationFromFile("computer-person.eav");
 
-			Computer computer = domainService.findComputerByName("MAUI");
+			TransactionTemplate transactionTemplate = new TransactionTemplate(ctx.getBean(JpaTransactionManager.class));
+			transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+				@Override
+				protected void doInTransactionWithoutResult(TransactionStatus status) {
 
-			Person gyles = domainService.findPersonByName("gyles");
+					Person gyles = domainService.findPersonByName("gyles");
 
-			System.out.println(toString(gyles));
+					System.out.println("\n");
+					System.out.println(Util.toString(gyles));
+					
+					System.out.println("\nGyles is getting older");
+					gyles.setAge(gyles.getAge() + 1);
+					Person emil = domainService.findPersonByName("emil");
+					System.out.println("\nGyles met Emil and they become friends\n");
+					emil.addFriend(gyles);
+					gyles.addFriend(emil);
+					
+					System.out.println(Util.toString(gyles));
+					System.out.println("\n");
+					System.out.println(Util.toString(emil));
+				}
+			});
+
 		}
 
 	}
