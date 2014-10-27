@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>pl.softech.eav</groupId>
+        <artifactId>eav-parent</artifactId>
+        <version>1.2-SNAPSHOT</version>
+        <relativePath>../eav-parent</relativePath>
+    </parent>
     <groupId>pl.softech.eav.example</groupId>
     <artifactId>eav-examples</artifactId>
-    <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>examples</name>
+    <properties>
+        <log4j.version>1.2.17</log4j.version>
+    </properties>
     <scm>
         <connection>scm:git:git@github.com:ssledz/eav-model-pattern.git</connection>
         <url>scm:git:git@github.com:ssledz/eav-model-pattern.git</url>
         <developerConnection>scm:git:git@github.com:ssledz/eav-model-pattern.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
-  <modules>
-    <module>eav-computer-person-example</module>
-  </modules>
+    <dependencies>
+        <dependency>
+            <groupId>pl.softech.eav</groupId>
+            <artifactId>eav-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+    </dependencies>
+    <modules>
+        <module>eav-computer-person-example</module>
+    </modules>
 </project>

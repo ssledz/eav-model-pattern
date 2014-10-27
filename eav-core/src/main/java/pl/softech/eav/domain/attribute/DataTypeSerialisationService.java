@@ -44,7 +44,7 @@ public class DataTypeSerialisationService {
 
 	private static final FastDateFormat DF = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss");
 
-	private ImmutableMap<Type, ValueReader> type2valueReader = new ImmutableMap.Builder<Type, ValueReader>()//
+	private final ImmutableMap<Type, ValueReader> type2valueReader = new ImmutableMap.Builder<Type, ValueReader>()//
 
 			.put(Type.TEXT, new ValueReader() {
 

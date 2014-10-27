@@ -59,6 +59,10 @@ public class CreateModelVisitor implements ContextVisitor {
 		this.symbolTable = symbolTable;
 	}
 
+	public SymbolTable getSymbolTable() {
+		return symbolTable;
+	}
+
 	public Collection<Category> getCategories() {
 		return symbolTable.getCategories();
 	}
