@@ -76,6 +76,8 @@ public class JpaConfig {
 		jpaProperties.setProperty("hibernate.cache.use_second_level_cache", "true");
 		jpaProperties.setProperty("hibernate.show_sql", "true");
 		jpaProperties.setProperty("hibernate.format_sql", "true");
+		/*See https://hibernate.atlassian.net/browse/HHH-8796*/
+		jpaProperties.setProperty("hibernate.schema_update.unique_constraint_strategy", "RECREATE_QUIETLY");
 		lemfb.setJpaProperties(jpaProperties);
 		return lemfb;
 	}

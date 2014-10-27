@@ -7,7 +7,7 @@
         <groupId>pl.softech.eav.example</groupId>
         <artifactId>eav-examples</artifactId>
         <version>1.2-SNAPSHOT</version>
-        <relativePath>../eav-parent</relativePath>
+        <relativePath>../</relativePath>
     </parent>
     <artifactId>eav-computer-person-example</artifactId>
     <name>computer-person example</name>
