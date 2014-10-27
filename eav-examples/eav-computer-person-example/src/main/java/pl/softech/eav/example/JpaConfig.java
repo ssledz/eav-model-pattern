@@ -80,7 +80,7 @@ public class JpaConfig {
 		return lemfb;
 	}
 
-	@Bean
+	@Bean(name="transactionManager")
 	public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
 		return new JpaTransactionManager(emf);
 	}
