@@ -139,6 +139,36 @@ Example of categories
 +---------------+--------------+------+-----+---------+----------------+
 ```
 
+##EAV Api
+
+
+
+##EAV Dsl parser
+
+Characteristics
+* hand written
+** top-down parsing strategy
+* clear separation from domain model
+** utilized visitor and context object pattern
+
+##EAV Domain specific language (dsl)
+
+Pros
+* easy to learn, clear structure
+* fast domain model preparation
+* easy to maintenance
+* ideal for the domain experts
+* supports comments
+
+Cons
+* there is no IDE support for syntax highlighting
+* there is no IDE support for syntax autocomplete
+
+Resources
+* [EBNF](https://github.com/ssledz/eav-model-pattern/blob/master/eav-core/src/conf/eav-dsl.ebnf)
+* [Computer-Person example](https://github.com/ssledz/eav-model-pattern/blob/master/eav-examples/eav-computer-person-example/src/main/resources/computer-person.eav)
+
+
 ##Todo
 - [ ] dsl parser
   - [ ] add line number to the parse error
@@ -153,6 +183,10 @@ Example of categories
 - [ ] core
   - [ ] introduce new json object value
   - [ ] enhance eav entities with audit capability
+  - [ ] introduce liquibase migrations
+    - [ ] mysql
+    - [ ] hsql
+    - [ ] oracle
   - [ ] test
     - [ ] implement tests marked with //TODO implement
 
