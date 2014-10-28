@@ -141,18 +141,24 @@ Example of categories
 
 ##EAV Api
 
-###Examples
+###Api Usage Examples
 
 Create a computer object
 
 ```java
-MyObject computer = new MyObject(categoryRepository.findByIdentifier("computer"), "STAR");
+MyObject computer = new MyObject(
+	categoryRepository.findByIdentifier("computer"), 
+	"STAR"
+);
 ```
 
 Create a person object
 
 ```java
-MyObject person = new MyObject(categoryRepository.findByIdentifier("person"), "Slavik");
+MyObject person = new MyObject(
+	categoryRepository.findByIdentifier("person"), 
+	"Slavik"
+);
 ```
 
 Add dictionary value to the computer object
