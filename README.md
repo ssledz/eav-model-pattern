@@ -146,33 +146,42 @@ Example of categories
 Create a computer object
 
 ```java
-MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "STAR");
+MyObject computer = new MyObject(categoryRepository.findByIdentifier("computer"), "STAR");
 ```
 
 Create a person object
 
 ```java
-MyObject person = new MyObject(categoryRepository.findByIdentifier(pmis.getPersonCategory()), "Slavik");
+MyObject person = new MyObject(categoryRepository.findByIdentifier("person"), "Slavik");
 ```
 
 Add dictionary value to the computer object
 
 ```java
-computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new DictionaryEntryValue(
-	dictionaryEntryRepository.findByIdentifier("dell")));
+computer.addValue(
+	attributeRepository.findByIdentifier(new AttributeIdentifier("make")), 
+	new DictionaryEntryValue(dictionaryEntryRepository.findByIdentifier("dell"))
+);
 ```
 
 Add string value to the computer object
 
 ```java
-computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("model")), new StringValue("Studio15"));
+computer.addValue(
+	attributeRepository.findByIdentifier(new AttributeIdentifier("model")), 
+	new StringValue("Studio15")
+);
 ```
 
 Configure 'has computer' relation between person and computer
 
 ```java
-RelationConfiguration hasComputer = new RelationConfiguration(new RelationIdentifier("has_computer"), "has",
-	categoryRepository.findByIdentifier("person"), categoryRepository.findByIdentifier("computer"));
+RelationConfiguration hasComputer = new RelationConfiguration(
+	new RelationIdentifier("has_computer"), 
+	"has",
+	categoryRepository.findByIdentifier("person"), 
+	categoryRepository.findByIdentifier("computer")
+);
 ```
 
 Add 'has computer' to the person object
