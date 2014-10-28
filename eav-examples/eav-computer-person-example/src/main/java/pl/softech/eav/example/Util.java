@@ -17,9 +17,6 @@ package pl.softech.eav.example;
 
 import java.util.Collection;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import pl.softech.eav.domain.dictionary.DictionaryEntry;
 import pl.softech.eav.domain.object.MyObject;
 import pl.softech.eav.domain.value.ObjectValue;
@@ -32,27 +29,12 @@ import com.google.common.collect.Collections2;
  * @since 1.2
  */
 public class Util {
-	private static final Function<ObjectValue, String> OBJECT_VALUE_2_STRING = new Function<ObjectValue, String>() {
-
-		@Override
-		public String apply(ObjectValue input) {
-			return Util.toString(input);
-		}
-	};
 
 	private static final Function<DictionaryEntry, String> DICT_2_STRING = new Function<DictionaryEntry, String>() {
 
 		@Override
 		public String apply(DictionaryEntry input) {
 			return input.getName();
-		}
-	};
-
-	private static final Function<Person, String> PERSON_2_STRING = new Function<Person, String>() {
-
-		@Override
-		public String apply(Person input) {
-			return Util.toStringShort(input);
 		}
 	};
 
@@ -64,63 +46,127 @@ public class Util {
 		return entries == null ? null : Collections2.transform(entries, DICT_2_STRING);
 	}
 
-	private static String toString(ObjectValue vakue) {
+	private static String toString(ObjectValue vakue, int ntabs) {
 		if (vakue == null) {
 			return null;
 		}
-		ToStringBuilder sb = new ToStringBuilder(vakue, ToStringStyle.SHORT_PREFIX_STYLE);
-		sb.append("attribute", vakue.getAttribute().getName());
-		sb.append("value", vakue.getValueAsString());
+		SimpleToStringBuilder sb = new SimpleToStringBuilder("ObjectValue", ntabs);
+		sb.add("attribute", vakue.getAttribute().getName());
+		sb.add("value", vakue.getValueAsString());
 		return sb.toString();
 	}
 
-	private static String toString(MyObject object) {
+	private static String toString(MyObject object, final int ntabs) {
 		if (object == null) {
 			return null;
 		}
-		ToStringBuilder sb = new ToStringBuilder(object, ToStringStyle.SHORT_PREFIX_STYLE);
-		sb.append("name", object.getName());
-		sb.append("category", object.getCategory().getIdentifier().getIdentifier());
-		sb.append("values", Collections2.transform(object.getValues(), OBJECT_VALUE_2_STRING));
+
+		SimpleToStringBuilder sb = new SimpleToStringBuilder("MyObject", ntabs);
+		sb.add("name", object.getName());
+		sb.add("category", object.getCategory().getIdentifier().getIdentifier());
+		sb.add("values", collectionToString(Collections2.transform(object.getValues(), new Function<ObjectValue, String>() {
+			@Override
+			public String apply(ObjectValue input) {
+				return Util.toString(input, ntabs + 2);
+			}
+		}), ntabs + 1));
 		return sb.toString();
 	}
 
-	private static String toString(Computer computer) {
+	private static String toString(Computer computer, int ntabs) {
 		if (computer == null) {
 			return null;
 		}
-		ToStringBuilder sb = new ToStringBuilder(computer, ToStringStyle.SHORT_PREFIX_STYLE);
-		sb.append("Make", Util.toString(computer.getMake()));
-		sb.append("drive", computer.getDrive());
-		sb.append("battery", computer.getBattery());
-		sb.append("cpu", computer.getCpu());
-		sb.append("model", computer.getModel());
-		sb.append("optical", computer.getOptical());
-		sb.append("os", Util.toString(computer.getOs()));
-		sb.append("purshaseDate", computer.getPurshaseDate());
-		sb.append("ram", computer.getRam());
-		sb.append("screen", computer.getScreen());
-		sb.append("video", computer.getVideo());
-		sb.append("type", Util.toString(computer.getType()));
+		SimpleToStringBuilder sb = new SimpleToStringBuilder("Computer", ntabs);
+		sb.add("Make", Util.toString(computer.getMake()));
+		sb.add("drive", computer.getDrive());
+		sb.add("battery", computer.getBattery());
+		sb.add("cpu", computer.getCpu());
+		sb.add("model", computer.getModel());
+		sb.add("optical", computer.getOptical());
+		sb.add("os", Util.toString(computer.getOs()));
+		sb.add("purshaseDate", computer.getPurshaseDate());
+		sb.add("ram", computer.getRam());
+		sb.add("screen", computer.getScreen());
+		sb.add("video", computer.getVideo());
+		sb.add("type", Util.toString(computer.getType()));
 		return sb.toString();
 	}
 
-	private static String toStringShort(Person person) {
-		ToStringBuilder sb = new ToStringBuilder(person, ToStringStyle.SHORT_PREFIX_STYLE);
-		sb.append("firstname", person.getFirstname());
-		sb.append("lastname", person.getLastname());
-		sb.append("age", person.getAge());
-		return sb.toString();
+	private static String toStringShort(Person person, int ntabs) {
+		SimpleToStringBuilder builder = new SimpleToStringBuilder("Person", ntabs);
+		builder.add("firstname", person.getFirstname());
+		builder.add("lastname", person.getLastname());
+		builder.add("age", person.getAge());
+		return builder.toString();
 	}
 
 	public static String toString(Person person) {
-		ToStringBuilder sb = new ToStringBuilder(person, ToStringStyle.MULTI_LINE_STYLE);
-		sb.append("firstname", person.getFirstname());
-		sb.append("lastname", person.getLastname());
-		sb.append("age", person.getAge());
-		sb.append("Computer", Util.toString(person.getComputer()));
-		sb.append("parent", Util.toString(person.getParent()));
-		sb.append("friends", Collections2.transform(person.getFriends(), PERSON_2_STRING));
-		return sb.toString();
+		return toString(person, 1);
+	}
+
+	public static String toString(Person person, final int ntabs) {
+		SimpleToStringBuilder builder = new SimpleToStringBuilder("Person", ntabs);
+		builder.add("firstname", person.getFirstname());
+		builder.add("lastname", person.getLastname());
+		builder.add("age", person.getAge());
+		if (person.getComputer() != null) {
+			builder.add("Computer", "\n" + ntabs(ntabs + 1) + Util.toString(person.getComputer(), ntabs + 2));
+		}
+		if (person.getParent() != null) {
+			builder.add("parent", "\n" + ntabs(ntabs + 1) + Util.toString(person.getParent(), ntabs + 2));
+		}
+		if (person.getFriends() != null) {
+			builder.add("friends", collectionToString(Collections2.transform(person.getFriends(), new Function<Person, String>() {
+
+				@Override
+				public String apply(Person input) {
+					return Util.toStringShort(input, ntabs + 2);
+				}
+			}), ntabs + 1));
+		}
+		return builder.toString();
+
+	}
+
+	private static String collectionToString(Collection<String> args, int ntabs) {
+		String t = ntabs(ntabs);
+		StringBuilder builder = new StringBuilder();
+		for (Object obj : args) {
+			builder.append("\n").append(t).append(obj.toString());
+		}
+		return builder.toString();
+	}
+
+	private static final String TAB = "   ";
+
+	private static String ntabs(int ntabs) {
+		String t = "";
+		for (int i = 0; i < ntabs; i++) {
+			t += TAB;
+		}
+		return t;
+	}
+
+	private static class SimpleToStringBuilder {
+
+		private final StringBuilder builder = new StringBuilder();
+
+		private String nlt = "\n";
+
+		public SimpleToStringBuilder(String className, int ntabs) {
+			builder.append("[").append(className).append("]");
+			nlt += ntabs(ntabs);
+		}
+
+		public SimpleToStringBuilder add(String name, Object value) {
+			builder.append(nlt).append(name).append(" = ").append(value);
+			return this;
+		}
+
+		@Override
+		public String toString() {
+			return builder.toString();
+		}
 	}
 }

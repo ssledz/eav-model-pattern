@@ -23,47 +23,16 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.2
  */
 @Configuration
-@PropertySources(value = { @PropertySource("classpath:jpa.properties") })
 public class JpaConfig {
-
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
-
-	@Bean
-	public DataSource dataSource(@Value("${db.username}") String username, @Value("${db.password}") String password,
-			@Value("${db.url}") String url) {
-		ComboPooledDataSource cpds = new ComboPooledDataSource();
-		cpds.setJdbcUrl(url);
-		cpds.setUser(username);
-		cpds.setPassword(password);
-		return cpds;
-	}
-
-	@Bean
-	public JpaVendorAdapter jpaVendorAdapter(@Value("${hibernate.generate_ddl}") boolean generateDDl) {
-		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-		jpaVendorAdapter.setDatabase(Database.MYSQL);
-		jpaVendorAdapter.setGenerateDdl(generateDDl);
-		return jpaVendorAdapter;
-	}
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(JpaVendorAdapter jpaVendorAdapter, DataSource ds,

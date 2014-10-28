@@ -15,29 +15,33 @@
  */
 package pl.softech.eav.example;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 /**
  * @author Sławomir Śledź <slawomir.sledz@sof-tech.pl>
  * @since 1.2
  */
 @Configuration
-@Import({ EavConfig.class })
-@ComponentScan("pl.softech.eav.example")
-@EnableTransactionManagement
-@PropertySources(value = { @PropertySource("classpath:app.properties") })
-public class AppConfig {
-
+public class HsqlDsConfig {
+	
 	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
+	public DataSource dataSource() {
+		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).build();
 	}
 
+	@Bean
+	public JpaVendorAdapter jpaVendorAdapter() {
+		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+		jpaVendorAdapter.setDatabase(Database.HSQL);
+		jpaVendorAdapter.setGenerateDdl(true);
+		return jpaVendorAdapter;
+	}
 }
