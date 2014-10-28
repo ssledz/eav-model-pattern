@@ -3,28 +3,33 @@ Entity-Attribute-Value model
 
 Entity–attribute–value model (EAV) is a data model to describe entities where the number of attributes (properties, parameters) that can be used to describe them is potentially vast, but the number that will actually apply to a given entity is relatively modest. In mathematics, this model is known as a sparse matrix. EAV is also known as object–attribute–value model, vertical database model and open schema.
 
-##EAV database
+##EAV database schema
 Data is recorded in the following tables
-* eav_attribute
-* eav_category
-* eav_dictionary
-* eav_dictionary_entry
-* eav_my_object
-* eav_object_value
-* eav_rel_configuration
-* eav_relation
+* **eav_attribute**
+* **eav_category**
+* **eav_dictionary**
+* **eav_dictionary_entry**
+* **eav_my_object**
+* **eav_object_value**
+* **eav_rel_configuration**
+* **eav_relation**
 
 ###eav_category
 Stores all defined categories referenced by
-* eav_attribute
-* eav_my_object
-* eav_rel_configuration
+* **eav_attribute**
+* **eav_my_object**
+* **eav_rel_configuration**
+
 It plays a role of glue between objects, attributes and relations. Attributes and relations related to the one object have the same category.
 
 Properties:
-* unique id
-* unique identifier
-* name
+* **id** - unique
+* **identifier** - unique 
+* **name**
+
+Example of categories
+* person
+* computer
 
 ```
 +------------+--------------+------+-----+---------+----------------+
