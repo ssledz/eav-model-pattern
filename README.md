@@ -141,17 +141,66 @@ Example of categories
 
 ##EAV Api
 
+###Examples
 
+Create a computer object
+
+```java
+MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "STAR");
+```
+
+Create a person object
+
+```java
+MyObject person = new MyObject(categoryRepository.findByIdentifier(pmis.getPersonCategory()), "Slavik");
+```
+
+Add dictionary value to the computer object
+
+```java
+computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new DictionaryEntryValue(
+	dictionaryEntryRepository.findByIdentifier("dell")));
+```
+
+Add string value to the computer object
+
+```java
+computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("model")), new StringValue("Studio15"));
+```
+
+Configure 'has computer' relation between person and computer
+
+```java
+RelationConfiguration hasComputer = new RelationConfiguration(new RelationIdentifier("has_computer"), "has",
+	categoryRepository.findByIdentifier("person"), categoryRepository.findByIdentifier("computer"));
+```
+
+Add 'has computer' to the person object
+```java
+person.addRelation(hasComputer, computer);
+```
+
+##EAV Frame
+
+Pros
+
+Cons
 
 ##EAV Dsl parser
 
 Characteristics
 * hand written
  * top-down parsing strategy
-* clear separation from domain model
+* clear separation from domain model (`CreateModelVisitor`)
  * utilized visitor and context object pattern
 
-##EAV Domain specific language (dsl)
+```java
+CreateModelVisitor visitor = new CreateModelVisitor(dictionaryRepository, dataTypeSerialisationService);
+Parser p = new Parser(visitor);
+p.parse(buffer.toString());
+```
+
+##EAV Domain specific language
 
 Pros
 * easy to learn, clear structure
