@@ -147,9 +147,9 @@ Example of categories
 
 Characteristics
 * hand written
-** top-down parsing strategy
+ * top-down parsing strategy
 * clear separation from domain model
-** utilized visitor and context object pattern
+ * utilized visitor and context object pattern
 
 ##EAV Domain specific language (dsl)
 
