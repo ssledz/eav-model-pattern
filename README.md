@@ -4,7 +4,7 @@ EAVModelPattern
 ##Todo
 - [ ] dsl parser
   - [ ] add line number to the parse error
-  - [ ] try to print as many errors as you can
+  - [ ] try to print as many errors as possible
   - [ ] add possibility to reference objects not yet defined
 - [ ] examples
   - [ ] add 'Curriculum Vitae' example 
