@@ -11,6 +11,7 @@ EAVModelPattern
   - [ ] add relation and objects creating on the fly example
 - [ ] documentation
   - [ ] document computer-person example
+
 ##Resources
 * http://en.wikipedia.org/wiki/Entity-attribute-value_model
 * http://stackoverflow.com/questions/1336449/eav-over-sql-server/1336471#1336471
