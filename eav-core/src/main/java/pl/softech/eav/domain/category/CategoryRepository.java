@@ -28,11 +28,11 @@ import org.springframework.data.repository.query.Param;
  */
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
-	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
+	@QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
 	@Query("select c from pl.softech.eav.domain.category.Category c where c.identifier = :identifier")
 	Category findByIdentifier(@Param("identifier") CategoryIdentifier identifier);
 	
 	@Override
-	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
+	@QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
 	Iterable<Category> findAll();
 }

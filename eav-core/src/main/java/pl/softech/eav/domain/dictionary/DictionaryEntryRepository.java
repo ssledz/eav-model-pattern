@@ -28,7 +28,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface DictionaryEntryRepository extends CrudRepository<DictionaryEntry, Long> {
 
-	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
+	@QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
 	@Query("select e from pl.softech.eav.domain.dictionary.DictionaryEntry e where e.identifier = :identifier")
 	DictionaryEntry findByIdentifier(@Param("identifier") DictionaryEntryIdentifier dictionaryEntryIdentifier);
 }

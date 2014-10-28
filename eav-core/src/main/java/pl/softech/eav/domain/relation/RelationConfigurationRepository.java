@@ -28,12 +28,12 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RelationConfigurationRepository extends CrudRepository<RelationConfiguration, Long> {
 
-	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
+	@QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
 	@Query("select rc from pl.softech.eav.domain.relation.RelationConfiguration rc where rc.identifier = :identifier")
 	RelationConfiguration findByIdentifier(@Param("identifier") RelationIdentifier identifier);
 	
 	@Override
-	@QueryHints(@QueryHint(name = org.hibernate.ejb.QueryHints.HINT_CACHEABLE, value = "true"))
+	@QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
 	Iterable<RelationConfiguration> findAll();
 
 }
