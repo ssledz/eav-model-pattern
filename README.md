@@ -272,6 +272,7 @@ Resources
   - [ ] test
     - [ ] implement tests marked with //TODO implement
 - [ ] add google analytics tracking scripts
+- [ ] setup continuous integration (maybe should try http://www.cloudbees.com/)
 
 ##Resources
 * http://en.wikipedia.org/wiki/Entity-attribute-value_model
@@ -279,3 +280,21 @@ Resources
 * http://eav.codeplex.com/
 * http://stackoverflow.com/questions/126271/key-value-pairs-in-relational-database
 * http://stackoverflow.com/questions/6661841/the-concept-of-implementing-key-value-stores-with-relational-database-languages
+
+##Problems
+* [Submin an issue](https://github.com/ssledz/eav-model-pattern/issues)
+
+##License
+   Copyright 2013 Sławomir Śledź <slawomir.sledz@sof-tech.pl>.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
