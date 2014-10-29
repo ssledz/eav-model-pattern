@@ -271,6 +271,7 @@ Resources
     - [ ] oracle
   - [ ] test
     - [ ] implement tests marked with //TODO implement
+- [ ] add google analytics tracking scripts
 
 ##Resources
 * http://en.wikipedia.org/wiki/Entity-attribute-value_model
