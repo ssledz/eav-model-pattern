@@ -142,18 +142,18 @@ Example of categories
 ##EAV Api
 
 Logically api is organized into three main modules 
-* frame api
- * **pl.softech.eav.domain.frame**
-* dsl api
- * **pl.softech.eav.domain.dsl**
-* model manipulation/query api being stored in the following packages
- * **pl.softech.eav.domain.attribute**
- * **pl.softech.eav.domain.category**
- * **pl.softech.eav.domain.dictionary**
- * **pl.softech.eav.domain.object**
- * **pl.softech.eav.domain.relation**
- * **pl.softech.eav.domain.specification**
- * **pl.softech.eav.domain.calue**
+* **frame api**
+ * *pl.softech.eav.domain.frame*
+* **dsl api**
+ * *pl.softech.eav.domain.dsl*
+* model **manipulation/query api** being stored in the following packages
+ * *pl.softech.eav.domain.attribute*
+ * *pl.softech.eav.domain.category*
+ * *pl.softech.eav.domain.dictionary*
+ * *pl.softech.eav.domain.object*
+ * *pl.softech.eav.domain.relation*
+ * *pl.softech.eav.domain.specification*
+ * *pl.softech.eav.domain.calue*
 
 ###Model manipulation api usage examples
 
