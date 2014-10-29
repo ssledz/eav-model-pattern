@@ -141,7 +141,21 @@ Example of categories
 
 ##EAV Api
 
-###Api Usage Examples
+Logicaly api is organized into three main modules 
+* frame api
+ * **pl.softech.eav.domain.frame**
+* dsl api
+ * **pl.softech.eav.domain.dsl**
+* model manipulation/query api being stored in the following packages
+ * **pl.softech.eav.domain.attribute**
+ * **pl.softech.eav.domain.category**
+ * **pl.softech.eav.domain.dictionary**
+ * **pl.softech.eav.domain.object**
+ * **pl.softech.eav.domain.relation**
+ * **pl.softech.eav.domain.specification**
+ * **pl.softech.eav.domain.calue**
+
+###Model manipulation api usage examples
 
 Create a computer object
 
@@ -195,7 +209,11 @@ Add 'has computer' to the person object
 person.addRelation(hasComputer, computer);
 ```
 
-##EAV Frame
+###Model query api usage examples
+
+###Frame api usage examples
+
+###Dsl api usage examples
 
 Pros
 
