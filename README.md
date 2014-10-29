@@ -141,7 +141,7 @@ Example of categories
 
 ##EAV Api
 
-Logicaly api is organized into three main modules 
+Logically api is organized into three main modules 
 * frame api
  * **pl.softech.eav.domain.frame**
 * dsl api
