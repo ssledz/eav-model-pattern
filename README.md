@@ -211,13 +211,19 @@ person.addRelation(hasComputer, computer);
 
 ###Model query api usage examples
 
+TODO
+
 ###Frame api usage examples
+
+TODO
 
 ###Dsl api usage examples
 
 Pros
+* TODO
 
 Cons
+* TODO
 
 ##EAV Dsl parser
 
