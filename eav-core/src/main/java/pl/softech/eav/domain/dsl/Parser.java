@@ -42,7 +42,7 @@ public class Parser {
 
 	private void consume(Type type) {
 		if (!match(type)) {
-			throw new RuntimeException(String.format("Should be %s is %s", type.name(), currentToken.getType().name()));
+			throw new RuntimeException(String.format("Should be %s is %s [%d]", type.name(), currentToken.getType().name(), currentToken.getLineNumber()));
 		}
 		currentToken = lexer.next();
 	}
