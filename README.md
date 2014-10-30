@@ -330,9 +330,9 @@ p.parse(buffer.toString());
 
 **Category definition**
 
-Category definision  consists of two elements
-* identifier
-* name
+Category definition  consists of two elements
+* **identifier**
+* **name**
 
 **Example**
 ```
@@ -344,19 +344,19 @@ end
 **Attributes definition**
 
 Attribute definition consists of four elements
-* identifier
-* name
-* category
-* data_type
+* **identifier**
+* **name**
+* **category**
+* **data_type**
 
 Data type element (`data_type`) can appear in the dsl in one of the two forms
-* dictionary type
-* simple type
- * text
- * double
- * integer
- * boolean
- * date
+* **dictionary type**
+* **simple type**
+ * **text**
+ * **double**
+ * **integer**
+ * **boolean**
+ * **date**
 
 **Examples**
 
@@ -381,10 +381,10 @@ end
 **Relation definition**
 
 Relation definition consists of 4 elements
-* identifier
-* name
-* owner
-* target
+* **identifier**
+* **name**
+* **owner**
+* **target**
 
 `identifier` and `name` are self explanatory, only `owner` and `target` need to be explained.
 Owner and target elements can only take category's identifier. Owner describes the owning side of the relation,
@@ -401,8 +401,8 @@ end
 **Object definition**
 
 Object must be defined with at least two elements
-* identifier
-* name
+* **identifier**
+* **name**
 
 In object definition any kind of matching attribute can appear. Attribute can be used in 
 the object definition if only it has the *same category* as object. Value of the attribute must fit with the *attribute datatype*.
