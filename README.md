@@ -43,6 +43,8 @@ Example of categories
 
 ###eav_attribute
 
+TODO
+
 ```
 +---------------+--------------+------+-----+---------+----------------+
 | Field         | Type         | Null | Key | Default | Extra          |
@@ -58,6 +60,8 @@ Example of categories
 
 ###eav_rel_configuration
 
+TODO
+
 ```
 +---------------+--------------+------+-----+---------+----------------+
 | Field         | Type         | Null | Key | Default | Extra          |
@@ -72,6 +76,8 @@ Example of categories
 
 ###eav_my_object
 
+TODO
+
 ```
 +-------------+--------------+------+-----+---------+----------------+
 | Field       | Type         | Null | Key | Default | Extra          |
@@ -83,6 +89,8 @@ Example of categories
 ```
 
 ###eav_object_value
+
+TODO
 
 ```
 +---------------------+--------------+------+-----+---------+----------------+
@@ -102,6 +110,8 @@ Example of categories
 
 ###eav_relation
 
+TODO
+
 ```
 +------------+------------+------+-----+---------+----------------+
 | Field      | Type       | Null | Key | Default | Extra          |
@@ -115,6 +125,8 @@ Example of categories
 
 ###eav_dictionary
 
+TODO
+
 ```
 +------------+--------------+------+-----+---------+----------------+
 | Field      | Type         | Null | Key | Default | Extra          |
@@ -126,6 +138,8 @@ Example of categories
 ```
 
 ###eav_dictionary_entry
+
+TODO
 
 ```
 +---------------+--------------+------+-----+---------+----------------+
@@ -280,11 +294,7 @@ Relation relation = person.getRelationByIdentifier(
 
 ###Dsl api
 
-Pros
-* TODO
-
-Cons
-* TODO
+TODO
 
 ##EAV Dsl parser
 
@@ -305,21 +315,80 @@ p.parse(buffer.toString());
 
 ##EAV Domain specific language
 
-Pros
+**Pros**
 * easy to learn, clear structure
 * fast domain model preparation
 * easy to maintenance
 * ideal for the domain experts
 * supports comments
 
-Cons
+**Cons**
 * there is no IDE support for syntax highlighting
 * there is no IDE support for syntax autocomplete
 
-Resources
+**Resources**
 * [EBNF](https://github.com/ssledz/eav-model-pattern/blob/master/eav-core/src/conf/eav-dsl.ebnf)
 * [Computer-Person example](https://github.com/ssledz/eav-model-pattern/blob/master/eav-examples/eav-computer-person-example/src/main/resources/computer-person.eav)
 
+###Dsl syntax
+
+**Category definition**
+
+Category definision  consists of two elements
+* identifier
+* name
+
+**Example**
+```
+category computer
+  name : "Computer"
+end
+```
+
+**Attributes definition**
+
+Attribute definition consists of four elements
+* identifier
+* name
+* category
+* data_type
+
+Data type element (`data_type`) can appear in the dsl in one of the two forms
+* dictionary type
+* simple type
+ * text
+ * double
+ * integer
+ * boolean
+ * date
+
+**Examples**
+
+dictionary type
+```
+attribute make
+  name : "Make"
+  category : "computer"
+  data_type : dictionary of "computer_make"
+end
+```
+
+simple type
+```
+attribute model
+  name : "Model"
+  category : "computer"
+  data_type : text
+end
+```
+
+**Relation definition**
+
+TODO
+
+**Object definition**
+
+TODO
 
 ##Todo
 - [ ] dsl parser
@@ -368,3 +437,15 @@ Resources
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-18907483-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
