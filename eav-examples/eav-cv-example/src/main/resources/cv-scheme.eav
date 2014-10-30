@@ -1,0 +1,132 @@
+# 
+#  Copyright 2013 Sławomir Śledź <slawomir.sledz@sof-tech.pl>.
+# 
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+# 
+#       http://www.apache.org/licenses/LICENSE-2.0
+# 
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+
+#--Date period definition
+category date-period
+  name : "Period"
+end
+
+attribute date-period-from
+  name : "From"
+  category : "date-period"
+  data_type : date
+end
+
+attribute date-period-to
+  name : "To"
+  category : "date-period"
+  data_type : date
+end
+
+#--Education definition
+category education-item
+  name : "Education Item"
+end
+
+attribute education-item-school
+  name : "School name"
+  category : "education-item"
+  data_type : text
+end
+
+attribute education-item-faculty
+  name : "Faculty"
+  category : "education-item"
+  data_type : text
+end
+
+attribute education-item-field
+  name : "Field"
+  category : "education-item"
+  data_type : text
+end
+
+attribute education-item-specialization
+  name : "Specialization"
+  category : "education-item"
+  data_type : text
+end
+
+relation education_has_period
+  name   : "Period"
+  owner  : "education-item"
+  target : "date-period"
+end
+
+
+#--Section definition
+category section
+  name : "Section"
+end
+
+attribute section-title
+  name : "Title"
+  category : "section"
+  data_type : text
+end
+
+relation section_has_education
+  name   : "Education"
+  owner  : "section"
+  target : "education-item"
+end
+
+object wat-study-period of date-period category
+  name             : "WAT Study Period"
+  date-period-from : "2010-10-01 00:00:00"
+  date-period-to   : "2014-10-01 00:00:00" 
+end
+
+object wat-education of education-item category
+  name : "WAT Education"
+  education-item-school : "Warsaw Military University of Technology"
+  education-item-field  : "Major Informatics" 
+  relations
+    education_has_period : "wat-study-period"
+  end
+end
+
+object education-section of section category
+  name : "Education"
+  section-title : "Education"
+  relations
+    section_has_education : "wat-education"
+  end
+end
+
+
+#--Document definition
+category document
+  name : "Curriculum vitae"
+end
+
+relation document_has_section
+  name   : "Section"
+  owner  : "document"
+  target : "section"
+end
+
+object ssledz-cv of document category
+  name : "Slawomir Sledz CV"
+  relations
+    document_has_section : "education-section"
+  end
+end
+
+
+
+
+

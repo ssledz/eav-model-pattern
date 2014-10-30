@@ -24,7 +24,7 @@ import pl.softech.eav.domain.dsl.Token.Type;
 public class Lexer {
 
 	private int current;
-	private String input;
+	private final String input;
 
 	Lexer(String input) {
 		this.input = input;
@@ -124,7 +124,7 @@ public class Lexer {
 
 		checkState(Character.isLetter(c), "Character %s is not a letter", c);
 
-		while (Character.isLetter(c) || Character.isDigit(c) || c == '_') {
+		while (Character.isLetter(c) || Character.isDigit(c) || c == '_' || c == '-') {
 			buffer.append(c);
 			c = getChar();
 		}
