@@ -326,13 +326,14 @@ p.parse(buffer.toString());
 * there is no IDE support for syntax highlighting
 * there is no IDE support for syntax autocomplete
 
-***Resources**
+**Resources**
 * [EBNF](https://github.com/ssledz/eav-model-pattern/blob/master/eav-core/src/conf/eav-dsl.ebnf)
 * [Computer-Person example](https://github.com/ssledz/eav-model-pattern/blob/master/eav-examples/eav-computer-person-example/src/main/resources/computer-person.eav)
 
 ###Dsl syntax
 
 **Category definition**
+
 Category definision  consists of two elements
 * identifier
 * name
@@ -382,8 +383,10 @@ end
 ```
 
 **Relation definition**
+
 TODO
 **Object definition**
+
 TODO
 
 ##Todo
