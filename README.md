@@ -292,10 +292,6 @@ Relation relation = person.getRelationByIdentifier(
 );
 ```
 
-###Dsl api
-
-TODO
-
 ##EAV Dsl parser
 
 Characteristics
@@ -384,11 +380,70 @@ end
 
 **Relation definition**
 
-TODO
+Relation definition consists of 4 elements
+* identifier
+* name
+* owner
+* target
 
+`identifier` and `name` are self explanatory, only `owner` and `target` need to be explained.
+Owner and target elements can only take category's identifier. Owner describes the owning side of the relation,
+target in the other hand is the second side.
+
+**Example**
+```
+relation has_computer
+  name   : "Has computer"
+  owner  : "person"
+  target : "computer"
+end
+```
 **Object definition**
 
-TODO
+Object must be defined with at least two elements
+* identifier
+* name
+
+In object definition any kind of matching attribute can appear. Attribute can be used in 
+the object definition if only it has the *same category* as object. Value of the attribute must fit with the *attribute datatype*.
+
+Relations are set in the special block starting with the `relations` keyword. Value of the relation 
+must fit with the *owner* and *target* object category.
+
+**Example**
+
+```
+object maui of computer category
+  name : "MAUI"
+  make : "dell"
+  model : "Studio15"
+  type : "notebook"
+  cpu : "Core 2 Duo 2.4GHz"
+  drive : "320Gb 5400rpm"
+  video : "Intel Acc"
+  ram : "4"
+  optical : "DVD RW"
+  battery : "6 cell"
+  screen : "15"
+  os : "win7"
+  os : "linux"
+end
+```
+
+object with relations
+```
+object gyles of person category
+  name : "gyles"
+  firstname : "Gyles"
+  lastname : "Aitken"
+  age : "22"
+  relations
+    has_computer : "maui"
+    has_parent : "colton"
+    has_friend : "colton"
+    has_friend : "jermaine"
+  end
+```
 
 ##Todo
 - [ ] dsl parser
@@ -410,7 +465,6 @@ TODO
     - [ ] oracle
   - [ ] test
     - [ ] implement tests marked with //TODO implement
-- [ ] add google analytics tracking scripts
 - [ ] setup continuous integration (maybe should try http://www.cloudbees.com/)
 
 ##Resources
@@ -424,28 +478,16 @@ TODO
 * [Submin an issue](https://github.com/ssledz/eav-model-pattern/issues)
 
 ##License
-   Copyright 2013 Sławomir Śledź <slawomir.sledz@sof-tech.pl>.
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-   
-        http://www.apache.org/licenses/LICENSE-2.0
-   
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-18907483-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+> Copyright 2013 Sławomir Śledź <slawomir.sledz@sof-tech.pl>.
+> 
+> Licensed under the Apache License, Version 2.0 (the "License");
+> you may not use this file except in compliance with the License.
+> You may obtain a copy of the License at
+> 
+>       http://www.apache.org/licenses/LICENSE-2.0
+> 
+> Unless required by applicable law or agreed to in writing, software
+> distributed under the License is distributed on an "AS IS" BASIS,
+> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+> See the License for the specific language governing permissions and
+> limitations under the License.
