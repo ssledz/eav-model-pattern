@@ -400,16 +400,16 @@ end
 ```
 **Object definition**
 
-Object must be defined with at least two elements
-* **identifier** - follows `obejct` keyword
-* **category** - is between `of` and `category` keyword
+Object must be defined with at least three elements
+* **identifier** - follows `object` keyword
+* **category** - is between `of` and `category` keywords
 * `name`
 
-In object definition any kind of matching attribute can appear. Attribute can be used in 
-the object definition if only it has the *same category* as object. Value of the attribute must fit with the *attribute datatype*.
+In `object` definition any kind of matching attribute can appear. Attribute can be used in 
+the `object` definition if only it has the same `category` as `object`. Value of the `attribute` must fit with the `attribute` datatype.
 
 Relations are set in the special block starting with the `relations` keyword and must have the same `owner` category as the `object`. 
-Value of the relation must fit with the *target* object category.
+Value of the relation must fit with the target object category.
 
 **Example**
 
