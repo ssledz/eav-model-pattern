@@ -172,7 +172,10 @@ public interface Computer {
 ```
 
 ```java
-MyObject object = new MyObject(categoryRepository.findByIdentifier("computer"), "MAUI");
+MyObject object = new MyObject(
+	categoryRepository.findByIdentifier("computer"), 
+	"MAUI"
+);
 Computer computer = frameFactory.frame(Computer.class, object);
 computer.setModel("Studio15");
 ```
@@ -228,7 +231,7 @@ RelationConfiguration hasComputer = new RelationConfiguration(
 );
 ```
 
-Add 'has computer' to the person object
+Add 'has computer' relation to the person object
 ```java
 person.addRelation(hasComputer, computer);
 ```
@@ -270,7 +273,9 @@ Set<ObjectValue> oss = obj.getValuesByAttribute(new AttributeIdentifier("os"));
 
 Ask for a given relation
 ```java
-Relation relation = person.getRelationByIdentifier(new RelationIdentifier("has_computer"));
+Relation relation = person.getRelationByIdentifier(
+	new RelationIdentifier("has_computer")
+);
 ```
 
 ###Dsl api
@@ -290,7 +295,10 @@ Characteristics
  * utilized visitor and context object pattern
 
 ```java
-CreateModelVisitor visitor = new CreateModelVisitor(dictionaryRepository, dataTypeSerialisationService);
+CreateModelVisitor visitor = new CreateModelVisitor(
+	dictionaryRepository, 
+	dataTypeSerialisationService
+);
 Parser p = new Parser(visitor);
 p.parse(buffer.toString());
 ```
