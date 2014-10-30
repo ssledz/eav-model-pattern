@@ -155,7 +155,31 @@ Logically api is organized into three main modules
  * *pl.softech.eav.domain.specification*
  * *pl.softech.eav.domain.calue*
 
-###Model manipulation api usage examples
+###Frame Api
+It is an abstraction which works well in case when we have well defined entity model. Each object of class `MyObject` can be framed with an interface.
+Thanks to this manipulation and querying tasks on `MyObject` can be performed on the interface simply calling appropriate methods.
+ 
+**Examples**
+```java
+public interface Computer {
+
+	DictionaryEntry getMake();
+	
+	String getModel();
+	
+	void setModel(String model);
+}
+```
+
+```java
+MyObject object = new MyObject(categoryRepository.findByIdentifier("computer"), "MAUI");
+Computer computer = frameFactory.frame(Computer.class, object);
+computer.setModel("Studio15");
+```
+
+###Model manipulation/query api
+
+**Examples**
 
 Create a computer object
 
@@ -209,15 +233,47 @@ Add 'has computer' to the person object
 person.addRelation(hasComputer, computer);
 ```
 
-###Model query api usage examples
+Ask for a value for the given attribute as a string
+```java
+ObjectValue makeValue = obj.getValueByAttribute(new AttributeIdentifier("make"));
+String make = makeValue.getValueAsString();
+```
 
-TODO
+Ask for a value for given attribute, assuming that the value is of DictionaryEntry type
+```java
+ObjectValue makeValue = obj.getValueByAttribute(new AttributeIdentifier("make"));
+final DictionaryEntryValue[] bag = new DictionaryEntryValue[1];
+makeValue.accept(new ValueVisitorAdapter() {
+	@Override
+	public void visit(DictionaryEntryValue value) {
+		bag[0] = value;
+	}
+});
+```
 
-###Frame api usage examples
+Ask for a value for a given attribue, assuming that the value is of Integer type
+```java
+ObjectValue ramValue = obj.getValueByAttribute(new AttributeIdentifier("ram"));
+final Integer[] bag = new Integer[1];
+ramValue.accept(new ValueVisitorAdapter() {
+	@Override
+	public void visit(IntegerValue value) {
+		bag[0] = value;
+	}
+});
+```
 
-TODO
+Ask for a collection of values for a given attribute
+```java
+Set<ObjectValue> oss = obj.getValuesByAttribute(new AttributeIdentifier("os"));
+```
 
-###Dsl api usage examples
+Ask for a given relation
+```java
+Relation relation = person.getRelationByIdentifier(new RelationIdentifier("has_computer"));
+```
+
+###Dsl api
 
 Pros
 * TODO

@@ -34,6 +34,7 @@ import pl.softech.eav.domain.dictionary.DictionaryEntryRepository;
 import pl.softech.eav.domain.dictionary.DictionaryRepository;
 import pl.softech.eav.domain.object.MyObject;
 import pl.softech.eav.domain.object.MyObjectRepository;
+import pl.softech.eav.domain.relation.Relation;
 import pl.softech.eav.domain.relation.RelationConfiguration;
 import pl.softech.eav.domain.relation.RelationConfigurationRepository;
 import pl.softech.eav.domain.relation.RelationIdentifier;
@@ -105,6 +106,11 @@ public class PersonComputerRelationTest {
 		person.addRelation(hasComputer, computer);
 
 		myObjectRepository.save(person);
+		
+		Relation relation = person.getRelationByIdentifier(new RelationIdentifier("has_computer"));
+		MyObject computer3 = relation.getTarget();
+		
+		Assert.assertTrue(computer == computer3);
 		
 		try {
 			person.addRelation(hasComputer, person2);
