@@ -23,9 +23,9 @@ Stores all defined categories referenced by
 It plays a role of glue between objects, attributes and relations. Attributes and relations related to the one object have the same category.
 
 Properties:
-* **id** - unique
-* **identifier** - unique 
-* **name**
+* `id` - unique
+* `identifier` - unique 
+* `name`
 
 Example of categories
 * person
@@ -43,8 +43,6 @@ Example of categories
 
 ###eav_attribute
 
-TODO
-
 ```
 +---------------+--------------+------+-----+---------+----------------+
 | Field         | Type         | Null | Key | Default | Extra          |
@@ -60,8 +58,6 @@ TODO
 
 ###eav_rel_configuration
 
-TODO
-
 ```
 +---------------+--------------+------+-----+---------+----------------+
 | Field         | Type         | Null | Key | Default | Extra          |
@@ -76,8 +72,6 @@ TODO
 
 ###eav_my_object
 
-TODO
-
 ```
 +-------------+--------------+------+-----+---------+----------------+
 | Field       | Type         | Null | Key | Default | Extra          |
@@ -89,8 +83,6 @@ TODO
 ```
 
 ###eav_object_value
-
-TODO
 
 ```
 +---------------------+--------------+------+-----+---------+----------------+
@@ -110,8 +102,6 @@ TODO
 
 ###eav_relation
 
-TODO
-
 ```
 +------------+------------+------+-----+---------+----------------+
 | Field      | Type       | Null | Key | Default | Extra          |
@@ -125,8 +115,6 @@ TODO
 
 ###eav_dictionary
 
-TODO
-
 ```
 +------------+--------------+------+-----+---------+----------------+
 | Field      | Type         | Null | Key | Default | Extra          |
@@ -138,8 +126,6 @@ TODO
 ```
 
 ###eav_dictionary_entry
-
-TODO
 
 ```
 +---------------+--------------+------+-----+---------+----------------+
