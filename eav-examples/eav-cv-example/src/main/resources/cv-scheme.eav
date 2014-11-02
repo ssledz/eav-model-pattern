@@ -32,37 +32,37 @@ attribute date-period-to
 end
 
 #--Education definition
-category education-item
-  name : "Education Item"
+category education
+  name : "Education"
 end
 
-attribute education-item-school
+attribute education-school
   name : "School name"
-  category : "education-item"
+  category : "education"
   data_type : text
 end
 
-attribute education-item-faculty
+attribute education-faculty
   name : "Faculty"
-  category : "education-item"
+  category : "education"
   data_type : text
 end
 
-attribute education-item-field
+attribute education-field
   name : "Field"
-  category : "education-item"
+  category : "education"
   data_type : text
 end
 
-attribute education-item-specialization
+attribute education-specialization
   name : "Specialization"
-  category : "education-item"
+  category : "education"
   data_type : text
 end
 
 relation education_has_period
   name   : "Period"
-  owner  : "education-item"
+  owner  : "education"
   target : "date-period"
 end
 
@@ -81,7 +81,7 @@ end
 relation section_has_education
   name   : "Education"
   owner  : "section"
-  target : "education-item"
+  target : "education"
 end
 
 object wat-study-period of date-period category
@@ -90,12 +90,59 @@ object wat-study-period of date-period category
   date-period-to   : "2014-10-01 00:00:00" 
 end
 
-object wat-education of education-item category
+object wat-education of education category
   name : "WAT Education"
-  education-item-school : "Warsaw Military University of Technology"
-  education-item-field  : "Major Informatics" 
+  education-school  : "Warsaw Military University of Technology"
+  education-field   : "Major Informatics" 
   relations
     education_has_period : "wat-study-period"
+  end
+end
+
+object pwr-inf-study-period of date-period category
+  name             : "PWR Inf Study Period"
+  date-period-from : "2005-10-01 00:00:00"
+  date-period-to   : "2008-01-01 00:00:00" 
+end
+
+object pwr-inf-education of education category
+  name                   : "PWR Inf Education"
+  education-school       : "Wrocław University of Technology"
+  education-faculty      : "Electronics"
+  education-field        : "Major Informatics" 
+  relations
+    education_has_period : "pwr-inf-study-period"
+  end
+end
+
+object pwr-air-study-period of date-period category
+  name             : "PWR Air Period"
+  date-period-from : "2002-10-01 00:00:00"
+  date-period-to   : "2007-06-01 00:00:00" 
+end
+
+object pwr-air-education of education category
+  name : "PWR Air Education"
+  education-school         : "Wrocław University of Technology"
+  education-faculty        : "Electronics"
+  education-field          : "Major Control Engineering and Robotics" 
+  education-specialization : "Robotics"
+  relations
+    education_has_period   : "pwr-air-study-period"
+  end
+end
+
+object lo-education-period of date-period category
+  name             : "PWR Air Period"
+  date-period-from : "1998-09-01 00:00:00"
+  date-period-to   : "2002-06-22 00:00:00" 
+end
+
+object lo-education of education category
+  name : "Lo Education"
+  education-school         : "II High School in Lubin"
+  relations
+    education_has_period   : "lo-education-period"
   end
 end
 
@@ -104,9 +151,56 @@ object education-section of section category
   section-title : "Education"
   relations
     section_has_education : "wat-education"
+    section_has_education : "pwr-inf-education"
+    section_has_education : "pwr-air-education"
+    section_has_education : "lo-education"
   end
 end
 
+
+#--Employment History definition
+category employment
+  name : "Employment"
+end
+
+attribute employment-company-name
+  name : "Company Name"
+  category : "employment"
+  data_type : text
+end
+
+relation employment_has_period
+  name   : "Period"
+  owner  : "employment"
+  target : "date-period"
+end
+
+relation section_has_employment
+  name   : "Employment"
+  owner  : "section"
+  target : "employment"
+end
+
+object roche-employment-period of date-period category
+  name             : "Roche Employment Period"
+  date-period-from : "1998-09-01 00:00:00"
+  date-period-to   : "2002-06-22 00:00:00" 
+end
+
+object roche-employment of employment category
+  name : "Roche Employment"
+  relations
+    employment_has_period   : "roche-employment-period"
+  end
+end
+
+object employment-history-section of section category
+  name : "Employment History"
+  section-title : "Employment History"
+  relations
+    section_has_employment : "roche-employment"
+  end
+end
 
 #--Document definition
 category document
@@ -123,6 +217,7 @@ object ssledz-cv of document category
   name : "Slawomir Sledz CV"
   relations
     document_has_section : "education-section"
+    document_has_section : "employment-history-section"
   end
 end
 
