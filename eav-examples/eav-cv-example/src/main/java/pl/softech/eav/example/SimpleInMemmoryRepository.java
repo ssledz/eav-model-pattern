@@ -15,6 +15,7 @@
  */
 package pl.softech.eav.example;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -124,7 +125,9 @@ public class SimpleInMemmoryRepository<E extends AbstractEntity> implements Crud
 
 	private static void setId(AbstractEntity entity, Long id) {
 		try {
-			entity.getClass().getField("id").set(entity, id);
+			Field f = AbstractEntity.class.getDeclaredField("id");
+			f.setAccessible(true);
+			f.set(entity, id);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

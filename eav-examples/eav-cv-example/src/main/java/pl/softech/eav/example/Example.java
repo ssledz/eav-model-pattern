@@ -29,7 +29,11 @@ public class Example {
 
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class)) {
 
-			final DocumentManagementService documentManagementService = ctx.getBean(DocumentManagementService.class);
+			BootstrapperService bootstrapper = ctx.getBean(BootstrapperService.class);
+			
+			bootstrapper.onApplicationStart();
+			
+			DocumentManagementService documentManagementService = ctx.getBean(DocumentManagementService.class);
 
 			SymbolTable symbolTable = documentManagementService.loadConfigurationFromFile("cv-scheme.eav");
 			
