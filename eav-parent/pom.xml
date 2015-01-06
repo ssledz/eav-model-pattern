@@ -76,7 +76,6 @@
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
@@ -131,4 +130,16 @@
             </plugins>
         </pluginManagement>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>repo</id>
+            <name>Internal Repository</name>
+            <url>${internal.repo.path}</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshot-repo</id>
+            <name>Internal Repository</name>
+            <url>${internal.snapshot-repo.path}</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
