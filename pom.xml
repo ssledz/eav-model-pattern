@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.softech.eav</groupId>
     <artifactId>eav</artifactId>
@@ -10,7 +12,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
     <developers>
         <developer>
             <id>ssledz</id>
@@ -21,17 +22,27 @@
             </roles>
         </developer>
     </developers>
-    
     <scm>
         <connection>scm:git:git@github.com:ssledz/eav-model-pattern.git</connection>
         <url>scm:git:git@github.com:ssledz/eav-model-pattern.git</url>
         <developerConnection>scm:git:git@github.com:ssledz/eav-model-pattern.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
-    
     <modules>
         <module>eav-parent</module>
         <module>eav-core</module>
-    <module>eav-examples</module>
-  </modules>
+        <module>eav-examples</module>
+    </modules>
+    <distributionManagement>
+        <repository>
+            <id>repo</id>
+            <name>Internal Repository</name>
+            <url>${internal.repo.path}</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshot-repo</id>
+            <name>Internal Repository</name>
+            <url>${internal.snapshot-repo.path}</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

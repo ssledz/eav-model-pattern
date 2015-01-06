@@ -131,16 +131,4 @@
             </plugins>
         </pluginManagement>
     </build>
-    <distributionManagement>
-        <repository>
-            <id>repo</id>
-            <name>Internal Repository</name>
-            <url>${internal.repo.path}</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshot-repo</id>
-            <name>Internal Repository</name>
-            <url>${internal.snapshot-repo.path}</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
