@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.softech.eav</groupId>
     <artifactId>eav-parent</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
     <packaging>pom</packaging>
     <name>parent</name>
     <url>https://github.com/ssledz/eav-model-pattern</url>
@@ -32,14 +30,14 @@
         <connection>scm:git:git@github.com:ssledz/eav-model-pattern.git</connection>
         <url>scm:git:git@github.com:ssledz/eav-model-pattern.git</url>
         <developerConnection>scm:git:git@github.com:ssledz/eav-model-pattern.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>eav-1.2</tag>
     </scm>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>pl.softech.eav</groupId>
                 <artifactId>eav-core</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>1.2</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
