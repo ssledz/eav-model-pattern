@@ -24,7 +24,8 @@ import pl.softech.eav.domain.dsl.Token.Type;
 public class Lexer {
 
 	private int current;
-	private String input;
+	private final String input;
+	private long currentLineNumber = 1;
 
 	Lexer(String input) {
 		this.input = input;
@@ -45,15 +46,19 @@ public class Lexer {
 	Token next() {
 
 		if (!hasNextChar()) {
-			return new Token(Type.EOF);
+			return new Token(Type.EOF, currentLineNumber);
 		}
 
 		char c = getChar();
 
 		while (Character.isWhitespace(c)) {
 
+			if(c == '\n') {
+				currentLineNumber++;
+			}
+			
 			if (!hasNextChar()) {
-				return new Token(Type.EOF);
+				return new Token(Type.EOF, currentLineNumber);
 			}
 
 			c = getChar();
@@ -63,6 +68,7 @@ public class Lexer {
 			while (c != '\n') {
 				c = getChar();
 			}
+			currentLineNumber++;
 			return next();
 		}
 
@@ -71,7 +77,7 @@ public class Lexer {
 		}
 
 		if (c == ':') {
-			return new Token(Type.COLON);
+			return new Token(Type.COLON, currentLineNumber);
 		}
 
 		unputChar();
@@ -81,29 +87,29 @@ public class Lexer {
 		switch (token.getValue().toLowerCase()) {
 
 		case "category":
-			return new Token(Type.CATEGORY);
+			return new Token(Type.CATEGORY, currentLineNumber);
 		case "attribute":
-			return new Token(Type.ATTRIBUTE);
+			return new Token(Type.ATTRIBUTE, currentLineNumber);
 		case "object":
-			return new Token(Type.OBJECT);
+			return new Token(Type.OBJECT, currentLineNumber);
 		case "name":
-			return new Token(Type.NAME);
+			return new Token(Type.NAME, currentLineNumber);
 		case "data_type":
-			return new Token(Type.DATA_TYPE);
+			return new Token(Type.DATA_TYPE, currentLineNumber);
 		case "of":
-			return new Token(Type.OF);
+			return new Token(Type.OF, currentLineNumber);
 		case "end":
-			return new Token(Type.END);
+			return new Token(Type.END, currentLineNumber);
 		case "dictionary":
-			return new Token(Type.DICTIONARY);
+			return new Token(Type.DICTIONARY, currentLineNumber);
 		case "owner":
-			return new Token(Type.OWNER);
+			return new Token(Type.OWNER, currentLineNumber);
 		case "target":
-			return new Token(Type.TARGET);
+			return new Token(Type.TARGET, currentLineNumber);
 		case "relation":
-			return new Token(Type.RELATION);
+			return new Token(Type.RELATION, currentLineNumber);
 		case "relations":
-			return new Token(Type.RELATIONS);
+			return new Token(Type.RELATIONS, currentLineNumber);
 		}
 
 		return token;
@@ -124,13 +130,13 @@ public class Lexer {
 
 		checkState(Character.isLetter(c), "Character %s is not a letter", c);
 
-		while (Character.isLetter(c) || Character.isDigit(c) || c == '_') {
+		while (Character.isLetter(c) || Character.isDigit(c) || c == '_' || c == '-') {
 			buffer.append(c);
 			c = getChar();
 		}
 
 		unputChar();
-		return new Token(Type.IDENTIFIER, buffer.toString());
+		return new Token(Type.IDENTIFIER, buffer.toString(), currentLineNumber);
 
 	}
 
@@ -146,7 +152,7 @@ public class Lexer {
 
 		checkState(c == '"', "Character %s is not a \"", c);
 
-		return new Token(Type.STRING, buffer.toString());
+		return new Token(Type.STRING, buffer.toString(), currentLineNumber);
 
 	}
 

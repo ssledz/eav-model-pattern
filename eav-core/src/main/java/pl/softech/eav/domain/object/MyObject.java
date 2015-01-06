@@ -260,6 +260,7 @@ public class MyObject extends AbstractEntity {
 		sb.append("name", name);
 		sb.append("category", category);
 		sb.append("values", values);
+		sb.append("relations", relations);
 		return sb.toString();
 	}
 

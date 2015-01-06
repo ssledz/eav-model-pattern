@@ -44,5 +44,6 @@
     </dependencies>
     <modules>
         <module>eav-computer-person-example</module>
+        <module>eav-cv-example</module>
     </modules>
 </project>

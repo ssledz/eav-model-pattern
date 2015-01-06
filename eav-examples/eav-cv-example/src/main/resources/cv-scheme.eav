@@ -1,0 +1,452 @@
+# 
+#  Copyright 2013 Sławomir Śledź <slawomir.sledz@sof-tech.pl>.
+# 
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+# 
+#       http://www.apache.org/licenses/LICENSE-2.0
+# 
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+
+#--Date period definition
+category date-period
+  name : "Period"
+end
+
+attribute date-period-from
+  name : "From"
+  category : "date-period"
+  data_type : date
+end
+
+attribute date-period-to
+  name : "To"
+  category : "date-period"
+  data_type : date
+end
+
+#--Education definition
+category education
+  name : "Education"
+end
+
+attribute education-school
+  name : "School name"
+  category : "education"
+  data_type : text
+end
+
+attribute education-faculty
+  name : "Faculty"
+  category : "education"
+  data_type : text
+end
+
+attribute education-field
+  name : "Field"
+  category : "education"
+  data_type : text
+end
+
+attribute education-specialization
+  name : "Specialization"
+  category : "education"
+  data_type : text
+end
+
+relation education_has_period
+  name   : "Period"
+  owner  : "education"
+  target : "date-period"
+end
+
+
+#--Section definition
+category section
+  name : "Section"
+end
+
+attribute section-title
+  name : "Title"
+  category : "section"
+  data_type : text
+end
+
+relation section_has_education
+  name   : "Education"
+  owner  : "section"
+  target : "education"
+end
+
+object wat-study-period of date-period category
+  name             : "WAT Study Period"
+  date-period-from : "2010-10-01 00:00:00"
+  date-period-to   : "2014-10-01 00:00:00" 
+end
+
+object wat-education of education category
+  name : "WAT Education"
+  education-school  : "Warsaw Military University of Technology"
+  education-field   : "Major Informatics" 
+  relations
+    education_has_period : "wat-study-period"
+  end
+end
+
+object pwr-inf-study-period of date-period category
+  name             : "PWR Inf Study Period"
+  date-period-from : "2005-10-01 00:00:00"
+  date-period-to   : "2008-01-01 00:00:00" 
+end
+
+object pwr-inf-education of education category
+  name                   : "PWR Inf Education"
+  education-school       : "Wrocław University of Technology"
+  education-faculty      : "Electronics"
+  education-field        : "Major Informatics" 
+  relations
+    education_has_period : "pwr-inf-study-period"
+  end
+end
+
+object pwr-air-study-period of date-period category
+  name             : "PWR Air Period"
+  date-period-from : "2002-10-01 00:00:00"
+  date-period-to   : "2007-06-01 00:00:00" 
+end
+
+object pwr-air-education of education category
+  name : "PWR Air Education"
+  education-school         : "Wrocław University of Technology"
+  education-faculty        : "Electronics"
+  education-field          : "Major Control Engineering and Robotics" 
+  education-specialization : "Robotics"
+  relations
+    education_has_period   : "pwr-air-study-period"
+  end
+end
+
+object lo-education-period of date-period category
+  name             : "PWR Air Period"
+  date-period-from : "1998-09-01 00:00:00"
+  date-period-to   : "2002-06-22 00:00:00" 
+end
+
+object lo-education of education category
+  name : "Lo Education"
+  education-school         : "II High School in Lubin"
+  relations
+    education_has_period   : "lo-education-period"
+  end
+end
+
+object education-section of section category
+  name : "Education"
+  section-title : "Education"
+  relations
+    section_has_education : "wat-education"
+    section_has_education : "pwr-inf-education"
+    section_has_education : "pwr-air-education"
+    section_has_education : "lo-education"
+  end
+end
+
+
+#--Employment History definition
+category employment
+  name : "Employment"
+end
+
+attribute employment-company-name
+  name : "Company Name"
+  category : "employment"
+  data_type : text
+end
+
+attribute employment-job-position
+  name : "Job position"
+  category : "employment"
+  data_type : text
+end
+
+attribute employment-job-description
+  name : "Job description"
+  category : "employment"
+  data_type : text
+end
+
+attribute employment-job-project
+  name : "Job description"
+  category : "employment"
+  data_type : text
+end
+
+relation employment_has_period
+  name   : "Period"
+  owner  : "employment"
+  target : "date-period"
+end
+
+relation section_has_employment
+  name   : "Employment"
+  owner  : "section"
+  target : "employment"
+end
+
+object roche-employment-period of date-period category
+  name             : "Roche Employment Period"
+  date-period-from : "2013-01-08 00:00:00"
+end
+
+object roche-employment of employment category
+  name                       : "Roche Employment"
+  employment-company-name    : "Roche Polska"
+  employment-job-position    : "Software engineer"
+  employment-job-project     : "GRIP - Global Research and Insight Portal"
+  employment-job-project     : "CIAP - Competitor Information"
+  employment-job-description : "Improving web applications to manage drugs."
+  relations
+    employment_has_period    : "roche-employment-period"
+  end
+end
+
+object pzu-employment-period of date-period category
+  name             : "PZU Employment Period"
+  date-period-from : "2013-01-14 00:00:00"
+  date-period-to   : "2013-07-12 00:00:00"
+end
+
+object pzu-employment of employment category
+  name                       : "PZU Employment"
+  employment-company-name    : "PZU SA"
+  employment-job-position    : "Software engineer"
+  employment-job-project     : "Everest project"
+  employment-job-description : "Responsible for developing Policy Center, Guidewire Software product for insurance industry."
+  relations
+    employment_has_period    : "pzu-employment-period"
+  end
+end
+
+object sii-employment-period of date-period category
+  name             : "Sii Employment Period"
+  date-period-from : "2013-01-01 00:00:00"
+end
+
+object sii-employment of employment category
+  name                       : "Sii Employment"
+  employment-company-name    : "Sii Polska"
+  employment-job-position    : "JEE Consultant"
+  relations
+    employment_has_period    : "sii-employment-period"
+  end
+end
+
+object ns-tpm-employment-period of date-period category
+  name             : "Netsprint TPM Employment Period"
+  date-period-from : "2008-05-08 00:00:00"
+  date-period-to   : "2013-01-14 00:00:00"
+end
+
+object ns-tpm-employment of employment category
+  name                       : "Netsprint TPM Employment"
+  employment-company-name    : "Netsprint Sp. z o.o"
+  employment-job-position    : "Technical Project Manager"
+  employment-job-project     : "Advertising Department"
+  employment-job-description : "Responsible for managing group of up to 4 Software engineer."
+  relations
+    employment_has_period    : "ns-tpm-employment-period"
+  end
+end
+
+object ns-se-employment-period of date-period category
+  name             : "Netsprint Software Engineer Employment Period"
+  date-period-from : "2008-02-11 00:00:00"
+  date-period-to   : "2008-05-08 00:00:00"
+end
+
+object ns-se-employment of employment category
+  name                       : "Netsprint TPM Employment"
+  employment-company-name    : "Netsprint Sp. z o.o"
+  employment-job-position    : "Software engineer"
+  employment-job-project     : "Advertising Department"
+  employment-job-description : "Responsible for developing software used for emitting advertisement on the web portals based on its context. Responsible also for developing aided managing advertising tools using J2EE and Desktop java architecture"
+  relations
+    employment_has_period    : "ns-se-employment-period"
+  end
+end
+
+object employment-history-section of section category
+  name : "Employment History"
+  section-title : "Employment History"
+  relations
+    section_has_employment : "roche-employment"
+    section_has_employment : "pzu-employment"
+    section_has_employment : "sii-employment"
+    section_has_employment : "ns-tpm-employment"
+    section_has_employment : "ns-se-employment"
+  end
+end
+
+#--Knowledge Topic definition
+category knowledge-topic
+  name : "Knowledge Topic"
+end
+
+attribute knowledge-topic-title
+  name : "Title"
+  category : "knowledge-topic"
+  data_type : text
+end
+
+attribute knowledge-topic-dictionary-name
+  name : "Dictionary name"
+  category : "knowledge-topic"
+  data_type : text
+end
+
+attribute knowledge-topic-max-rate
+  name : "Max rating"
+  category : "knowledge-topic"
+  data_type : integer
+end
+
+#--Knowledge Topic entry definition
+category knowledge-topic-entry
+  name : "Knowledge Topic Entry"
+end
+
+attribute knowledge-topic-rate
+  name : "Knowledge entry topic rating"
+  category : "knowledge-topic-entry"
+  data_type : integer
+end
+
+attribute knowledge-topic-entry-os
+  name : "Operating system knowledge entry topic"
+  category : "knowledge-topic-entry"
+  data_type : dictionary of "knowledge-topic-os"
+end
+
+attribute knowledge-topic-entry-ws
+  name : "Web server knowledge entry topic"
+  category : "knowledge-topic-entry"
+  data_type : dictionary of "knowledge-topic-ws"
+end
+
+attribute knowledge-topic-entry-ts
+  name : "Tracking system knowledge entry topic"
+  category : "knowledge-topic-entry"
+  data_type : dictionary of "knowledge-topic-ts"
+end
+
+attribute knowledge-topic-entry-ci
+  name : "Continuous integration server knowledge entry topic"
+  category : "knowledge-topic-entry"
+  data_type : dictionary of "knowledge-topic-ci"
+end
+
+attribute knowledge-topic-entry-sof
+  name : "Software knowledge entry topic"
+  category : "knowledge-topic-entry"
+  data_type : dictionary of "knowledge-topic-sof"
+end
+
+attribute knowledge-topic-entry-pl
+  name : "Programming language knowledge entry topic"
+  category : "knowledge-topic-entry"
+  data_type : dictionary of "knowledge-topic-pl"
+end
+
+attribute knowledge-topic-entry-java
+  name : "Java knowledge entry topic"
+  category : "knowledge-topic-entry"
+  data_type : dictionary of "knowledge-topic-java"
+end
+
+attribute knowledge-topic-entry-db
+  name : "Database  knowledge entry topic"
+  category : "knowledge-topic-entry"
+  data_type : dictionary of "knowledge-topic-db"
+end
+
+attribute w3c-topic-entry-w3c
+  name : "W3C standard knowledge entry topic"
+  category : "knowledge-topic-entry"
+  data_type : dictionary of "knowledge-topic-w3c"
+end
+
+relation topic_has_entry
+  name   : "Entry"
+  owner  : "knowledge-topic"
+  target : "knowledge-topic-entry"
+end
+
+relation section_has_knowledge_topic
+  name   : "Knowledge_ Topic"
+  owner  : "section"
+  target : "knowledge-topic"
+end
+
+#--Summary of Technical Knowledge definition
+
+object knowledge-entry-os-solaris of knowledge-topic-entry category
+  name : "Solaris knowledge"
+  knowledge-topic-entry-os : "solaris"
+  knowledge-topic-rate     : "3"
+end
+
+object knowledge-entry-os-linux of knowledge-topic-entry category
+  name : "Solaris knowledge"
+  knowledge-topic-entry-os : "linux"
+  knowledge-topic-rate     : "4"
+end
+
+object operating-systems of knowledge-topic category
+  name                            : "Operating Systems"
+  knowledge-topic-title           : "Operating Systems"
+  knowledge-topic-dictionary-name : "knowledge-topic-os"
+  knowledge-topic-max-rate        : "5"
+  relations
+    topic_has_entry               : "knowledge-entry-os-solaris"
+    topic_has_entry               : "knowledge-entry-os-linux"
+  end
+end
+
+object summary-of-it-knowledge-section of section category
+  name : "Summary of Technical Knowledge"
+  section-title : "Summary of Technical Knowledge"
+  relations
+    section_has_knowledge_topic : "operating-systems"
+  end
+end
+
+#--Document definition
+category document
+  name : "Curriculum vitae"
+end
+
+relation document_has_section
+  name   : "Section"
+  owner  : "document"
+  target : "section"
+end
+
+object ssledz-cv of document category
+  name : "Slawomir Sledz CV"
+  relations
+    document_has_section : "education-section"
+    document_has_section : "employment-history-section"
+    document_has_section : "summary-of-it-knowledge-section"
+  end
+end
+
+
+
+
+

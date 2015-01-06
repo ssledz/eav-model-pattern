@@ -30,14 +30,20 @@ public class Token {
 
 	private final Type type;
 	private final String value;
+	private final long lineNumber;
 
-	Token(Type type, String value) {
+	Token(Type type, String value, long lineNumber) {
 		this.type = type;
 		this.value = value;
+		this.lineNumber = lineNumber;
 	}
 
-	Token(Type type) {
-		this(type, null);
+	Token(Type type, long lineNumber) {
+		this(type, null, lineNumber);
+	}
+
+	public long getLineNumber() {
+		return lineNumber;
 	}
 
 	public Type getType() {
@@ -53,6 +59,7 @@ public class Token {
 		ToStringBuilder sb = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
 		sb.append("type", type);
 		sb.append("value", value);
+		sb.append("lineNumber", lineNumber);
 		return sb.toString();
 	}
 
