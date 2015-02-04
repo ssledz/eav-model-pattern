@@ -82,7 +82,7 @@ public class ComputerModelExampleTest {
 	@Transactional
 	public void testExample() {
 
-		MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "MAUI");
+		final MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "MAUI");
 
 		computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new DictionaryEntryValue(
 				dictionaryEntryRepository.findByIdentifier(cmis.getDell())));
@@ -104,12 +104,12 @@ public class ComputerModelExampleTest {
 
 		myObjectRepository.save(computer);
 
-		MyObject obj = myObjectRepository.findByName("MAUI");
+		final MyObject obj = myObjectRepository.findByName("MAUI");
 
-		ObjectValue makeValue = obj.getValueByAttribute(new AttributeIdentifier("make"));
+		final ObjectValue makeValue = obj.getValueByAttribute(new AttributeIdentifier("make"));
 		Assert.assertEquals("Dell", makeValue.getValueAsString());
 
-		ObjectValue ramValue = obj.getValueByAttribute(new AttributeIdentifier("ram"));
+		final ObjectValue ramValue = obj.getValueByAttribute(new AttributeIdentifier("ram"));
 		Assert.assertEquals("4", ramValue.getValueAsString());
 
 		Assert.assertFalse(obj.hasValues(new AttributeIdentifier("ramm")));
@@ -117,18 +117,18 @@ public class ComputerModelExampleTest {
 
 		Assert.assertNull(obj.getValueByAttribute((new AttributeIdentifier("ramm"))));
 
-		Set<ObjectValue> opticals = obj.getValuesByAttribute(new AttributeIdentifier("optical"));
+		final Set<ObjectValue> opticals = obj.getValuesByAttribute(new AttributeIdentifier("optical"));
 		Assert.assertEquals(1, opticals.size());
 		Assert.assertEquals("DVD RW", opticals.iterator().next().getValueAsString());
 
-		Set<ObjectValue> oss = obj.getValuesByAttribute(new AttributeIdentifier("os"));
+		final Set<ObjectValue> oss = obj.getValuesByAttribute(new AttributeIdentifier("os"));
 		Assert.assertEquals(2, oss.size());
 
-		ObjectValue[] arr = oss.toArray(new ObjectValue[2]);
+		final ObjectValue[] arr = oss.toArray(new ObjectValue[2]);
 		Arrays.sort(arr, new Comparator<ObjectValue>() {
 
 			@Override
-			public int compare(ObjectValue o1, ObjectValue o2) {
+			public int compare(final ObjectValue o1, final ObjectValue o2) {
 				return o1.getValueAsString().compareTo(o2.getValueAsString());
 			}
 		});
@@ -140,12 +140,12 @@ public class ComputerModelExampleTest {
 	@Test
 	@Transactional
 	public void testCategoryConstraint() {
-		MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "PING");
+		final MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "PING");
 
 		try {
 			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("firstname")), new StringValue("Slawek"));
 			Assert.fail();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 
 	}
@@ -153,19 +153,19 @@ public class ComputerModelExampleTest {
 	@Test
 	@Transactional
 	public void testValueMatchAttributeConstraint() {
-		MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "PONG");
+		final MyObject computer = new MyObject(categoryRepository.findByIdentifier(cmis.getComputerCategory()), "PONG");
 
 		try {
 			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new StringValue("Dell"));
 			Assert.fail();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 
 		try {
 			computer.addValue(attributeRepository.findByIdentifier(new AttributeIdentifier("make")), new DictionaryEntryValue(
 					dictionaryEntryRepository.findByIdentifier(cmis.getNotebook())));
 			Assert.fail();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 
 	}
