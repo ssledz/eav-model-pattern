@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.softech.eav</groupId>
     <artifactId>eav-parent</artifactId>
-    <version>1.3</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>parent</name>
     <url>https://github.com/ssledz/eav-model-pattern</url>
@@ -31,14 +31,14 @@
         <connection>scm:git:git@github.com:ssledz/eav-model-pattern.git</connection>
         <url>scm:git:git@github.com:ssledz/eav-model-pattern.git</url>
         <developerConnection>scm:git:git@github.com:ssledz/eav-model-pattern.git</developerConnection>
-        <tag>eav-1.3</tag>
+        <tag>HEAD</tag>
     </scm>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>pl.softech.eav</groupId>
                 <artifactId>eav-core</artifactId>
-                <version>1.3</version>
+                <version>1.4-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
