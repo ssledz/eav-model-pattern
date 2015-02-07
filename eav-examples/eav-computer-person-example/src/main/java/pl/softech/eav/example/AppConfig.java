@@ -43,7 +43,8 @@ public class AppConfig {
 	public SpringLiquibase liquibase(final DataSource ds) {
 		final SpringLiquibase lb = new SpringLiquibase();
 		lb.setDataSource(ds);
-		lb.setChangeLog("db.changelog.xml");
+		lb.setChangeLog("pl/softech/eav/db.changelog.xml");
+		lb.setDropFirst(true);
 		return lb;
 	}
 	

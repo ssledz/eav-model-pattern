@@ -6,120 +6,120 @@
 
     <changeSet author="ssledz" id="eav-tables-initial-schema" dbms="mysql,hsqldb">
         <createTable tableName="eav_attribute">
-            <column autoIncrement="${autoIncrement}" name="id" type="${bigint_type}">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="data_type" type="${text_medium_type}">
+            <column name="data_type" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="identifier" type="${text_medium_type}">
+            <column name="identifier" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="${text_medium_type}">
+            <column name="name" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="category_id" type="${bigint_type}">
+            <column name="category_id" type="${eav_bigint_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="dictionary_id" type="${bigint_type}"/>
+            <column name="dictionary_id" type="${eav_bigint_type}"/>
         </createTable>
         <createTable tableName="eav_category">
-            <column autoIncrement="${autoIncrement}" name="id" type="${bigint_type}">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="identifier" type="${text_medium_type}">
+            <column name="identifier" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="${text_medium_type}">
+            <column name="name" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         <createTable tableName="eav_dictionary">
-            <column autoIncrement="${autoIncrement}" name="id" type="${bigint_type}">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="identifier" type="${text_medium_type}">
+            <column name="identifier" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="${text_medium_type}">
+            <column name="name" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         <createTable tableName="eav_dictionary_entry">
-            <column autoIncrement="${autoIncrement}" name="id" type="${bigint_type}">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="disabled" type="${boolean_type}">
+            <column name="disabled" type="${eav_boolean_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="identifier" type="${text_medium_type}">
+            <column name="identifier" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="${text_medium_type}">
+            <column name="name" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="dictionary_id" type="${bigint_type}">
+            <column name="dictionary_id" type="${eav_bigint_type}">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         <createTable tableName="eav_my_object">
-            <column autoIncrement="${autoIncrement}" name="id" type="${bigint_type}">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="name" type="${text_medium_type}">
+            <column name="name" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="category_id" type="${bigint_type}">
+            <column name="category_id" type="${eav_bigint_type}">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         
         <createTable tableName="eav_object_value">
-            <column autoIncrement="${autoIncrement}" name="id" type="${bigint_type}">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="boolean_value" type="${boolean_type}"/>
-            <column name="date_value" type="${date_type}"/>
-            <column name="double_value" type="${double_type}"/>
-            <column name="integer_value" type="${integer_type}"/>
-            <column name="string_value" type="${text_long_type}"/>
-            <column name="attribute_id" type="${bigint_type}">
+            <column name="boolean_value" type="${eav_boolean_type}"/>
+            <column name="date_value" type="${eav_date_type}"/>
+            <column name="double_value" type="${eav_double_type}"/>
+            <column name="integer_value" type="${eav_integer_type}"/>
+            <column name="string_value" type="${eav_text_long_type}"/>
+            <column name="attribute_id" type="${eav_bigint_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="dictionary_entry_id" type="${bigint_type}"/>
-            <column name="object_id" type="${bigint_type}">
+            <column name="dictionary_entry_id" type="${eav_bigint_type}"/>
+            <column name="object_id" type="${eav_bigint_type}">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         
         <createTable tableName="eav_rel_configuration">
-            <column autoIncrement="${autoIncrement}" name="id" type="${bigint_type}">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="identifier" type="${text_medium_type}">
+            <column name="identifier" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="${text_medium_type}">
+            <column name="name" type="${eav_text_medium_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="owner_cat_id" type="${bigint_type}">
+            <column name="owner_cat_id" type="${eav_bigint_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="target_cat_id" type="${bigint_type}">
+            <column name="target_cat_id" type="${eav_bigint_type}">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         <createTable tableName="eav_relation">
-            <column autoIncrement="${autoIncrement}" name="id" type="${bigint_type}">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="rel_cnf_id" type="${bigint_type}">
+            <column name="rel_cnf_id" type="${eav_bigint_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="owner_id" type="${bigint_type}">
+            <column name="owner_id" type="${eav_bigint_type}">
                 <constraints nullable="false"/>
             </column>
-            <column name="target_id" type="${bigint_type}"/>
+            <column name="target_id" type="${eav_bigint_type}"/>
         </createTable>
     </changeSet>
 
