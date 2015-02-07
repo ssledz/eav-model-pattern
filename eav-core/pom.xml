@@ -3,7 +3,7 @@
     <parent>
         <groupId>pl.softech.eav</groupId>
         <artifactId>eav-parent</artifactId>
-        <version>1.3-SNAPSHOT</version>
+        <version>1.3</version>
         <relativePath>../eav-parent</relativePath>
     </parent>
     <artifactId>eav-core</artifactId>

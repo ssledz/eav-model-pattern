@@ -4,7 +4,7 @@
     <parent>
         <groupId>pl.softech.eav.example</groupId>
         <artifactId>eav-examples</artifactId>
-        <version>1.3-SNAPSHOT</version>
+        <version>1.3</version>
     </parent>
     <artifactId>eav-cv-example</artifactId>
     <name>cv-example</name>
