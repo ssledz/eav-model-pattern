@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+>
+
+    <property name="eav_boolean_type" value="BOOLEAN" dbms="hsqldb"/>
+    <property name="eav_boolean_type" value="BIT(1)" dbms="mysql"/>
+    <property name="eav_date_type" value="DATE"/>
+    <property name="eav_datetime_type" value="DATETIME"/>
+    <property name="eav_bigint_type" value="BIGINT"/>
+
+    <property name="eav_double_type" value="DOUBLE"/>
+    <property name="eav_integer_type" value="INTEGER"/>
+    <property name="eav_numeric_type" value="DECIMAL(18,4)"/>
+    <property name="eav_text_short_type" value="VARCHAR(16)" dbms="mysql,hsqldb"/>
+    <property name="eav_text_medium_type" value="VARCHAR(255)" dbms="mysql,hsqldb"/>
+    <property name="eav_text_long_type" value="VARCHAR(4000)" dbms="mysql,hsqldb"/>
+
+    <property name="eavAutoIncrement" value="true" dbms="mysql,hsqldb"/>
+
+    <include file="pl/softech/eav/db-changelog-mysql-hsql.xml"/>
+
+</databaseChangeLog>

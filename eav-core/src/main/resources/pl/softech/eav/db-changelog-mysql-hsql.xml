@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+>
+
+    <changeSet author="ssledz" id="eav-tables-initial-schema" dbms="mysql,hsqldb">
+        <createTable tableName="eav_attribute">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="data_type" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="identifier" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="${eav_bigint_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dictionary_id" type="${eav_bigint_type}"/>
+        </createTable>
+        <createTable tableName="eav_category">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="identifier" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="eav_dictionary">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="identifier" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="eav_dictionary_entry">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="disabled" type="${eav_boolean_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="identifier" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dictionary_id" type="${eav_bigint_type}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="eav_my_object">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="${eav_bigint_type}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="eav_object_value">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="boolean_value" type="${eav_boolean_type}"/>
+            <column name="date_value" type="${eav_date_type}"/>
+            <column name="double_value" type="${eav_double_type}"/>
+            <column name="integer_value" type="${eav_integer_type}"/>
+            <column name="string_value" type="${eav_text_long_type}"/>
+            <column name="attribute_id" type="${eav_bigint_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dictionary_entry_id" type="${eav_bigint_type}"/>
+            <column name="object_id" type="${eav_bigint_type}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="eav_rel_configuration">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="identifier" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="${eav_text_medium_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner_cat_id" type="${eav_bigint_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="target_cat_id" type="${eav_bigint_type}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="eav_relation">
+            <column autoIncrement="${eavAutoIncrement}" name="id" type="${eav_bigint_type}">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="rel_cnf_id" type="${eav_bigint_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner_id" type="${eav_bigint_type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="target_id" type="${eav_bigint_type}"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="ssledz" id="eav-constraints-initial-schema" dbms="mysql,hsqldb">
+
+        <!-- eav_dictionary -->
+
+        <addUniqueConstraint columnNames="identifier" constraintName="eav_dct_identifier_uc" tableName="eav_dictionary"/>
+
+        <!-- eav_dictionary_entry -->
+
+        <addUniqueConstraint columnNames="identifier" constraintName="eav_dct_ent_identifier_uc" tableName="eav_dictionary_entry"/>
+
+        <addForeignKeyConstraint baseColumnNames="dictionary_id" baseTableName="eav_dictionary_entry"
+            constraintName="eav_dct_ent_dct_fk" referencedColumnNames="id" referencedTableName="eav_dictionary"/>
+
+        <!-- eav_category -->
+
+        <addUniqueConstraint columnNames="identifier" constraintName="eav_cat_identifier_uc" tableName="eav_category"/>
+
+        <!-- eav_attribute -->
+
+        <addUniqueConstraint columnNames="identifier" constraintName="eav_att_identifier_uc" tableName="eav_attribute"/>
+
+        <addForeignKeyConstraint baseColumnNames="dictionary_id" baseTableName="eav_attribute" constraintName="eav_att_dct_fk"
+            referencedColumnNames="id" referencedTableName="eav_dictionary"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="eav_attribute" constraintName="eav_att_cat_fk"
+            referencedColumnNames="id" referencedTableName="eav_category"/>
+
+
+        <!-- eav_rel_configuration -->
+
+        <addUniqueConstraint columnNames="identifier" constraintName="eav_rel_cfg_identifier_uc" tableName="eav_rel_configuration"/>
+
+        <addForeignKeyConstraint baseColumnNames="target_cat_id" baseTableName="eav_rel_configuration"
+            constraintName="eav_rel_cfg_tar_cat_fk" referencedColumnNames="id" referencedTableName="eav_category"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_cat_id" baseTableName="eav_rel_configuration"
+            constraintName="eav_rel_cfg_own_cat_fk" referencedColumnNames="id" referencedTableName="eav_category"/>
+
+        <!-- eav_relation -->
+
+
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="eav_relation" constraintName="eav_rel_own_fk"
+            referencedColumnNames="id" referencedTableName="eav_my_object"/>
+
+        <addForeignKeyConstraint baseColumnNames="target_id" baseTableName="eav_relation" constraintName="eav_rel_tar_fk"
+            referencedColumnNames="id" referencedTableName="eav_my_object"/>
+
+        <addForeignKeyConstraint baseColumnNames="rel_cnf_id" baseTableName="eav_relation" constraintName="eav_rel_cnf_fk"
+            referencedColumnNames="id" referencedTableName="eav_rel_configuration"/>
+
+
+        <!-- eav_my_object -->
+
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="eav_my_object" constraintName="eav_my_obj_cat_fk"
+            referencedColumnNames="id" referencedTableName="eav_category"/>
+
+
+        <!-- eav_object_value -->
+
+        <addForeignKeyConstraint baseColumnNames="dictionary_entry_id" baseTableName="eav_object_value"
+            constraintName="eav_obj_val_dct_ent_fk" referencedColumnNames="id" referencedTableName="eav_dictionary_entry"/>
+
+        <addForeignKeyConstraint baseColumnNames="attribute_id" baseTableName="eav_object_value" constraintName="eav_obj_val_att_fk"
+            referencedColumnNames="id" referencedTableName="eav_attribute"/>
+
+        <addForeignKeyConstraint baseColumnNames="object_id" baseTableName="eav_object_value" constraintName="eav_obj_val_obj_fk"
+            referencedColumnNames="id" referencedTableName="eav_my_object"/>
+
+
+    </changeSet>
+</databaseChangeLog>

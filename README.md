@@ -446,9 +446,9 @@ object gyles of person category
 - [ ] core
   - [ ] introduce new json object value
   - [ ] enhance eav entities with audit capability
-  - [ ] introduce liquibase migrations
-    - [ ] mysql
-    - [ ] hsql
+  - [x] introduce liquibase migrations
+    - [x] mysql
+    - [x] hsql
     - [ ] oracle
   - [ ] test
     - [ ] implement tests marked with //TODO implement

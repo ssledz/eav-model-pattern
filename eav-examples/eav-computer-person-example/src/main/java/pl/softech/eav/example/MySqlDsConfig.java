@@ -34,9 +34,9 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 public class MySqlDsConfig {
 
 	@Bean
-	public DataSource dataSource(@Value("${mysql.db.username}") String username, @Value("${mysql.db.password}") String password,
-			@Value("${mysql.db.url}") String url) {
-		ComboPooledDataSource cpds = new ComboPooledDataSource();
+	public DataSource dataSource(@Value("${mysql.db.username}") final String username, @Value("${mysql.db.password}") final String password,
+			@Value("${mysql.db.url}") final String url) {
+		final ComboPooledDataSource cpds = new ComboPooledDataSource();
 		cpds.setJdbcUrl(url);
 		cpds.setUser(username);
 		cpds.setPassword(password);
@@ -44,10 +44,9 @@ public class MySqlDsConfig {
 	}
 
 	@Bean
-	public JpaVendorAdapter jpaVendorAdapter(@Value("${mysql.generate_ddl}") boolean generateDDl) {
-		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+	public JpaVendorAdapter jpaVendorAdapter(@Value("${mysql.generate_ddl}") final boolean generateDDl) {
+		final HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		jpaVendorAdapter.setDatabase(Database.MYSQL);
-		jpaVendorAdapter.setGenerateDdl(generateDDl);
 		return jpaVendorAdapter;
 	}
 	

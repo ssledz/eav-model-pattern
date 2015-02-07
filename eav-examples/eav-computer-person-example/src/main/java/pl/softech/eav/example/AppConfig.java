@@ -15,6 +15,10 @@
  */
 package pl.softech.eav.example;
 
+import javax.sql.DataSource;
+
+import liquibase.integration.spring.SpringLiquibase;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +39,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySources(value = { @PropertySource("classpath:app.properties") })
 public class AppConfig {
 
+	@Bean
+	public SpringLiquibase liquibase(final DataSource ds) {
+		final SpringLiquibase lb = new SpringLiquibase();
+		lb.setDataSource(ds);
+		lb.setChangeLog("pl/softech/eav/db.changelog.xml");
+		lb.setDropFirst(true);
+		return lb;
+	}
+	
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();

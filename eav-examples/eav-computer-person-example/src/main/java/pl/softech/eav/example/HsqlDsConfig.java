@@ -31,7 +31,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  */
 @Configuration
 public class HsqlDsConfig {
-	
+
 	@Bean
 	public DataSource dataSource() {
 		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).build();
@@ -39,9 +39,8 @@ public class HsqlDsConfig {
 
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
-		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+		final HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		jpaVendorAdapter.setDatabase(Database.HSQL);
-		jpaVendorAdapter.setGenerateDdl(true);
 		return jpaVendorAdapter;
 	}
 }

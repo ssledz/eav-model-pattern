@@ -20,6 +20,10 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import liquibase.integration.spring.SpringLiquibase;
+import liquibase.logging.LogFactory;
+import liquibase.logging.LogLevel;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -53,13 +57,22 @@ public class HSqlConfig {
 	}
 	
 	@Bean
-	public FrameFactory frameFactory(AttributeRepository attributeRepository,
-			RelationConfigurationRepository relationConfigurationRepository) {
+	public SpringLiquibase liquibase(final DataSource ds) {
+		LogFactory.getInstance().setDefaultLoggingLevel(LogLevel.DEBUG);
+		final SpringLiquibase lb = new SpringLiquibase();
+		lb.setDataSource(ds);
+		lb.setChangeLog("pl/softech/eav/db.changelog.xml");
+		return lb;
+	} 
+	
+	@Bean
+	public FrameFactory frameFactory(final AttributeRepository attributeRepository,
+			final RelationConfigurationRepository relationConfigurationRepository) {
 		return new FrameFactory(attributeRepository, relationConfigurationRepository);
 	}
 
 	@Bean
-	public DataTypeSerialisationService dataTypeSerialisationService(DictionaryEntryRepository dictionaryEntryRepository) {
+	public DataTypeSerialisationService dataTypeSerialisationService(final DictionaryEntryRepository dictionaryEntryRepository) {
 		return new DataTypeSerialisationService(dictionaryEntryRepository);
 	}
 
@@ -74,25 +87,25 @@ public class HSqlConfig {
 	}
 
 	@Bean
-	public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
+	public JpaTransactionManager transactionManager(final EntityManagerFactory emf) {
 		return new JpaTransactionManager(emf);
 	}
 
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
-		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+		final HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		jpaVendorAdapter.setDatabase(Database.HSQL);
-		jpaVendorAdapter.setGenerateDdl(true);
+//		jpaVendorAdapter.setGenerateDdl(true);
 		return jpaVendorAdapter;
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean lemfb = new LocalContainerEntityManagerFactoryBean();
-		lemfb.setDataSource(dataSource());
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(final DataSource ds) {
+		final LocalContainerEntityManagerFactoryBean lemfb = new LocalContainerEntityManagerFactoryBean();
+		lemfb.setDataSource(ds);
 		lemfb.setJpaVendorAdapter(jpaVendorAdapter());
 		lemfb.setPackagesToScan("pl.softech.eav.domain");
-		Properties jpaProperties = new Properties();
+		final Properties jpaProperties = new Properties();
 		jpaProperties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
 		jpaProperties.setProperty("hibernate.cache.use_second_level_cache", "true");
 		jpaProperties.setProperty("hibernate.show_sql", "true");
