@@ -12,7 +12,7 @@
         <!-- Db -->
         <hibernate.version>4.3.6.Final</hibernate.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
-        <spring-data-jpa.version>1.7.0.RELEASE</spring-data-jpa.version>
+        <spring-data-jpa.version>1.11.23.RELEASE</spring-data-jpa.version>
         <!-- Utils -->
         <guava.version>16.0.1</guava.version>
         <commons-lang3.version>3.3.1</commons-lang3.version>
